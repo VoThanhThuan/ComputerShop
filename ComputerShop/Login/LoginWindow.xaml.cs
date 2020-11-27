@@ -42,8 +42,10 @@ namespace DesignLogin
 
         private void SetBackground()
         {
-            //pictureBox1.Image = Image.FromFile(GetCurrentDesktopWallpaper());
-            imgBackground.ImageSource = new BitmapImage(new Uri(GetCurrentDesktopWallpaper(), UriKind.Relative));
+            var path = GetCurrentDesktopWallpaper();
+            if(string.IsNullOrEmpty(path))
+                return;
+            imgBackground.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
         }
 
 
