@@ -25,7 +25,6 @@ namespace Dashboard.Data.EF
 
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
-            modelBuilder.ApplyConfiguration(new ContactConfiguration());
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
@@ -48,8 +47,6 @@ namespace Dashboard.Data.EF
 
         public DbSet<CategoryTranslation> CategoryTranslations { get; set; }
         public DbSet<ProductInCategory> ProductInCategories { get; set; }
-
-        public DbSet<Contact> Contacts { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 
