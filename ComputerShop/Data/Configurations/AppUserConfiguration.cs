@@ -15,6 +15,8 @@ namespace Dashboard.Data.Configurations
             builder.Property(x => x.FirstName).IsRequired().HasMaxLength(200);
             builder.Property(x => x.LastName).IsRequired().HasMaxLength(200);
             builder.Property(x => x.Dob).IsRequired();
+            builder.Property(x => x.UserName).IsRequired();
+            builder.Property(x => x.PasswordHash).IsRequired();
 
         }
     }

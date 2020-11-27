@@ -38,7 +38,11 @@ namespace Dashboard.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Dob = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Dob = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
