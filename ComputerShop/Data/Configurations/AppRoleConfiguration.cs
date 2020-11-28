@@ -12,8 +12,6 @@ namespace Dashboard.Data.Configurations
         public void Configure(EntityTypeBuilder<AppRole> builder)
         {
             builder.ToTable("AppRoles");
-            builder.Property(x => x.Id);
-            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Description).HasMaxLength(200).IsRequired();
 
