@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Dashboard.Data.Configurations;
 using Dashboard.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Dashboard.Data.EF
 {
@@ -33,6 +34,7 @@ namespace Dashboard.Data.EF
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
 
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRole").HasKey(x => new { x.UserId, x.RoleId });
 
             //base.OnModelCreating(modelBuilder);
         }
