@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,17 +10,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DesignLogin;
-using MaterialDesignThemes.Wpf;
 
-namespace Dashboard
+namespace Social_Blade_Dashboard
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UserController.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserController : UserControl
     {
-        public MainWindow()
+        public UserController()
         {
             InitializeComponent();
         }

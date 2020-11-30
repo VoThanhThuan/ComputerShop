@@ -4,36 +4,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesignLogin"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         x:Class="DesignLogin.LoginWindow"
         mc:Ignorable="d"
         Title="LoginWindow"
-        Height="420"
+        Height="440"
         Width="730"
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseLeave="Window_MouseLeave"
-        MouseEnter="Window_MouseEnter">
-    <Window.Effect>
-        <BlurEffect x:Name="blurEffect" Radius="3" />
-    </Window.Effect>
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Background>
         <ImageBrush x:Name="imgBackground"
                     ImageSource="/Login/WallpaperVTT.png" />
     </Window.Background>
     <Grid>
         <Label x:Name="label"
-               Content=""
                HorizontalAlignment="Left"
                Height="421"
                Margin="342,0,0,0"
                VerticalAlignment="Center"
                Width="388">
-            <!--<Label.Background>
-                <ImageBrush x:Name="imgBackground"
-                            ImageSource="/Login/loginwpf.png" />
-            </Label.Background>-->
         </Label>
         <Grid Margin="0, 0, 388, -1"
               Background="#CCFFFFFF">
@@ -79,7 +70,7 @@
                                          Foreground="{Binding ElementName=txt_Usuario,Path=BorderBrush}"
                                          VerticalAlignment="Bottom"
                                          Margin="0 0"></materialDesign:PackIcon>
-                <TextBox x:Name="txt_Usuario"
+                <TextBox x:Name="tbx_UserName"
                          materialDesign:HintAssist.Hint="User Name"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          Margin="25,0,0,0"
@@ -105,16 +96,18 @@
                             VerticalAlignment="Top"
                             Width="234.5"
                             Grid.ColumnSpan="2" />
-                <materialDesign:PackIcon Kind="Key"
+                <materialDesign:PackIcon Grid.Column="0"
+                                         Kind="Key"
                                          Width="20"
                                          Height="20"
                                          Foreground="{Binding ElementName=txt_Password,Path=BorderBrush}"
                                          VerticalAlignment="Bottom"
                                          Margin="0 0"></materialDesign:PackIcon>
-                <PasswordBox   x:Name="txt_Password"
+                <PasswordBox   x:Name="tbx_Password"
                                materialDesign:HintAssist.Hint="Password"
                                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                Grid.ColumnSpan="2"
+                               Grid.Column="0"
                                Margin="25,0,0,0"
                                CaretBrush="#FF2B5BEB"
                                BorderBrush="#FF696FD0" />
@@ -153,36 +146,37 @@
 
         </Grid>
 
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
+        <RepeatButton ToolTip="chưa biết để gì"
                       Margin="371.5,10,249.5,378"
                       Background="Transparent"
                       BorderBrush="Transparent"
                       Content="MÃ NGUỒN " />
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
+        <RepeatButton ToolTip="GitHub :v"
                       Margin="485.5,10,135.5,378"
                       Background="Transparent"
                       BorderBrush="Transparent"
                       Content="PORNHUB" />
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
+        <RepeatButton ToolTip="Giới thiệu về thành viên nhớm"
                       Margin="594,10,27,378"
                       Background="Transparent"
                       BorderBrush="Transparent"
-                      Content="LIÊN HỆ" />
+                      Content="GIỚI THIỆU" />
 
 
-        <ToggleButton x:Name="btn_Salir"
+        <ToggleButton x:Name="btn_Close"
                       Style="{StaticResource MaterialDesignFlatToggleButton}"
-                      ToolTip="MaterialDesignFlatToggleButton"
-                      Margin="712.083,0,0,400.5"
+                      ToolTip="Thoát chương trình"
+                      Margin="690,0,0,400"
                       Height="Auto"
                       Width="Auto"
-                      Click="Btn_Salir_Click">
+                      Checked="btn_Close_Checked">
             <materialDesign:PackIcon Kind="Close"
                                      Height="15"
-                                     Width="10.333"
+                                     Width="15"
                                      Foreground="White" />
         </ToggleButton>
-        <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
+        <CheckBox x:Name="cbx_RememberLogin"
+                  Style="{StaticResource MaterialDesignCheckBox}"
                   Margin="73.833,263.045,544,131.205"
                   Content="Ghi nhớ đăng nhập"
                   BorderBrush="#FFBCBCBC"
@@ -200,18 +194,13 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Left"
                 Width="109" />
-        <RepeatButton x:Name="btnLogin"
-                      ToolTip="Resource name: MaterialDesignRaisedButton"
-                      Margin="49.833,305.693,610.167,82.306"
+        <RepeatButton x:Name="btn_Login"
+                      ToolTip="Đăng nhập"
+                      Margin="114,303,502,85"
                       Background="#FF2B5BEB"
                       BorderBrush="Transparent"
                       Content="Login"
                       Click="BtnLogin_Click" />
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
-                      Margin="168,306,444,82"
-                      Background="#FF605ED6"
-                      BorderBrush="Transparent"
-                      Content="Tạo tài khoản" />
         <Label x:Name="label1_Copy"
                Content="Hoặc đăng nhập bằng:"
                HorizontalAlignment="Left"
