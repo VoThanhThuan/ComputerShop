@@ -91,7 +91,7 @@ namespace DesignLogin
         private void SetBackground()
         {
             var path = GetCurrentDesktopWallpaper();
-            if(string.IsNullOrEmpty(path))
+            if(!File.Exists(path))
                 return;
             imgBackground.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
         }
