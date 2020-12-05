@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesignLogin"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:controlzex="urn:controlzex"
         x:Class="DesignLogin.LoginWindow"
         mc:Ignorable="d"
         Title="LoginWindow"
@@ -13,10 +13,11 @@
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        KeyDown="Window_KeyDown">
     <Window.Background>
         <ImageBrush x:Name="imgBackground"
-                    ImageSource="/Login/WallpaperVTT.png" />
+                    ImageSource="/Login/image/WallpaperVTT.png" />
     </Window.Background>
     <Grid>
         <Label x:Name="label"
@@ -24,8 +25,7 @@
                Height="421"
                Margin="342,0,0,0"
                VerticalAlignment="Center"
-               Width="388">
-        </Label>
+               Width="388" />
         <Grid Margin="0, 0, 388, -1"
               Background="#CCFFFFFF">
             <Label x:Name="label1"
@@ -67,9 +67,9 @@
                 <materialDesign:PackIcon Kind="Account"
                                          Width="20"
                                          Height="20"
-                                         Foreground="{Binding ElementName=txt_Usuario,Path=BorderBrush}"
+                                         Foreground="{Binding BorderBrush, ElementName=txt_Usuario}"
                                          VerticalAlignment="Bottom"
-                                         Margin="0 0"></materialDesign:PackIcon>
+                                         Margin="0 0" />
                 <TextBox x:Name="tbx_UserName"
                          materialDesign:HintAssist.Hint="User Name"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -100,9 +100,9 @@
                                          Kind="Key"
                                          Width="20"
                                          Height="20"
-                                         Foreground="{Binding ElementName=txt_Password,Path=BorderBrush}"
+                                         Foreground="{Binding BorderBrush, ElementName=txt_Password}"
                                          VerticalAlignment="Bottom"
-                                         Margin="0 0"></materialDesign:PackIcon>
+                                         Margin="0 0" />
                 <PasswordBox   x:Name="tbx_Password"
                                materialDesign:HintAssist.Hint="Password"
                                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
@@ -118,12 +118,10 @@
                           ToolTip="MaterialDesignActionLightToggleButton"
                           Margin="72,376,238,13"
                           Background="#FF2437B0">
-                <ToggleButton.Content>
-                    <materialDesign:PackIcon Kind="Facebook" />
-                </ToggleButton.Content>
                 <materialDesign:ToggleButtonAssist.OnContent>
                     <materialDesign:PackIcon Kind="EmoticonHappy" />
                 </materialDesign:ToggleButtonAssist.OnContent>
+                <materialDesign:PackIcon Kind="Facebook" />
             </ToggleButton>
             <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
                           ToolTip="MaterialDesignActionLightToggleButton"
@@ -194,13 +192,31 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Left"
                 Width="109" />
-        <RepeatButton x:Name="btn_Login"
-                      ToolTip="Đăng nhập"
-                      Margin="114,303,502,85"
-                      Background="#FF2B5BEB"
-                      BorderBrush="Transparent"
-                      Content="Login"
-                      Click="BtnLogin_Click" />
+        <materialDesign:DialogHost CloseOnClickAway="True"
+                                   x:Name="dht_Loading">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+                    <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                                 HorizontalAlignment="Center"
+                                 Margin="16"
+                                 IsIndeterminate="True"
+                                 Value="0" />
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+
+            <RepeatButton x:Name="btn_Login"
+                          Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                          ToolTip="Đăng nhập"
+                          Margin="114,303,502,85"
+                          Background="#FF2B5BEB"
+                          BorderBrush="Transparent"
+                          Content="Login"
+                          Click="BtnLogin_Click">
+                
+            </RepeatButton>
+            
+        </materialDesign:DialogHost>
+
         <Label x:Name="label1_Copy"
                Content="Hoặc đăng nhập bằng:"
                HorizontalAlignment="Left"
@@ -209,8 +225,6 @@
                VerticalAlignment="Top"
                Width="153"
                FontWeight="Bold" />
-
-
 
     </Grid>
 </Window>

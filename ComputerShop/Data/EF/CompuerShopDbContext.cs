@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Dashboard.Data.Configurations;
 using Dashboard.Data.Entities;
+using Dashboard.Data.Entities.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Dashboard.Data.EF
 {
@@ -33,13 +35,17 @@ namespace Dashboard.Data.EF
 
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserRoleConfiguration());
 
-            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRole").HasKey(x => new { x.UserId, x.RoleId });
+            //modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRole").HasKey(x => new { x.UserId, x.RoleId });
 
             //base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
+
+        public DbSet<AppUserRole> AppUserRoles { get; set; }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
 

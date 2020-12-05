@@ -9,7 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Dashboard.Common;
 using Dashboard.Data.EF;
+using Dashboard.Login;
 using DesignLogin;
 
 namespace Dashboard
@@ -24,13 +26,14 @@ namespace Dashboard
         {
             InitializeComponent();
             _context = context;
+            Db.Context = context;
             var login = new LoginWindow();
             login.Show();
         }
 
         public static void StartDashboard()
         {
-            var dashboard = new Social_Blade_Dashboard.MainWindow();
+            var dashboard = new AdminWindow.MainWindow();
             dashboard.Show();
         }
 
