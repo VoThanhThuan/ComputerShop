@@ -1,28 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using Dashboard.Common;
-using Dashboard.Data.EF;
-using Dashboard.Data.Entities;
+﻿using Dashboard.Common;
 using Dashboard.Login;
+using System;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using Dashboard;
+using Dashboard.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using UserService = Dashboard.Login.UserService;
 
 namespace DesignLogin
 {
@@ -45,6 +33,7 @@ namespace DesignLogin
         public LoginWindow()
         {
             InitializeComponent();
+            Controller._context.AppUsers.Load();
             SetBackground();
         }
 
@@ -52,24 +41,32 @@ namespace DesignLogin
 
         private void AuthenticateUser()
         {
-            var user = new UserService();
-
-            var login = new LoginRequest()
+            Db.Context.AppUserRoles.Load();
+            var a = Db.Context.AppUserRoles.Local;
+            Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                Username = tbx_UserName.Text,
-                Password = tbx_Password.Password,
-                RememberMe = false
-            };
+                var user = new UserService();
 
-            var result = user.Authenticate(login);
-            if (result.IsSuccessed)
-                this.Close();
-            else
-            {
-                var formError = new FormError {lbl_Messege = {Content = $"{result.Message}"}, lbl_Username = {Content = tbx_UserName.Text}};
-                formError.Show();
-            }
+                var login = new LoginRequest()
+                {
+                    Username = tbx_UserName.Text,
+                    Password = tbx_Password.Password,
+                    RememberMe = false
+                };
+
+                var result = user.Authenticate(login);
+                if (result.IsSuccessed)
+                    this.Close();
+                else
+                {
+                    var formError = new FormError { lbl_Messege = { Content = $"{result.Message}" }, lbl_Username = { Content = tbx_UserName.Text } };
+                    formError.Show();
+                    dht_Loading.IsOpen = false;
+                }
+            }));
+
         }
+
 
         #endregion
 
@@ -101,11 +98,19 @@ namespace DesignLogin
             this.DragMove();
         }
 
-
-
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            AuthenticateUser();
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                AuthenticateUser();
+            }).Start();
+
+
+                // _userService.Authenticate(login);
+
+            //AuthenticateUser();
+            //Thread.Sleep(2000);
         }
 
         private void btn_Close_Checked(object sender, RoutedEventArgs e)
@@ -113,6 +118,13 @@ namespace DesignLogin
             Application.Current.Shutdown();
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                AuthenticateUser();
+            }
+        }
     }
     
 }

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Social_Blade_Dashboard
+namespace AdminWindow
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -35,5 +35,19 @@ namespace Social_Blade_Dashboard
         {
             Application.Current.Shutdown();
         }
+
+
+        private void btn_User_Click(object sender, RoutedEventArgs e)
+        {
+            RenderPages.Children.Clear();
+            RenderPages.Children.Add(new UserController());
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton != MouseButtonState.Released)
+                this.DragMove();
+        }
+
     }
 }
