@@ -14,22 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Login\Loading.gif" />
-    <None Remove="Login\loginwpf.png" />
-    <None Remove="Login\wallpaper2.png" />
-    <None Remove="Login\WallpaperVTT.png" />
-    <None Remove="Staff\AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg" />
-    <None Remove="Staff\core i9 _10th gen .jpg" />
-    <None Remove="Staff\corei9 _10thgen .jpg" />
-    <None Remove="Staff\corei9_10thgen.jpg" />
-    <None Remove="Staff\z490_aorus.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf.NetCore3" Version="0.9.7" />
     <PackageReference Include="MaterialDesignColors" Version="1.2.7" />
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -44,20 +33,24 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+
     <Resource Include="Login\Loading.gif" />
     <Resource Include="Login\loginwpf.png" />
     <Resource Include="Login\wallpaper2.png" />
     <Resource Include="Login\WallpaperVTT.png" />
-    <Resource Include="Staff\AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg" />
-    <Resource Include="Staff\core i9 _10th gen .jpg" />
-    <Resource Include="Staff\corei9 _10thgen .jpg" />
-    <Resource Include="Staff\corei9_10thgen.jpg" />
-    <Resource Include="Staff\z490_aorus.jpg" />
+ 
+    <Resource Include="Login\image\Loading.gif" />
+    <Resource Include="Login\image\loginwpf.png" />
+    <Resource Include="Login\image\wallpaper2.png" />
+    <Resource Include="Login\image\WallpaperVTT.png" />
+
   </ItemGroup>
 
 </Project>

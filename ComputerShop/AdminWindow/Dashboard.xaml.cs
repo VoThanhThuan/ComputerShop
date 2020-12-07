@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Social_Blade_Dashboard
+namespace AdminWindow
 {
     /// <summary>
     /// Interaction logic for Dashboard.xaml

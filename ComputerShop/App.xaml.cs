@@ -7,7 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Dashboard.Data.EF;
+using Dashboard.Data.Entities;
 using DesignLogin;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,10 +44,18 @@ namespace Dashboard
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CompuerShopDbContext>
-            (options => options.UseSqlServer(
-                Configuration.GetConnectionString("ShopManagerDatabase")));
+            services.AddDbContext<CompuerShopDbContext>(cs => cs.UseSqlServer(
+                "Server=ANOME-PC\\SQLEXPRESS;Database=ComputerShopManager;User Id=ComputerShop;password=dh19pm;Trusted_Connection=False;MultipleActiveResultSets=true;")
+            );
 
+
+
+            //services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            //services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            //services.AddTransient<IUserService, UserService>();
+            //services.AddTransient(typeof(LoginWindow));
+            //(options => options.UseSqlServer( 
+            //    Configuration.GetConnectionString("ShopManagerDatabase")));
 
             services.AddTransient(typeof(Controller));
         }
