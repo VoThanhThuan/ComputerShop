@@ -24,14 +24,17 @@ namespace Dashboard
         {
             InitializeComponent();
             _context = context;
-            var login = new LoginWindow();
-            login.Show();
+            //var login = new LoginWindow();
+            // login.Show();
+            StartDashboard();
         }
 
         public static void StartDashboard()
         {
-            var dashboard = new Social_Blade_Dashboard.MainWindow();
-            dashboard.Show();
+            //var dashboard = new Social_Blade_Dashboard.MainWindow();
+            //dashboard.Show();
+            var mainProduct = new MainWindow();
+            mainProduct.Show();
         }
 
     }

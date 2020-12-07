@@ -18,6 +18,11 @@
     <None Remove="Login\loginwpf.png" />
     <None Remove="Login\wallpaper2.png" />
     <None Remove="Login\WallpaperVTT.png" />
+    <None Remove="Staff\AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg" />
+    <None Remove="Staff\core i9 _10th gen .jpg" />
+    <None Remove="Staff\corei9 _10thgen .jpg" />
+    <None Remove="Staff\corei9_10thgen.jpg" />
+    <None Remove="Staff\z490_aorus.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +53,11 @@
     <Resource Include="Login\loginwpf.png" />
     <Resource Include="Login\wallpaper2.png" />
     <Resource Include="Login\WallpaperVTT.png" />
+    <Resource Include="Staff\AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg" />
+    <Resource Include="Staff\core i9 _10th gen .jpg" />
+    <Resource Include="Staff\corei9 _10thgen .jpg" />
+    <Resource Include="Staff\corei9_10thgen.jpg" />
+    <Resource Include="Staff\z490_aorus.jpg" />
   </ItemGroup>
 
 </Project>
