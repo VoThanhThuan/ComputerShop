@@ -1,6 +1,7 @@
 ﻿using Dashboard.Common;
 using Dashboard.Login;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
@@ -100,6 +101,7 @@ namespace DesignLogin
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
+            this.Topmost = true;
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;

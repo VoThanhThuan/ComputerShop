@@ -12,13 +12,13 @@ namespace Dashboard.Data.Configurations
         public void Configure(EntityTypeBuilder<Cart> builder)
         {
             builder.ToTable("Carts");
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.ID);
 
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.ID).UseIdentityColumn();
 
 
             builder.HasOne(x => x.Product).WithMany(x => x.Carts).HasForeignKey(x => x.ProductId);
-            builder.HasOne(x => x.AppUser).WithMany(x => x.Carts).HasForeignKey(x => x.UserId);
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Carts).HasForeignKey(x => x.UserID);
         }
     }
 }

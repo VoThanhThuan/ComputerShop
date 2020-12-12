@@ -22,7 +22,8 @@ using MaterialDesignThemes.Wpf;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace AdminWindow
+namespace Dashboard.AdminWindow
+
 {
     /// <summary>
     /// Interaction logic for UserController.xaml
@@ -48,7 +49,7 @@ namespace AdminWindow
 
         private Result<string> AddUser()
         {
-            var cUser = Db.Context.AppUsers.FirstOrDefault(x => x.UserName == tbx_Username.Text);
+            var cUser = Db.Context.AppUsers.FirstOrDefault(x => x.Username == tbx_Username.Text);
             if (cUser != null)
                 return new ResultError<string>("Tài khoản đã tồn tại");
             if (tbx_Password.Text != tbx_ConfirmPassword.Text)
@@ -59,7 +60,7 @@ namespace AdminWindow
                 Dob = dp_DoB.SelectedDate ?? DateTime.Today,
                 FirstName = tbx_FirstName.Text,
                 LastName = tbx_LastName.Text,
-                UserName = tbx_Username.Text,
+                Username = tbx_Username.Text,
                 PhoneNumber = tbx_PhoneNumber.Text,
                 PasswordHash = UserService.PasswordHash(tbx_Password.Text)
             };
@@ -75,9 +76,9 @@ namespace AdminWindow
             dp_DoB.Text = $"{info.Dob}";
             tbx_Email.Text = info.Email;
             tbx_PhoneNumber.Text = info.PhoneNumber;
-            tbx_Username.Text = info.UserName;
+            tbx_Username.Text = info.Username;
 
-            var role = Db.Context.AppUserRoles.FirstOrDefault(x => x.UserId == info.Id);
+            var role = Db.Context.AppUserRoles.FirstOrDefault(x => x.UserID == info.ID);
 
             tbtn_IsAdmin.IsChecked = role != null;
 
@@ -85,7 +86,7 @@ namespace AdminWindow
 
         private Result<string> EditUser()
         {
-            var user = Db.Context.AppUsers.FirstOrDefault(x => x.UserName == tbx_Username.Text);
+            var user = Db.Context.AppUsers.FirstOrDefault(x => x.Username == tbx_Username.Text);
             if (user == null)
                 return new ResultError<string>("Không có tài khoản này");
 
@@ -93,7 +94,7 @@ namespace AdminWindow
             user.Dob = dp_DoB.SelectedDate ?? DateTime.Today;
             user.FirstName = tbx_FirstName.Text;
             user.LastName = tbx_LastName.Text;
-            user.UserName = tbx_Username.Text;
+            user.Username = tbx_Username.Text;
             user.PhoneNumber = tbx_PhoneNumber.Text;
             user.PasswordHash = UserService.PasswordHash(tbx_Password.Text);
 
@@ -103,7 +104,7 @@ namespace AdminWindow
 
         private Result<string> RemoveUser()
         {
-            var id = ((AppUser)dtg_User.SelectedValue).Id;
+            var id = ((AppUser)dtg_User.SelectedValue).ID;
             var user = Db.Context.AppUsers.Find(id);
             if (user == null)
             {

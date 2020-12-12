@@ -6,11 +6,11 @@ namespace Dashboard.Data.Entities
 {
     public class ProductInCategory
     {
-        public int ProductId { get; set; }
+        public int ProductID { get; set; }
 
         public Product Product { get; set; }
 
-        public int CategoryId { get; set; }
+        public int CategoryID { get; set; }
 
         public Category Category { get; set; }
     }
