@@ -13,10 +13,10 @@ namespace Dashboard.Data.Configurations
         {
             builder.ToTable("Transactions");
 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.ID);
 
-            builder.Property(x => x.Id).UseIdentityColumn();
-            builder.HasOne(x => x.AppUser).WithMany(x => x.Transactions).HasForeignKey(x => x.UserId);
+            builder.Property(x => x.ID).UseIdentityColumn();
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Transactions).HasForeignKey(x => x.UserID);
 
         }
     }

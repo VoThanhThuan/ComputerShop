@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon_laptop_rec.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,7 @@
   <ItemGroup>
     <None Remove="Login\Loading.gif" />
     <None Remove="Login\loginwpf.png" />
+    <None Remove="Login\Logo_Laptop.png" />
     <None Remove="Login\wallpaper2.png" />
     <None Remove="Login\WallpaperVTT.png" />
   </ItemGroup>
@@ -51,6 +53,13 @@
     <Resource Include="Login\image\loginwpf.png" />
     <Resource Include="Login\image\wallpaper2.png" />
     <Resource Include="Login\image\WallpaperVTT.png" />
+    <Resource Include="Login\Logo_Laptop.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Common\ViewModel\MessageDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

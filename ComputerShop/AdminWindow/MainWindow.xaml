@@ -1,10 +1,10 @@
-﻿<Window x:Class="AdminWindow.MainWindow"
+﻿<Window x:Class="Dashboard.AdminWindow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:Dashboard"
+        xmlns:local="clr-namespace:Dashboard.AdminWindow"
         mc:Ignorable="d"
         Height="850"
         Width="1200"
@@ -32,7 +32,9 @@
                     </Style>
                 </Grid.Resources>
                 <Grid Grid.Column="0">
-                    <ListView Margin="0 15">
+                    <ListView Margin="0 0"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListViewItem HorizontalAlignment="Center"
                                       Margin="0 10">
                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
@@ -40,10 +42,31 @@
                                     BorderBrush="{x:Null}"
                                     Background="{x:Null}"
                                     Foreground="Black">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="Resistor" />
-                                </StackPanel>
+                                <Path Data="M5540 5628 c-931 -329 -1489 -526 -2245 -790 -473 -166 -862 -305 -865 -309 -3 -4 -56 -434 -119 -956 -63 -521 -117 -950 -122 -953 -4 -3 -498 -174 -1098 -380 -600 -206 -1091 -379 -1091 -385 0 -5 485 -151 1078 -324 592 -173 1482 -433 1977 -578 494 -145 906 -263 915 -263 9 0 371 347 806 771 434 425 844 826 912 892 111 108 138 141 100 123 -7 -3 -442 -291 -967 -639 l-954 -634 -1316 329 c-724 181 -1319 330 -1323 331 -4 1 308 109 695 241 386 131 707 243 713 250 6 6 61 427 123 936 63 509 115 926 116 928 4 4 2468 861 2477 862 6 0 -1 -2041 -7 -2048 -4 -5 -2441 -670 -2481 -678 -41 -7 -45 -24 -6 -23 15 0 686 82 1492 182 l1465 183 3 1512 c2 1207 0 1512 -10 1511 -7 0 -128 -41 -268 -91z"
+                                      Height="34"
+                                      Stretch="Fill"
+                                      Width="40"
+                                      RenderTransformOrigin="0.5,0.5">
+                                    <Path.Fill>
+                                        <LinearGradientBrush EndPoint="0.5,1"
+                                                             StartPoint="0.5,0">
+                                            <GradientStop Color="#FF8000FF" />
+                                            <GradientStop Color="#FFCB98FF"
+                                                          Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Path.Fill>
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="-1" />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+
                             </Button>
+
                         </ListViewItem>
                         <ListViewItem HorizontalAlignment="Center"
                                       Margin="0">
@@ -55,19 +78,21 @@
                                     Foreground="Black"
                                     Click="btn_User_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="CircleSlice6" />
+                                    <materialDesign:PackIcon Kind="AccountCogOutline" />
                                 </StackPanel>
                             </Button>
                         </ListViewItem>
                         <ListViewItem HorizontalAlignment="Center"
                                       Margin="0 10">
-                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            <Button x:Name="btn_Product"
+                                    Style="{StaticResource MaterialDesignFloatingActionButton}"
                                     HorizontalAlignment="Left"
                                     BorderBrush="{x:Null}"
                                     Background="{x:Null}"
-                                    Foreground="Black">
+                                    Foreground="Black"
+                                    Click="btn_Product_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="CalendarBlankOutline" />
+                                    <materialDesign:PackIcon Kind="PackageVariantClosed" />
                                 </StackPanel>
                             </Button>
                         </ListViewItem>
@@ -84,7 +109,8 @@
                             </Button>
                         </ListViewItem>
                         <ListViewItem HorizontalAlignment="Center"
-                                      Margin="0 10">
+                                      Margin="0 10"
+                                      Visibility="Hidden">
                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
                                     HorizontalAlignment="Left"
                                     BorderBrush="{x:Null}"
@@ -105,7 +131,7 @@
                                     x:Name="btnExit"
                                     Click="btnExit_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="ExitToApp" />
+                                    <materialDesign:PackIcon Kind="Close" />
                                 </StackPanel>
                             </Button>
                         </ListViewItem>

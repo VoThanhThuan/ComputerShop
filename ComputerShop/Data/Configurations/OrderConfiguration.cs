@@ -13,9 +13,9 @@ namespace Dashboard.Data.Configurations
         {
             builder.ToTable("Orders");
 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.ID);
 
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.ID).UseIdentityColumn();
 
             builder.Property(x => x.OrderDate);
 
