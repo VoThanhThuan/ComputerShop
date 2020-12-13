@@ -2,32 +2,21 @@
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace AdminWindow
+namespace Dashboard.AdminWindow
 {
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : UserControl
+    public partial class HomePage : UserControl
     {
         public SeriesCollection SeriesCollection { get; set; }
         public SeriesCollection LastHourSeries { get; set; }
         public SeriesCollection LastHourSeries1 { get; set; }
         public string[] Labels { get; set; }
         public Func<double,string> Formatter { get; set; }
-        public Dashboard()
+        public HomePage()
         {
             InitializeComponent();
             SeriesCollection = new SeriesCollection

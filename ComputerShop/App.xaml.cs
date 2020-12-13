@@ -45,7 +45,7 @@ namespace Dashboard
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CompuerShopDbContext>(cs => cs.UseSqlServer(
-                "Server=MYPC;Database=ComputerShopManager;Trusted_Connection=True;")
+                "Server=ANOME-PC\\SQLEXPRESS;Database=ComputerShopManager;Trusted_Connection=True;")
             );
 
 

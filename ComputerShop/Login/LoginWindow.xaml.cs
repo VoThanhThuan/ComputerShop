@@ -101,6 +101,7 @@ namespace DesignLogin
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
+            this.Topmost = true;
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;

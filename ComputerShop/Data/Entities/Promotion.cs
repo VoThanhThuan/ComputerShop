@@ -7,7 +7,7 @@ namespace Dashboard.Data.Entities
 {
     public class Promotion
     {
-        public int Id { set; get; }
+        public int ID { set; get; }
         public DateTime FromDate { set; get; }
         public DateTime ToDate { set; get; }
         public bool ApplyForAll { set; get; }

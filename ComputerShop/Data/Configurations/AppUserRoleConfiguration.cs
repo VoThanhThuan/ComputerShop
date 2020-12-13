@@ -13,8 +13,8 @@ namespace Dashboard.Data.Configurations
         {
             builder.ToTable("AppUserRole");
 
-            builder.HasKey(x => x.UserId);
-            builder.HasKey(x => x.RoleId);
+            builder.HasKey(x => x.UserID);
+            builder.HasKey(x => x.RoleID);
         }
     }
 }

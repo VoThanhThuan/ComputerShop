@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Identity;
 namespace Dashboard.Data.Entities
 {
     [NotMapped]
-    public class AppUserRole : IdentityUserRole<Guid>
+    public class AppUserRole
     {
-        //public Guid UserId { get; set; }
-        //public Guid RoleId { get; set; }
+        public string UserID { get; set; }
+        public string RoleID { get; set; }
 
     }
 }

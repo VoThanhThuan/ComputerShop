@@ -16,7 +16,7 @@ namespace Dashboard.Login
 
         public Result<string> Authenticate(LoginRequest request)
         {
-            var userName = Controller._context.AppUsers.FirstOrDefault(x => x.UserName == request.Username);
+            var userName = Controller._context.AppUsers.FirstOrDefault(x => x.Username == request.Username);
             if (userName == null) return new ResultError<string>("Tài khoản không tồn tại!");
             var password = PasswordHash(request.Password);
             if (password != userName.PasswordHash) return new ResultError<string>("Password không đúng");

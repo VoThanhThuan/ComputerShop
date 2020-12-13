@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon_laptop_rec.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,8 @@
     <None Remove="Entity\**" />
     <Page Remove="Entity\**" />
   </ItemGroup>
+
+
 
   <ItemGroup>
     <None Remove="0dc9da469ec12fb17c17fb856a884390.jpg" />
@@ -58,12 +61,12 @@
     <Resource Include="Login\image\loginwpf.png" />
     <Resource Include="Login\image\wallpaper2.png" />
     <Resource Include="Login\image\WallpaperVTT.png" />
-    <Resource Include="Staff\AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg" />
-    <Resource Include="Staff\aorus_rgb_memory16gb.jpg" />
-    <Resource Include="Staff\corei9_10thgen.jpg" />
-    <Resource Include="Staff\GIGABYTE_GeForceRTX™2080 SUPER_AORUS8G.jpg" />
-    <Resource Include="Staff\mainpage.jpg" />
-    <Resource Include="Staff\ssd_gigabyte_aorusRGB.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Common\ViewModel\MessageDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
 
   </ItemGroup>
 
