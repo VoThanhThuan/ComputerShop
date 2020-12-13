@@ -19,7 +19,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace Dashboard
 {
-   
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -38,11 +38,12 @@ namespace Dashboard
 
         }
 
+
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var index = ListViewMenu.SelectedIndex;
             MoveCursorMenu(index);
-            // Gọi thằng con 
+         
             switch (index)
             {
                 case 0:
@@ -52,45 +53,34 @@ namespace Dashboard
 
                 case 1:
                     GridPrincipal.Children.Clear();
-                    /*  GridPrincipal.Children.Add(new UserControlHome);*/
+                    GridPrincipal.Children.Add(new UserControlProduct());
                     break;
 
                 case 2:
                     GridPrincipal.Children.Clear();
-                   /* GridPrincipal.Children.Add(new UserControlInicio());*/
+                    GridPrincipal.Children.Add(new UserControl_InvoicePrinting());
                     break;
 
                 case 3:
                     GridPrincipal.Children.Clear();
                     break;
-
-                case 4:
-                    GridPrincipal.Children.Clear();
-                    break;
-
-                case 5:
-                    GridPrincipal.Children.Clear();
-                    break;
+              
 
                 default:
                     break;
             }
         }
 
-
         private void MoveCursorMenu(int index)
         {
             TrainsitionigContentSlide.OnApplyTemplate();
-            GridCursor.Margin = new Thickness(0, (100 + (60 * index)), 0, 0);
+            GridCursor.Margin = new Thickness(0, (164 + (60 * index)), 0, 0);
         }
-
-
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
-
 
         private void BtnHide(object sender, RoutedEventArgs e)
         {

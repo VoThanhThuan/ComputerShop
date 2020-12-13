@@ -17,6 +17,17 @@
 
 
   <ItemGroup>
+    <None Remove="0dc9da469ec12fb17c17fb856a884390.jpg" />
+    <None Remove="Staff\AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg" />
+    <None Remove="Staff\aorus_rgb_memory16gb.jpg" />
+    <None Remove="Staff\corei9_10thgen.jpg" />
+    <None Remove="Staff\GIGABYTE_GeForceRTX™2080 SUPER_AORUS8G.jpg" />
+    <None Remove="Staff\mainpage.jpg" />
+    <None Remove="Staff\ssd_gigabyte_aorusRGB.jpg" />
+    <None Remove="Staff\z490_aorus.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf.NetCore3" Version="0.9.7" />
     <PackageReference Include="MaterialDesignColors" Version="1.2.7" />
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
@@ -43,18 +54,13 @@
   </ItemGroup>
 
   <ItemGroup>
-
-    <Resource Include="Login\Loading.gif" />
-    <Resource Include="Login\loginwpf.png" />
-    <Resource Include="Login\wallpaper2.png" />
-    <Resource Include="Login\WallpaperVTT.png" />
+ 
+    <Resource Include="0dc9da469ec12fb17c17fb856a884390.jpg" />
  
     <Resource Include="Login\image\Loading.gif" />
     <Resource Include="Login\image\loginwpf.png" />
     <Resource Include="Login\image\wallpaper2.png" />
     <Resource Include="Login\image\WallpaperVTT.png" />
-    
-    <Resource Include="Login\Logo_Laptop.png" />
   </ItemGroup>
 
   <ItemGroup>
