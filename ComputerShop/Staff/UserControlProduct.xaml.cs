@@ -10,29 +10,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace Dashboard.Staff
 {
     /// <summary>
-    /// Interaction logic for UserControlHome.xaml
+    /// Interaction logic for UserControlProduct.xaml
     /// </summary>
-    public partial class UserControlHome : UserControl
+    public partial class UserControlProduct : UserControl
     {
-        public UserControlHome()
+        public UserControlProduct()
         {
             InitializeComponent();
-            var liveTime = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(0)
-            };
-            liveTime.Tick += timer_Tick;
-            liveTime.Start();
+            LoadPanel();
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        private void LoadPanel()
         {
-            LiveTimeLabel.Content = $"{DateTime.Now:🕤hh:mm:ss tt}";
+            for (int i = 0; i < 10; i++)
+            {
+                Product.Children.Add(new UserControlProductChild());
+            }
         }
+
+        
     }
 }

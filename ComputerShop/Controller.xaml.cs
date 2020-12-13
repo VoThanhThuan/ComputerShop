@@ -29,8 +29,8 @@ namespace Dashboard
             StartDashboard();
 
             Db.Context = context;
-            var login = new LoginWindow();
-            login.Show();
+            //var login = new LoginWindow();
+            //login.Show();
 
         }
 
@@ -39,8 +39,8 @@ namespace Dashboard
             var mainProduct = new MainWindow();
             mainProduct.Show();
             
-            var dashboard = new AdminWindow.MainWindow();
-            dashboard.Show();
+           // var dashboard = new AdminWindow.MainWindow();
+            //dashboard.Show();
 
         }
 
