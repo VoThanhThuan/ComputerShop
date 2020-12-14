@@ -9,7 +9,8 @@
         Title="Prompt"
         Height="170"
         Width="410"
-        WindowStyle="None">
+        WindowStyle="None"
+        MouseLeftButtonDown="PromptDialog_OnMouseLeftButtonDown">
     <Grid>
 
         <DockPanel>
@@ -45,7 +46,7 @@
                     <ColumnDefinition x:Name="clm_Ok"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btn_OK" 
+                <Button x:Name="btn_OK"
                         Style="{StaticResource MaterialDesignOutlinedButton}"
                         ToolTip="MaterialDesignOutlinedButton"
                         VerticalAlignment="Bottom"
@@ -55,20 +56,22 @@
                         Click="Btn_OK_OnClick">
                     OK
                 </Button>
-                <Button Grid.Column="1"
+                <Button x:Name="btn_Cancel"
+                        Grid.Column="1"
                         Style="{StaticResource MaterialDesignOutlinedButton}"
                         ToolTip="MaterialDesignOutlinedButton"
                         VerticalAlignment="Bottom"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         BorderBrush="#FF673EAE"
                         Margin="5"
-                        Click="Btn_Close_Click">
+                        Click="Btn_Cancel_OnClick">
                     Cancel
                 </Button>
             </Grid>
 
             <ScrollViewer>
-                <TextBox x:Name="tbx_Value" materialDesign:HintAssist.Hint="Nội dung"
+                <TextBox x:Name="tbx_Value"
+                         materialDesign:HintAssist.Hint="Nội dung"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" />
             </ScrollViewer>

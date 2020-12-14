@@ -26,18 +26,18 @@ namespace Dashboard
         {
             InitializeComponent();
             _context = context;
-            StartDashboard();
+            //StartDashboard();
 
             Db.Context = context;
-            //var login = new LoginWindow();
-            //login.Show();
+            var login = new LoginWindow();
+            login.Show();
 
         }
 
         public static void StartDashboard()
         {
-            var mainProduct = new MainWindow();
-            mainProduct.Show();
+            //var mainProduct = new MainWindow();
+            //mainProduct.Show();
             
            // var dashboard = new AdminWindow.MainWindow();
             //dashboard.Show();

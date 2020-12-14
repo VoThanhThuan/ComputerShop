@@ -24,7 +24,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Image
-                            Source="/Staff/AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg"
+                            Source="/Staff/AORUS_Z390_Xtreme_Waterforce_5G_Bundle_Intel_Core_i9_9900K.jpg"
                             Margin="12,0,13,0"
                             Stretch="UniformToFill" Height="120" VerticalAlignment="Center" />
 

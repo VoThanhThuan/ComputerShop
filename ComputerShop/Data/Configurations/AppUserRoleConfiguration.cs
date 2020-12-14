@@ -12,9 +12,8 @@ namespace Dashboard.Data.Configurations
         public void Configure(EntityTypeBuilder<AppUserRole> builder)
         {
             builder.ToTable("AppUserRole");
-
-            builder.HasKey(x => x.UserID);
-            builder.HasKey(x => x.RoleID);
+            builder.HasKey(x => x.ID);
+            builder.Property(x => x.ID).UseIdentityColumn();
         }
     }
 }

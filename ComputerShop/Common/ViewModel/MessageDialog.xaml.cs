@@ -22,22 +22,35 @@ namespace Dashboard.Common.ViewModel
         public MessageDialog()
         {
             InitializeComponent();
+
         }
 
-        private void Btn_Salir_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        public new MyDialogResult.Result DialogResult = MyDialogResult.Result.Close;
 
         private void Btn_OK_OnClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = MyDialogResult.Result.Ok;
             this.Close();
         }
 
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
+            DialogResult = MyDialogResult.Result.Cancel;
             this.Close();
         }
+
+        private void Btn_Close_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = MyDialogResult.Result.Close;
+            this.Close();
+        }
+
+        private void MessageDialog_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+
     }
+
 }

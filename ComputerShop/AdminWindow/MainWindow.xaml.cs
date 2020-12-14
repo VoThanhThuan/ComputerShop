@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Dashboard.Common;
+using Dashboard.Common.ViewModel;
 using Dashboard.Data.Entities;
+using DesignLogin;
 
 namespace Dashboard.AdminWindow
 {
@@ -34,7 +37,26 @@ namespace Dashboard.AdminWindow
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            var mess = new MessageDialog()
+            {
+                tbl_Title = { Text = "Bạn Muốn Thoát ?" }
+                ,
+                tbl_Message = { Text = "Tắt chương trình hoặc trở lại màn hình đăng nhập" }
+                ,
+                btn_Cancel = { Content = "Login" }
+            };
+            mess.ShowDialog();
+            switch (mess.DialogResult)
+            {
+                case MyDialogResult.Result.Ok:
+                    Application.Current.Shutdown();
+                    break;
+                case MyDialogResult.Result.Cancel:
+                    var login = new LoginWindow();
+                    login.Show();
+                    this.Close();
+                    break;
+            }
         }
 
 
@@ -46,7 +68,7 @@ namespace Dashboard.AdminWindow
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.LeftButton != MouseButtonState.Released)
+            if (e.LeftButton != MouseButtonState.Released)
                 this.DragMove();
         }
 

@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Dashboard.Data.Entities
 {
-    [NotMapped]
     public class AppUserRole
     {
+        public int ID { get; set; }      
         public string UserID { get; set; }
         public string RoleID { get; set; }
 

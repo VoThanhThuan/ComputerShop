@@ -41,7 +41,7 @@
                       Width="260"
                     Margin="0 5 3 0 ">
                 <Border.Background>
-                    <ImageBrush ImageSource="/Staff/AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg"/>
+                    <ImageBrush ImageSource="/Staff/AORUS_Z390_Xtreme_Waterforce_5G_Bundle_Intel_Core_i9_9900K.jpg" />
                 </Border.Background>
             </Border>
         </StackPanel>

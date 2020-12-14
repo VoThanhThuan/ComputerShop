@@ -1,157 +1,155 @@
 ﻿<UserControl x:Class="Dashboard.Staff.UserControlProduct"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dashboard.Staff" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Dashboard.Staff"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" d:DesignWidth="800" Height="511">
-    <Grid>
+             mc:Ignorable="d"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="231*" ></ColumnDefinition>
-            <ColumnDefinition Width="169*" ></ColumnDefinition>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <Grid x:Name="grid_showProduct"
+              Grid.Column="0">
+            <DockPanel>
+                <materialDesign:ColorZone Mode="PrimaryMid"
+                                          Padding="5"
+                                          DockPanel.Dock="Top">
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    materialDesign:RippleAssist.IsCentered="True">
+                            <ComboBox SelectedIndex="0"
+                                      Margin="8 0 0 0"
+                                      BorderThickness="0"
+                                      materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                                      BorderBrush="{DynamicResource MaterialDesignPaper}">
+                                <ComboBoxItem>
+                                    ALL
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    CPU
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    Mainboard
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    VGA(Card đồ họa)
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    Bộ nguồn điện
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    RAM
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    HDD/ SSD
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    Cooler(tản nhiệt)
+                                </ComboBoxItem>
+                            </ComboBox>
+                            <materialDesign:ColorZone Mode="Standard"
+                                                      Padding="8 4 8 4"
+                                                      CornerRadius="2"
+                                                      Panel.ZIndex="1"
+                                                      Margin="16 0 0 0"
+                                                      materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-        <StackPanel>
-            <materialDesign:ColorZone
-                Mode="PrimaryMid"
-                Padding="5">
-                <DockPanel>
-                    <StackPanel
-                        Orientation="Horizontal"
-                        materialDesign:RippleAssist.IsCentered="True">
-                        <ComboBox
-                            SelectedIndex="0"
-                            Margin="8 0 0 0"
-                            BorderThickness="0"                     
-                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
-                            BorderBrush="{DynamicResource MaterialDesignPaper}">
-                            <ComboBoxItem>
-                                ALL
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                CPU
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                Mainboard
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                VGA(Card đồ họa)
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                Bộ nguồn điện
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                RAM
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                HDD/ SSD
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                Cooler(tản nhiệt)
-                            </ComboBoxItem>
-                        </ComboBox>
-                        <materialDesign:ColorZone
-                            Mode="Standard"
-                            Padding="8 4 8 4"
-                            CornerRadius="2"
-                            Panel.ZIndex="1"
-                            Margin="16 0 0 0"
-                            materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+                                    <!--Button search-->
+                                    <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                        <materialDesign:PackIcon Kind="Magnify"
+                                                                 Opacity=".56" />
+                                    </Button>
 
-                                <!--Button search-->
-                                <Button Style="{DynamicResource MaterialDesignToolButton}">
-                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
-                                </Button>
+                                    <!--Search box-->
+                                    <TextBox Grid.Column="1"
+                                             Margin="8 0 0 0"
+                                             materialDesign:HintAssist.Hint="Build a search bar"
+                                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                             BorderThickness="0"
+                                             MinWidth="200"
+                                             VerticalAlignment="Center" />
 
-                                <!--Search box-->
-                                <TextBox
-            Grid.Column="1"
-            Margin="8 0 0 0"
-            materialDesign:HintAssist.Hint="Build a search bar"
-            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-            BorderThickness="0"
-            MinWidth="200"
-            VerticalAlignment="Center" />
+                                    <!--Button voice-->
+                                    <Button Style="{DynamicResource MaterialDesignToolButton}"
+                                            Grid.Column="2">
+                                        <materialDesign:PackIcon Kind="Microphone"
+                                                                 Opacity=".56"
+                                                                 Margin="8 0 0 0" />
+                                    </Button>
 
-                                <!--Button voice-->
-                                <Button
-            Style="{DynamicResource MaterialDesignToolButton}"
-            Grid.Column="2">
-                                    <materialDesign:PackIcon
-              Kind="Microphone"
-              Opacity=".56"
-              Margin="8 0 0 0" />
-                                </Button>
+                                </Grid>
+                            </materialDesign:ColorZone>
 
-                            </Grid>
-                        </materialDesign:ColorZone>
+                            <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                                    Margin="8 0 0 0"
+                                    Panel.ZIndex="0">
+                                <materialDesign:PackIcon Kind="Send" />
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <ScrollViewer x:Name="MyViewer"
+                              Margin="0 10 0 0"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              Height="{Binding ElementName=grid_showProduct, Path=Height}">
+                    <WrapPanel x:Name="Product"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               MinHeight="400"
+                               Width="{Binding ElementName=MyViewer, Path=ViewportWidth}" />
+                </ScrollViewer>
 
-                        <Button
-        Style="{DynamicResource MaterialDesignToolForegroundButton}"
-        Margin="8 0 0 0"
-        Panel.ZIndex="0">
-                            <materialDesign:PackIcon
-          Kind="Send" />
-                        </Button>
-                    </StackPanel>
-                </DockPanel>
-            </materialDesign:ColorZone>
+            </DockPanel>
 
 
+        </Grid>
+        <Grid Grid.Column="1"
+                    MinWidth="300">
 
-            <ScrollViewer 
-                VerticalScrollBarVisibility="Auto"
-                Height="448"
-                Margin="0 10 0 0 " 
-                Width="458" 
-               >
-                <WrapPanel x:Name="Product" Width="452"/>
-            </ScrollViewer>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            
-            <ListView Height="450" x:Name="selectedProduct">
+            <ListView x:Name="selectedProduct"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch">
 
             </ListView>
 
-            <StackPanel Orientation="Horizontal" >
-                <Button                   
-                    Style="{DynamicResource MaterialDesignRaisedButton}" 
-                    Width="120" 
-                    Margin="25 0 0 0"
-                    Content="Thanh Toán"
-                     />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Button Style="{DynamicResource MaterialDesignRaisedButton}"
+                        Width="120"
+                        Margin="5 0 0 0"
+                        Content="Thanh Toán" />
 
-                <Button                   
-                    Style="{DynamicResource MaterialDesignRaisedButton}" 
-                    Width="120" 
-                    Margin="15 0 0 0"
-                    Content="Xoá"
-                     />
-                <Button
-                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                    ToolTip="Làm mới" 
-                    Height="30" 
-                    Width="30"  
-                    VerticalAlignment="Center"
-                    Margin="20 0 0 0">
-                     <materialDesign:PackIcon
-                                    Kind="Refresh"
-                                    Height="20"
-                                    Width="20" />
-                   
-                    </Button>
+                <Button Style="{DynamicResource MaterialDesignRaisedButton}"
+                        Width="120"
+                        Margin="5 0 0 0"
+                        Content="Xoá" />
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        ToolTip="Làm mới"
+                        Height="30"
+                        Width="30"
+                        VerticalAlignment="Center"
+                        Margin="20 0 0 0">
+                    <materialDesign:PackIcon Kind="Refresh"
+                                             Height="20"
+                                             Width="20" />
+
+                </Button>
 
             </StackPanel>
-         
-        </StackPanel>
+
+        </Grid>
     </Grid>
 </UserControl>

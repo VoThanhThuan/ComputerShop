@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Common;
+using Dashboard.Common;
+using Dashboard.Common.ViewModel;
 using Dashboard.Staff;
 using DesignLogin;
 using MaterialDesignThemes.Wpf;
@@ -30,12 +32,26 @@ namespace Dashboard
 
         private void BtnExit(object sender, RoutedEventArgs e)
         {
-            var mess = new Message
-            { lbl_Title = { Content = "Thoát" }, lbl_message = { Content = "Bạn thật sự muốn thoát" } };
-            var result = mess.ShowDialog();
-            if (result == true)
-                Application.Current.Shutdown();
-
+            var mess = new MessageDialog()
+            {
+                tbl_Title = { Text = "Bạn Muốn Thoát ?" }
+                ,
+                tbl_Message = { Text = "Tắt chương trình hoặc trở lại màn hình đăng nhập" }
+                ,
+                btn_Cancel = { Content = "Login" }
+            };
+            mess.ShowDialog();
+            switch (mess.DialogResult)
+            {
+                case MyDialogResult.Result.Ok:
+                    Application.Current.Shutdown();
+                    break;
+                case MyDialogResult.Result.Cancel:
+                    var login = new LoginWindow();
+                    login.Show();
+                    this.Close();
+                    break;
+            }
         }
 
 

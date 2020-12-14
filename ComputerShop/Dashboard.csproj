@@ -20,6 +20,7 @@
     <None Remove="0dc9da469ec12fb17c17fb856a884390.jpg" />
     <None Remove="Staff\AORUS-Z390-Xtreme-Waterforce-5G-Bundle-Intel-Core-i9-9900K.jpg" />
     <None Remove="Staff\aorus_rgb_memory16gb.jpg" />
+    <None Remove="Staff\AORUS_Z390_Xtreme_Waterforce_5G_Bundle_Intel_Core_i9_9900K.jpg" />
     <None Remove="Staff\corei9_10thgen.jpg" />
     <None Remove="Staff\GIGABYTE_GeForceRTX™2080 SUPER_AORUS8G.jpg" />
     <None Remove="Staff\mainpage.jpg" />
@@ -61,6 +62,11 @@
     <Resource Include="Login\image\loginwpf.png" />
     <Resource Include="Login\image\wallpaper2.png" />
     <Resource Include="Login\image\WallpaperVTT.png" />
+    <Resource Include="Staff\aorus_rgb_memory16gb.jpg" />
+    <Resource Include="Staff\AORUS_Z390_Xtreme_Waterforce_5G_Bundle_Intel_Core_i9_9900K.jpg" />
+    <Resource Include="Staff\corei9_10thgen.jpg" />
+    <Resource Include="Staff\GIGABYTE_GeForceRTX™2080 SUPER_AORUS8G.jpg" />
+    <Resource Include="Staff\ssd_gigabyte_aorusRGB.jpg" />
   </ItemGroup>
 
   <ItemGroup>

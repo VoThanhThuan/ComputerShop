@@ -21,16 +21,30 @@ namespace Dashboard.Common.ViewModel
         {
             InitializeComponent();
         }
+        public new MyDialogResult.Result DialogResult = MyDialogResult.Result.Close;
 
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = MyDialogResult.Result.Close;
             this.Close();
         }
 
         private void Btn_OK_OnClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = MyDialogResult.Result.Ok;
             this.Close();
         }
+
+        private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = MyDialogResult.Result.Cancel;
+            this.Close();
+        }
+
+        private void PromptDialog_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
     }
 }

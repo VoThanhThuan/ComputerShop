@@ -56,6 +56,18 @@ namespace Dashboard.Migrations
                             ID = "admin",
                             Description = "Administrator role",
                             Name = "admin"
+                        },
+                        new
+                        {
+                            ID = "staff",
+                            Description = "staff role",
+                            Name = "staff"
+                        },
+                        new
+                        {
+                            ID = "dev",
+                            Description = "developer role",
+                            Name = "dev"
                         });
                 });
 
@@ -110,26 +122,66 @@ namespace Dashboard.Migrations
                             LastName = "Võ",
                             PasswordHash = "ISMvKXpXpadDiUoOSoAfww==",
                             Username = "admin"
+                        },
+                        new
+                        {
+                            ID = "devSon",
+                            Dob = new DateTime(2020, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "sondeptrai@gmail.com",
+                            FirstName = "Sơn",
+                            Identity = "035123456",
+                            LastName = "Nguyễn Ngọc",
+                            PasswordHash = "dOc/DGes1e2AFDggnmrAhA==",
+                            Username = "sondeptrai"
+                        },
+                        new
+                        {
+                            ID = "NV01",
+                            Dob = new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "toan@gmail.com",
+                            FirstName = "Toàn",
+                            Identity = "035123456",
+                            LastName = "Nguyễn Thanh",
+                            PasswordHash = "cwHuoXLomiI3mEZ9SpHnqQ==",
+                            Username = "toan"
                         });
                 });
 
             modelBuilder.Entity("Dashboard.Data.Entities.AppUserRole", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
                     b.Property<string>("RoleID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RoleID");
+                    b.HasKey("ID");
 
                     b.ToTable("AppUserRole");
 
                     b.HasData(
                         new
                         {
+                            ID = 1,
                             RoleID = "admin",
                             UserID = "admin"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            RoleID = "admin",
+                            UserID = "devSon"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            RoleID = "staff",
+                            UserID = "NV01"
                         });
                 });
 
@@ -341,7 +393,7 @@ namespace Dashboard.Migrations
                         new
                         {
                             ID = 1,
-                            DateCreated = new DateTime(2020, 12, 9, 20, 53, 17, 916, DateTimeKind.Local).AddTicks(5243),
+                            DateCreated = new DateTime(2020, 12, 13, 23, 4, 25, 44, DateTimeKind.Local).AddTicks(2678),
                             Name = "RAM-SAMSUNG-256GB",
                             OriginalPrice = 100000m,
                             Price = 200000m,

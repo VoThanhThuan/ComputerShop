@@ -12,8 +12,9 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
-        Background="{x:Null}">
-    <materialDesign:Card UniformCornerRadius="10">
+        Background="{x:Null}"
+        MouseLeftButtonDown="MessageDialog_OnMouseLeftButtonDown">
+    <materialDesign:Card UniformCornerRadius="10" Margin="5">
             <DockPanel>
                 <Grid DockPanel.Dock="Top">
                     <materialDesign:ColorZone Mode="PrimaryMid"
@@ -30,7 +31,7 @@
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   ToolTip="Close"
                                   HorizontalAlignment="Right"
-                                  Click="Btn_Cancel_OnClick"
+                                  Click="Btn_Close_OnClick"
                                   Margin="0,0,10,0">
                         <materialDesign:PackIcon Kind="Close"
                                                  Height="15"

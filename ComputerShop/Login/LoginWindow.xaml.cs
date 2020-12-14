@@ -57,7 +57,24 @@ namespace DesignLogin
 
                 var result = user.Authenticate(login);
                 if (result.IsSuccessed)
+                {
+                    switch (result.Message)
+                    {
+                        case "admin":
+                            var admin = new Dashboard.AdminWindow.MainWindow();
+                            admin.Show();
+                            break;
+                        case "dev":
+                            admin = new Dashboard.AdminWindow.MainWindow();
+                            admin.Show();
+                            break;
+                        case "staff":
+                            var staff = new MainWindow();
+                            staff.Show();
+                            break;
+                    }
                     this.Close();
+                }
                 else
                 {
                     var formError = new FormError { lbl_Messege = { Content = $"{result.Message}" }, lbl_Username = { Content = tbx_UserName.Text } };

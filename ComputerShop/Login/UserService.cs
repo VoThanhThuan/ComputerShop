@@ -20,8 +20,9 @@ namespace Dashboard.Login
             if (userName == null) return new ResultError<string>("Tài khoản không tồn tại!");
             var password = PasswordHash(request.Password);
             if (password != userName.PasswordHash) return new ResultError<string>("Password không đúng");
-            Controller.StartDashboard();
-            return new ResultSuccess<string>();
+            var role = Db.Context.AppUserRoles.FirstOrDefault(x => x.UserID == userName.ID);
+            if(role == null) return new ResultError<string>("không tồn tại quyền cho tài khoản này!");
+            return new ResultSuccess<string>(role.RoleID);
         }
 
         public static string PasswordHash(string password)

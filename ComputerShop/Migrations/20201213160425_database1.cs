@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dashboard.Migrations
 {
-    public partial class Initial : Migration
+    public partial class database1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,12 +36,14 @@ namespace Dashboard.Migrations
                 name: "AppUserRole",
                 columns: table => new
                 {
-                    RoleID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoleID = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserRole", x => x.RoleID);
+                    table.PrimaryKey("PK_AppUserRole", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,20 +84,6 @@ namespace Dashboard.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Guarantee",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Guarantee", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -106,7 +94,8 @@ namespace Dashboard.Migrations
                     OriginalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SeriNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SeriNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -140,6 +129,9 @@ namespace Dashboard.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DayImport = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Supplier = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Warehouse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Stock = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AppUserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -236,50 +228,23 @@ namespace Dashboard.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GuaranteeInProduct",
-                columns: table => new
-                {
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    GuaranteeID = table.Column<int>(type: "int", nullable: false),
-                    DateOfPurchase = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GuaranteeInProduct", x => new { x.ProductID, x.GuaranteeID });
-                    table.ForeignKey(
-                        name: "FK_GuaranteeInProduct_Guarantee_GuaranteeID",
-                        column: x => x.GuaranteeID,
-                        principalTable: "Guarantee",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GuaranteeInProduct_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductImages",
+                name: "ProductGuarantee",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Caption = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    IsDefault = table.Column<bool>(type: "bit", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SortOrder = table.Column<int>(type: "int", nullable: false),
-                    FileSize = table.Column<long>(type: "bigint", nullable: false)
+                    DateOfPurchase = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SeriNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductImages", x => x.ID);
+                    table.PrimaryKey("PK_ProductGuarantee", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_ProductImages_Products_ProductID",
-                        column: x => x.ProductID,
+                        name: "FK_ProductGuarantee_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -335,8 +300,7 @@ namespace Dashboard.Migrations
                 columns: table => new
                 {
                     ProductID = table.Column<int>(type: "int", nullable: false),
-                    ImportID = table.Column<int>(type: "int", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false)
+                    ImportID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -384,17 +348,32 @@ namespace Dashboard.Migrations
             migrationBuilder.InsertData(
                 table: "AppRoles",
                 columns: new[] { "ID", "Description", "Name" },
-                values: new object[] { "admin", "Administrator role", "admin" });
+                values: new object[,]
+                {
+                    { "admin", "Administrator role", "admin" },
+                    { "staff", "staff role", "staff" },
+                    { "dev", "developer role", "dev" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AppUserRole",
-                columns: new[] { "RoleID", "UserID" },
-                values: new object[] { "admin", "admin" });
+                columns: new[] { "ID", "RoleID", "UserID" },
+                values: new object[,]
+                {
+                    { 1, "admin", "admin" },
+                    { 2, "admin", "devSon" },
+                    { 3, "staff", "NV01" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "ID", "Avatar", "Dob", "Email", "FirstName", "Identity", "LastName", "PasswordHash", "PhoneNumber", "Username" },
-                values: new object[] { "admin", null, new DateTime(2020, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "voanome@gmail.com", "Thuận", "035123456", "Võ", "ISMvKXpXpadDiUoOSoAfww==", null, "admin" });
+                values: new object[,]
+                {
+                    { "admin", null, new DateTime(2020, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "voanome@gmail.com", "Thuận", "035123456", "Võ", "ISMvKXpXpadDiUoOSoAfww==", null, "admin" },
+                    { "devSon", null, new DateTime(2020, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "sondeptrai@gmail.com", "Sơn", "035123456", "Nguyễn Ngọc", "dOc/DGes1e2AFDggnmrAhA==", null, "sondeptrai" },
+                    { "NV01", null, new DateTime(2020, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "toan@gmail.com", "Toàn", "035123456", "Nguyễn Thanh", "cwHuoXLomiI3mEZ9SpHnqQ==", null, "toan" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -403,8 +382,8 @@ namespace Dashboard.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ID", "DateCreated", "Name", "OriginalPrice", "Price", "SeriNumber", "Stock" },
-                values: new object[] { 1, new DateTime(2020, 12, 7, 23, 32, 32, 857, DateTimeKind.Local).AddTicks(148), "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
+                columns: new[] { "ID", "DateCreated", "ImagePath", "Name", "OriginalPrice", "Price", "SeriNumber", "Stock" },
+                values: new object[] { 1, new DateTime(2020, 12, 13, 23, 4, 25, 44, DateTimeKind.Local).AddTicks(2678), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
 
             migrationBuilder.InsertData(
                 table: "ProductInCategories",
@@ -427,11 +406,6 @@ namespace Dashboard.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GuaranteeInProduct_GuaranteeID",
-                table: "GuaranteeInProduct",
-                column: "GuaranteeID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Import_AppUserID",
                 table: "Import",
                 column: "AppUserID");
@@ -447,9 +421,10 @@ namespace Dashboard.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductImages_ProductID",
-                table: "ProductImages",
-                column: "ProductID");
+                name: "IX_ProductGuarantee_ProductId",
+                table: "ProductGuarantee",
+                column: "ProductId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductInCategories_ProductID",
@@ -460,6 +435,12 @@ namespace Dashboard.Migrations
                 name: "IX_ProductInImport_ImportID",
                 table: "ProductInImport",
                 column: "ImportID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductInImport_ProductID",
+                table: "ProductInImport",
+                column: "ProductID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductTranslations_ProductId",
@@ -487,13 +468,10 @@ namespace Dashboard.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "GuaranteeInProduct");
-
-            migrationBuilder.DropTable(
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "ProductImages");
+                name: "ProductGuarantee");
 
             migrationBuilder.DropTable(
                 name: "ProductInCategories");
@@ -509,9 +487,6 @@ namespace Dashboard.Migrations
 
             migrationBuilder.DropTable(
                 name: "Transactions");
-
-            migrationBuilder.DropTable(
-                name: "Guarantee");
 
             migrationBuilder.DropTable(
                 name: "Orders");
