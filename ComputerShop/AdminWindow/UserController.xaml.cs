@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Dashboard;
 using Dashboard.Common;
+using Dashboard.Common.ViewModel;
 using Dashboard.Data.Entities;
 using Dashboard.Login;
 using MaterialDesignThemes.Wpf;
@@ -49,6 +50,9 @@ namespace Dashboard.AdminWindow
 
         private Result<string> AddUser()
         {
+            var cID = Db.Context.AppUsers.FirstOrDefault(x => x.ID == tbx_ID.Text);
+            if (cID != null)
+                return new ResultError<string>("Trùng ID");
             var cUser = Db.Context.AppUsers.FirstOrDefault(x => x.Username == tbx_Username.Text);
             if (cUser != null)
                 return new ResultError<string>("Tài khoản đã tồn tại");
@@ -56,31 +60,52 @@ namespace Dashboard.AdminWindow
                 return new ResultError<string>("Mật khẩu xác thực không đúng");
             var user = new AppUser
             {
+                ID = tbx_ID.Text,
                 Email = tbx_Email.Text,
                 Dob = dp_DoB.SelectedDate ?? DateTime.Today,
                 FirstName = tbx_FirstName.Text,
                 LastName = tbx_LastName.Text,
                 Username = tbx_Username.Text,
-                PhoneNumber = tbx_PhoneNumber.Text,
-                PasswordHash = UserService.PasswordHash(tbx_Password.Text)
+                PhoneNumber = tbx_PhoneNumber.Text
+                
             };
+            if (tbx_Password.Text != tbx_ConfirmPassword.Text) return new ResultError<string>("xác thực password không chính xác");
+            user.PasswordHash = UserService.PasswordHash(tbx_Password.Text);
+
             Db.Context.AppUsers.Add(user);
+
+            var userRole = new AppUserRole();
+            if (tbtn_IsAdmin.IsChecked == true)
+            {
+                userRole.UserID = tbx_ID.Text;
+                userRole.RoleID = "admin";
+            }
+            else
+            {
+                userRole.UserID = tbx_ID.Text;
+                userRole.RoleID = "staff";
+            }
+            Db.Context.AppUserRoles.Add(userRole);
+
+            Db.Context.SaveChanges();
+
             return new ResultSuccess<string>();
         }
 
         private void SetValueUser()
         {
             var info = (AppUser)dtg_User.SelectedValue;
+            tbx_ID.Text = info.ID;
             tbx_LastName.Text = info.LastName;
             tbx_FirstName.Text = info.FirstName;
             dp_DoB.Text = $"{info.Dob}";
             tbx_Email.Text = info.Email;
             tbx_PhoneNumber.Text = info.PhoneNumber;
             tbx_Username.Text = info.Username;
-
+            
             var role = Db.Context.AppUserRoles.FirstOrDefault(x => x.UserID == info.ID);
 
-            tbtn_IsAdmin.IsChecked = role != null;
+            tbtn_IsAdmin.IsChecked = role != null && (role.RoleID == "admin" ? true : false);
 
         }
 
@@ -89,14 +114,34 @@ namespace Dashboard.AdminWindow
             var user = Db.Context.AppUsers.FirstOrDefault(x => x.Username == tbx_Username.Text);
             if (user == null)
                 return new ResultError<string>("Không có tài khoản này");
-
+            user.ID = tbx_ID.Text;
             user.Email = tbx_Email.Text;
             user.Dob = dp_DoB.SelectedDate ?? DateTime.Today;
             user.FirstName = tbx_FirstName.Text;
             user.LastName = tbx_LastName.Text;
             user.Username = tbx_Username.Text;
             user.PhoneNumber = tbx_PhoneNumber.Text;
-            user.PasswordHash = UserService.PasswordHash(tbx_Password.Text);
+            if (!string.IsNullOrEmpty(tbx_Password.Text))
+            {
+                if (tbx_Password.Text != tbx_ConfirmPassword.Text) return new ResultError<string>("xác thực password không chính xác");
+                user.PasswordHash = UserService.PasswordHash(tbx_Password.Text);
+
+            }
+
+            var userRole = Db.Context.AppUserRoles.FirstOrDefault(x => x.UserID == user.ID);
+            if (userRole != null)
+            {
+                if (tbtn_IsAdmin.IsChecked == true)
+                {
+                    userRole.UserID = tbx_ID.Text;
+                    userRole.RoleID = "admin";
+                }
+                else
+                {
+                    userRole.UserID = tbx_ID.Text;
+                    userRole.RoleID = "staff";
+                }
+            }
 
             Db.Context.SaveChanges();
             return new ResultSuccess<string>();
@@ -162,13 +207,33 @@ namespace Dashboard.AdminWindow
                     return;
                 case St.Add:
                     var add = AddUser();
-                    if (add.IsSuccessed == false) 
-                        MessageBox.Show(add.Message);
+                    if (add.IsSuccessed == false)
+                    {
+                        var mess = new MessageDialog()
+                        {
+                            tbl_Title = { Text = "LỖI" }
+                            ,
+                            tbl_Message = { Text = add.Message}
+                        };
+                        mess.ShowDialog();
+                    }
+                        
                     break;
                 case St.Edit:
                     var edit = EditUser();
                     if (edit.IsSuccessed == false)
-                        MessageBox.Show(edit.Message);
+                    {
+                        if (edit.IsSuccessed == false)
+                        {
+                            var mess = new MessageDialog()
+                            {
+                                tbl_Title = { Text = "LỖI" }
+                                ,
+                                tbl_Message = { Text = edit.Message }
+                            };
+                            mess.ShowDialog();
+                        }
+                    }
                     break;
                 default:
                     return;

@@ -46,6 +46,8 @@
                   IsReadOnly="True"
                   Grid.ColumnSpan="2">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"
+                                    Binding="{Binding ID}" />
                 <DataGridTextColumn Header="Họ"
                                     Binding="{Binding LastName}" />
                 <DataGridTextColumn Header="Tên"
@@ -70,6 +72,10 @@
                             Width="770"
                             Margin="10"
                             Background="White">
+                    <TextBox x:Name="tbx_ID"
+                             materialDesign:HintAssist.Hint="ID"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             VerticalAlignment="Center" />
                     <TextBox x:Name="tbx_FirstName"
                              materialDesign:HintAssist.Hint="Tên"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
