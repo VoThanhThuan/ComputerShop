@@ -36,8 +36,8 @@ namespace Dashboard.AdminWindow.Add
                     tbx_DateImport = {Text = $"{DateTime.Now}"},
                     tbx_DescriptionImport = {Text = aii.tbx_Description.Text}
                 };
-                ap.tbl_TitleImport.PreviewMouseDown += Window_MouseDown;
-                ap.tbl_TitleProduct.PreviewMouseDown += Window_MouseDown;
+                //ap.tbl_TitleImport.PreviewMouseDown += Window_MouseDown;
+                //ap.tbl_TitleProduct.PreviewMouseDown += Window_MouseDown;
                 ap.btn_CLose.Click += (o, eventArgs) =>
                 {
                     this.Close();

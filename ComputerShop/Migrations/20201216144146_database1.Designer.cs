@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dashboard.Migrations
 {
     [DbContext(typeof(CompuerShopDbContext))]
-    [Migration("20201213160425_database1")]
+    [Migration("20201216144146_database1")]
     partial class database1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -275,6 +275,9 @@ namespace Dashboard.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("SecurityCode")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
@@ -395,7 +398,7 @@ namespace Dashboard.Migrations
                         new
                         {
                             ID = 1,
-                            DateCreated = new DateTime(2020, 12, 13, 23, 4, 25, 44, DateTimeKind.Local).AddTicks(2678),
+                            DateCreated = new DateTime(2020, 12, 16, 21, 41, 45, 507, DateTimeKind.Local).AddTicks(8882),
                             Name = "RAM-SAMSUNG-256GB",
                             OriginalPrice = 100000m,
                             Price = 200000m,
@@ -458,13 +461,18 @@ namespace Dashboard.Migrations
 
             modelBuilder.Entity("Dashboard.Data.Entities.ProductInImport", b =>
                 {
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("ImportID")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductID", "ImportID");
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
 
                     b.HasIndex("ImportID");
 

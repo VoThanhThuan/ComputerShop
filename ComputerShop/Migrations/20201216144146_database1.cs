@@ -133,6 +133,7 @@ namespace Dashboard.Migrations
                     Warehouse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AppUserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -299,12 +300,14 @@ namespace Dashboard.Migrations
                 name: "ProductInImport",
                 columns: table => new
                 {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProductID = table.Column<int>(type: "int", nullable: false),
                     ImportID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductInImport", x => new { x.ProductID, x.ImportID });
+                    table.PrimaryKey("PK_ProductInImport", x => x.ID);
                     table.ForeignKey(
                         name: "FK_ProductInImport_Import_ImportID",
                         column: x => x.ImportID,
@@ -383,7 +386,7 @@ namespace Dashboard.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "DateCreated", "ImagePath", "Name", "OriginalPrice", "Price", "SeriNumber", "Stock" },
-                values: new object[] { 1, new DateTime(2020, 12, 13, 23, 4, 25, 44, DateTimeKind.Local).AddTicks(2678), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
+                values: new object[] { 1, new DateTime(2020, 12, 16, 21, 41, 45, 507, DateTimeKind.Local).AddTicks(8882), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
 
             migrationBuilder.InsertData(
                 table: "ProductInCategories",

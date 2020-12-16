@@ -68,12 +68,11 @@ namespace Dashboard.AdminWindow
                         tbx_StockImport = {Text = $"{import.Stock}"},
                         tbx_Warehouse = {Text = import.Warehouse}
                     };
-                    var window = new Window
-                    {
-                        Title = "My User Control Dialog",
-                        Content = ap
-                    };
+
+                    var window = new PageAddProductInImport(ap) {Title = "Thêm"};
+
                     window.ShowDialog();
+                    LoadDataProduct();
                 };
                 expander.btn_Edit.Click += (sender, args) =>
                 {
@@ -116,9 +115,11 @@ namespace Dashboard.AdminWindow
                     if (prod == null) return;
 
                     var mess = new MessageDialog() { tbl_Title = { Text = "Xóa sản phẩm" }, tbl_Message = { Text = $"bạn thật sự muốn xóa {prod.Name}" } };
-
-                    if(mess.ShowDialog() == false) return;
-
+                    mess.ShowDialog();
+                    if (mess.DialogResult != MyDialogResult.Result.Ok) return;
+                    var pathImage = $@"{Directory.GetCurrentDirectory()}\{prod.ImagePath}";
+                    if (Directory.Exists(pathImage))
+                        Directory.Delete(pathImage);
                     Db.Context.Products.Remove(prod);
                     var imp = Db.Context.Imports.Find(import.ID);
                     imp.Stock--;
@@ -246,6 +247,7 @@ namespace Dashboard.AdminWindow
             //dlh_Loading.IsOpen = true;
             var pap = new PageAddProduct();
             pap.ShowDialog();
+            LoadDataProduct();
         }
 
         private void btn_Do_Click(object sender, RoutedEventArgs e)

@@ -20,7 +20,8 @@
                            Background="{x:Null}"
                            Foreground="#FF673AB7"
                            VerticalAlignment="Stretch"
-                           TextAlignment="Center">
+                           TextAlignment="Center"
+                           MouseLeftButtonDown="Tbl_TitleImport_OnMouseLeftButtonDown">
                     THÔNG TIN CHO PHIẾU NHẬP HÀNG
                 </TextBlock>
                 <Grid>
@@ -83,7 +84,8 @@
                                HorizontalAlignment="Stretch"
                                Height="38"
                                Foreground="#FF673AB7"
-                               TextAlignment="Center">
+                               TextAlignment="Center"
+                               MouseLeftButtonDown="Tbl_TitleImport_OnMouseLeftButtonDown">
                     THÔNG TIN CHO SẢN PHẨM
                     </TextBlock>
                     <Grid>
@@ -137,7 +139,9 @@
                             <TextBox x:Name="tbx_Stock"
                                      materialDesign:HintAssist.Hint="Số lượng"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     VerticalAlignment="Center" />
+                                     VerticalAlignment="Center"
+                                     PreviewTextInput="tbx_Price_PreviewTextInput"
+                                     TextChanged="Tbx_Stock_OnTextChanged" />
                             <TextBox x:Name="tbx_Details"
                                      materialDesign:HintAssist.Hint="chi tiết"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -185,7 +189,8 @@
                         <Button x:Name="btn_SaveListProdut"
                             Grid.Column="1"
                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                            Click="btn_SaveListProdut_Click">Save</Button>
+                            Click="btn_SaveListProdut_Click"
+                            IsEnabled="False">Save</Button>
                     <Button x:Name="btn_CLose" Grid.Column="2"
                             Style="{StaticResource MaterialDesignOutlinedButton}">Đóng</Button>
                 </Grid>

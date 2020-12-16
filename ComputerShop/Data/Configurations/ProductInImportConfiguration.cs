@@ -12,7 +12,9 @@ namespace Dashboard.Data.Configurations
         public void Configure(EntityTypeBuilder<ProductInImport> builder)
         {
             builder.ToTable("ProductInImport");
-            builder.HasKey(x => new {x.ProductID, x.ImportID});
+
+            builder.HasKey(x => x.ID);
+            builder.Property(x => x.ID).UseIdentityColumn();
             builder.HasOne(x => x.Import).WithMany(x => x.ProductInImports)
                 .HasForeignKey(x => x.ImportID);
             builder.HasOne(x => x.Product).WithOne(x => x.ProductInImports)

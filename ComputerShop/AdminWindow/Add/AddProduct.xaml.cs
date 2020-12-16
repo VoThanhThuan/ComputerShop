@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Dashboard.Common;
+using Dashboard.Common.ViewModel;
 using Dashboard.Data.Entities;
 using Microsoft.Win32;
 using Path = System.IO.Path;
@@ -28,6 +29,7 @@ namespace Dashboard.AdminWindow.Add
         public AddProduct()
         {
             InitializeComponent();
+            dp_WarrantyPeriod.Text = $"{DateTime.Today.AddYears(2)}";
         }
 
         private Status _status = Status.Add;
@@ -36,6 +38,7 @@ namespace Dashboard.AdminWindow.Add
         public AddProduct(Status status, int id)
         {
             InitializeComponent();
+            dp_WarrantyPeriod.Text = $"{DateTime.Today.AddYears(2)}";
             switch (status)
             {
                 case Status.Edit:
@@ -87,7 +90,7 @@ namespace Dashboard.AdminWindow.Add
                 ProductGuarantee = new ProductGuarantee()
                 {
                     DateOfPurchase = DateTime.Now,
-                    ExpirationDate = Convert.ToDateTime(dp_WarrantyPeriod.Text),
+                    ExpirationDate = string.IsNullOrEmpty(dp_WarrantyPeriod.Text) == true ? DateTime.Today.AddYears(2) : Convert.ToDateTime(dp_WarrantyPeriod.Text),
                     SeriNumber = codeGuarantee,
                     Description = tbx_Details.Text
                 },
@@ -95,6 +98,7 @@ namespace Dashboard.AdminWindow.Add
             };
             _products.Add(product);
             tbx_StockImport.Text = $"{_products.Count}";
+            btn_SaveListProdut.IsEnabled = true;
             return new ResultSuccess<string>();
         }
 
@@ -113,6 +117,7 @@ namespace Dashboard.AdminWindow.Add
 
         private Result<string> SaveListProduct()
         {
+            var SecuriryCodeImport = Guid.NewGuid();
             if (_status != Status.AddOnlyProduct)
             {
                 var import = new Import
@@ -121,22 +126,31 @@ namespace Dashboard.AdminWindow.Add
                     Supplier = tbx_Supplier.Text,
                     Warehouse = tbx_Warehouse.Text,
                     Stock = Convert.ToInt32(tbx_StockImport.Text),
-                    Description = tbx_DescriptionImport.Text
+                    Description = tbx_DescriptionImport.Text,
+                    SecurityCode = SecuriryCodeImport
                 };
-                _ID = import.ID;
                 Db.Context.Imports.Add(import);
                 Db.Context.SaveChanges();
             }
 
             foreach (var item in _products)
             {
-                item.ProductInImports = new ProductInImport()
-                {
-                    ProductID = item.ID,
-                    ImportID = _ID
-                };
                 Db.Context.Products.Add(item);
-
+            }
+            Db.Context.SaveChanges();
+            var importID = Db.Context.Imports.FirstOrDefault(x => x.SecurityCode == SecuriryCodeImport);
+            if (importID == null)
+            {
+                MessageBox.Show("Lỗi truy tim mã nhập hàng");
+                return new ResultError<string>("Lỗi truy tim mã nhập hàng");
+            }
+            foreach (var import in _products.Select(item => new ProductInImport()
+            {
+                ProductID = item.ID,
+                ImportID = importID.ID
+            }))
+            {
+                Db.Context.ProductInImports.Add(import);
             }
             Db.Context.SaveChanges();
             return new ResultSuccess<string>();
@@ -204,6 +218,8 @@ namespace Dashboard.AdminWindow.Add
         private void btn_SaveListProdut_Click(object sender, RoutedEventArgs e)
         {
             SaveListProduct();
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
         }
 
         private void tbx_Price_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -216,6 +232,13 @@ namespace Dashboard.AdminWindow.Add
         {
             var txt = ((TextBox)sender);
             if (string.IsNullOrEmpty(txt.Text)) return;
+            if (!IsTextAllowed(txt.Text))
+            {
+                var mess = new MessageDialog(){tbl_Title = {Text = "Không phải số"}, tbl_Message = {Text = "Dữ liệu bạn copy có chứ ký tự."}};
+                mess.ShowDialog();
+                txt.Clear();
+                return;
+            }
             txt.Text = $"{Convert.ToDouble(txt.Text):N0}";
             txt.CaretIndex = txt.Text.Length;
 
@@ -224,6 +247,22 @@ namespace Dashboard.AdminWindow.Add
         private void btn_OpenCalendar_Click(object sender, RoutedEventArgs e)
         {
             dp_WarrantyPeriod.IsDropDownOpen = true;
+        }
+
+        private void Tbx_Stock_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txt = ((TextBox)sender);
+            if (IsTextAllowed(txt.Text)) return;
+            var mess = new MessageDialog() { tbl_Title = { Text = "Không phải số" }, tbl_Message = { Text = "Dữ liệu bạn copy có chứ ký tự." } };
+            mess.ShowDialog();
+            txt.Clear();
+            return;
+        }
+
+        private void Tbl_TitleImport_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var myWindow = Window.GetWindow(this);
+            myWindow.DragMove();
         }
     }
 
