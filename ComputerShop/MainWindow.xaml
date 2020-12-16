@@ -189,19 +189,24 @@
                 </ListViewItem>-->
 
                 <!-- Đăng Xuất-->
-                <ListViewItem Height="60">
+                <Button
+                        Height="60" 
+                        Background="{x:Null}" 
+                        BorderBrush="{x:Null}" 
+                        Foreground="#DDFFFFFF" 
+                        Width="190" Click="BtnLog_Out">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ExitToApp"
                                                  Width="30"
                                                  Height="30"
                                                  VerticalAlignment="Center"
-                                                 Margin="5" />
+                                                 Margin="-25 0 0 0" />
                         <TextBlock Text="Đăng Xuất"
                                    FontSize="17"
                                    VerticalAlignment="Center"
                                    Margin="20 0" />
                     </StackPanel>
-                </ListViewItem>
+                </Button>
             </ListView>
         </Grid>
     </Grid>
