@@ -12,11 +12,13 @@
           VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="0.437"/>
+            <ColumnDefinition Width="269.563"/>
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="grid_showProduct"
-              Grid.Column="0">
+        <Grid x:Name="GridShowProduct"
+              Grid.Column="0"
+        >
             <DockPanel>
                 <materialDesign:ColorZone Mode="PrimaryMid"
                                           Padding="5"
@@ -105,7 +107,7 @@
                               Margin="0 10 0 0"
                               HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Auto"
-                              Height="{Binding ElementName=grid_showProduct, Path=Height}">
+                              Height="{Binding ElementName=GridShowProduct, Path=Height}">
                     <WrapPanel x:Name="Product"
                                HorizontalAlignment="Stretch"
                                VerticalAlignment="Stretch"
@@ -118,36 +120,27 @@
 
         </Grid>
         <Grid Grid.Column="1"
-                    MinWidth="300">
-
-            <ListView x:Name="selectedProduct"
-                      VerticalAlignment="Stretch"
-                      HorizontalAlignment="Stretch">
-
+              Grid.ColumnSpan="2" Background="White">
+            <ListView x:Name="SelectedProduct" 
+                      Margin="0,0,0,50" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="auto" Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Width="auto" Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
-
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="70" >
                 <Button Style="{DynamicResource MaterialDesignRaisedButton}"
                         Width="120"
-                        Margin="5 0 0 0"
+                        Margin="12 0 0 0"
                         Content="Thanh Toán" />
 
-                <Button Style="{DynamicResource MaterialDesignRaisedButton}"
+                <Button x:Name="BtnDelete"
+                        Style="{DynamicResource MaterialDesignRaisedButton}"
                         Width="120"
                         Margin="5 0 0 0"
                         Content="Xoá" />
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                        ToolTip="Làm mới"
-                        Height="30"
-                        Width="30"
-                        VerticalAlignment="Center"
-                        Margin="20 0 0 0">
-                    <materialDesign:PackIcon Kind="Refresh"
-                                             Height="20"
-                                             Width="20" />
-
-                </Button>
-
             </StackPanel>
 
         </Grid>

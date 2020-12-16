@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Dashboard.Data.Entities
 {
-    public class Product
+    public class Product : IEnumerable
     {
         public int ID { set; get; }
         public string Name { get; set; }
@@ -25,5 +26,9 @@ namespace Dashboard.Data.Entities
         public List<Cart> Carts { get; set; }
 
         public List<ProductTranslation> ProductTranslations { get; set; }
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

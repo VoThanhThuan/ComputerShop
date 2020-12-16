@@ -32,28 +32,10 @@ namespace Dashboard
 
         private void BtnExit(object sender, RoutedEventArgs e)
         {
-            var mess = new MessageDialog()
-            {
-                tbl_Title = { Text = "Bạn Muốn Thoát ?" }
-                ,
-                tbl_Message = { Text = "Tắt chương trình hoặc trở lại màn hình đăng nhập" }
-                ,
-                btn_Cancel = { Content = "Login" }
-            };
-            mess.ShowDialog();
-            switch (mess.DialogResult)
-            {
-                case MyDialogResult.Result.Ok:
-                    Application.Current.Shutdown();
-                    break;
-                case MyDialogResult.Result.Cancel:
-                    var login = new LoginWindow();
-                    login.Show();
-                    this.Close();
-                    break;
-            }
+            MessExit();
         }
 
+      
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -77,13 +59,6 @@ namespace Dashboard
                     GridPrincipal.Children.Add(new UserControl_InvoicePrinting());
                     break;
 
-                case 3:
-                    GridPrincipal.Children.Clear();
-                    break;
-              
-
-                default:
-                    break;
             }
         }
 
@@ -106,6 +81,59 @@ namespace Dashboard
         private void BtnZoom(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        } 
+        
+        private void MessExit()
+        {
+            var mess = new MessageDialog()
+            {
+                tbl_Title = { Text = "Bạn Muốn Thoát ?" }
+                ,
+                tbl_Message = { Text = "Tắt chương trình hoặc trở lại màn hình đăng nhập" }
+                ,
+                btn_Cancel = { Content = "Login" }
+            };
+            mess.ShowDialog();
+            switch (mess.DialogResult)
+            {
+                case MyDialogResult.Result.Ok:
+                    Application.Current.Shutdown();
+                    break;
+                case MyDialogResult.Result.Cancel:
+                    var login = new LoginWindow();
+                    login.Show();
+                    this.Close();
+                    break;
+            }
+        }
+
+
+        private void Mess_Logout()
+        {
+            var mess = new MessageDialog()
+            {
+                tbl_Title = { Text = "Đăng Xuất" }
+                ,
+                tbl_Message = { Text = "Bạn có muốn đăng xuất ?" }
+                ,
+                btn_Cancel = { Content = "Ở lại" }
+            };
+            mess.ShowDialog();
+            switch (mess.DialogResult)
+            {
+                case MyDialogResult.Result.Ok:
+                    var login = new LoginWindow();
+                    login.Show();
+                    this.Close();
+                    break;
+                case MyDialogResult.Result.Cancel:
+                    break;
+            }
+        }
+
+        private void BtnLog_Out(object sender, RoutedEventArgs e)
+        {
+            Mess_Logout();
         }
     }
 }

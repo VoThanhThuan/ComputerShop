@@ -32,23 +32,23 @@
                             Grid.Row="1"
                             Margin="8,0,8,0"                        
                             >
-                            <TextBlock
+                            <TextBlock x:Name="TblNameProduct"
                                 FontWeight="Bold" Height="18">
                                 <Run Text="Nope"/>
                             </TextBlock>
-                            <Label x:Name="unitPrice" Width="128" Height="22"
+                            <TextBlock x:Name="TblUnitPrice" Width="128" Height="22"
                                        FontSize="15"
                                        FontFamily="Stormfaze"               
                                        Opacity="1" 
-                                       Content="Giá:" 
                                        HorizontalAlignment="Left"                                     
-                                       />
+                            />
 
                             <StackPanel Orientation="Horizontal" 
                                         HorizontalAlignment="Right" 
                                         VerticalAlignment="Center">
 
                                 <Button
+                                x:Name="BtnAddCart"
                                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                 ToolTip="Thêm" 
                                 Height="22" 
@@ -61,13 +61,16 @@
                                     Width="15" />
                                 </Button>
 
-                                <Label x:Name="amount"
-                                    Width="50"                                                                  
-                                    Height="25"
+                                <Label
                                     Content="SL:"
                                     />
+                                <TextBlock x:Name="TblAmount"
+                                    Width="34"                                                                  
+                                    Height="16" 
+                                    VerticalAlignment="Center"
+                                />
 
-                                <Button
+                                <!--<Button x:Name="btn_diffCart"
                                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                 HorizontalAlignment="Stretch"
                                 ToolTip="Giảm" 
@@ -77,13 +80,13 @@
                                     Kind="Minus"
                                     Height="15"
                                     Width="15" />
-                                </Button>
+                                </Button>-->
                             </StackPanel>
 
                         </StackPanel>
-                        
+
                     </Grid>
-                    
+
                 </materialDesign:Card>
 
             </Grid>
