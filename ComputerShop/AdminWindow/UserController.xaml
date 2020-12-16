@@ -53,7 +53,7 @@
                 <DataGridTextColumn Header="Tên"
                                     Binding="{Binding FirstName}" />
                 <DataGridTextColumn Header="Tài khoản"
-                                    Binding="{Binding UserName}" />
+                                    Binding="{Binding Username}" />
                 <DataGridTextColumn Header="Ngày sinh"
                                     Binding="{Binding Dob}" />
                 <DataGridTextColumn Header="Email"
@@ -63,7 +63,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <materialDesign:DialogHost CloseOnClickAway="True"
+        <!--<materialDesign:DialogHost CloseOnClickAway="True"
                                    x:Name="dlh_Loading">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel x:Name="stackPanel"
@@ -140,7 +140,7 @@
                 </StackPanel>
 
             </materialDesign:DialogHost.DialogContent>
-        </materialDesign:DialogHost>
+        </materialDesign:DialogHost>-->
 
 
 

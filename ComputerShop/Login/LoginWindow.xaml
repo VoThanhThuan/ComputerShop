@@ -18,8 +18,8 @@
         KeyDown="Window_KeyDown">
     <materialDesign:Card UniformCornerRadius="10">
         <materialDesign:Card.Background>
-            <ImageBrush x:Name="imgBackground"
-                        ImageSource="/Login/image/WallpaperVTT.png" />
+            <ImageBrush x:Name="ImgBackground"
+                        ImageSource="/Login/image/WallpaperLaptopLogo.png" />
         </materialDesign:Card.Background>
         <Grid>
             <Label x:Name="label"
@@ -54,18 +54,14 @@
                        VerticalAlignment="Top"
                        Width="44.5"
                        Background="#FF4346D3" />
-                <Grid Grid.Row="2"
+
+                <Grid 
                       HorizontalAlignment="Left"
                       Height="39"
                       Margin="49.833,157.5,0,0"
                       VerticalAlignment="Top"
-                      Width="233.167">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Left"
-                                Height="39"
-                                Margin="-1.333,0,0,0"
-                                VerticalAlignment="Top"
-                                Width="234.5" />
+                      Width="233.167"
+                      >
                     <materialDesign:PackIcon Kind="Account"
                                              Width="20"
                                              Height="20"
@@ -77,8 +73,8 @@
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Margin="25,0,0,0"
                              CaretBrush="#FF2B5BEB"
-                             BorderBrush="#FF696FD0" />
-
+                             BorderBrush="#FF696FD0" 
+                             Focusable="True" Padding="-1"/>
 
                 </Grid>
 
@@ -87,17 +83,6 @@
                        Margin="49.833,211.527,0,0"
                        VerticalAlignment="Top"
                        Width="233.167">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200*" />
-                        <ColumnDefinition Width="33*" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Left"
-                                Height="39"
-                                Margin="-1.333,0,0,0"
-                                VerticalAlignment="Top"
-                                Width="234.5"
-                                Grid.ColumnSpan="2" />
                     <materialDesign:PackIcon Grid.Column="0"
                                              Kind="Key"
                                              Width="20"
@@ -108,8 +93,6 @@
                     <PasswordBox   x:Name="tbx_Password"
                                    materialDesign:HintAssist.Hint="Password"
                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                   Grid.ColumnSpan="2"
-                                   Grid.Column="0"
                                    Margin="25,0,0,0"
                                    CaretBrush="#FF2B5BEB"
                                    BorderBrush="#FF696FD0" />

@@ -17,7 +17,7 @@
     <materialDesign:Card UniformCornerRadius="10" Margin="5">
             <DockPanel>
                 <Grid DockPanel.Dock="Top">
-                    <materialDesign:ColorZone Mode="PrimaryMid"
+                    <materialDesign:ColorZone x:Name="title_color" Mode="PrimaryMid"
                                               Height="40">
                         <TextBlock x:Name="tbl_Title"
                                    Text="Title Message"

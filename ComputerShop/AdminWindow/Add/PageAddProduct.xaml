@@ -11,8 +11,8 @@
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
         AllowsTransparency="True"
-        MaxWidth="800"
-        MaxHeight="800"
+        MinHeight="720"
+        MinWidth="720"
         MouseDown="Window_MouseDown">
     <Grid x:Name="RenderPages">
     </Grid>

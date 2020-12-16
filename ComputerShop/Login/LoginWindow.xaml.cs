@@ -6,8 +6,10 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Dashboard;
+using Dashboard.Common.ViewModel;
 using Dashboard.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
@@ -73,16 +75,24 @@ namespace DesignLogin
                             staff.Show();
                             break;
                     }
+
                     this.Close();
                 }
                 else
                 {
-                    var formError = new FormError { lbl_Messege = { Content = $"{result.Message}" }, lbl_Username = { Content = tbx_UserName.Text } };
-                    formError.Show();
                     dht_Loading.IsOpen = false;
-                }
-            }));
+                    var formError = new MessageDialog()
+                    {
+                        tbl_Title = { Text = "Lỗi đăng nhập" },
+                        tbl_Message = { Text = $"{result.Message}" },
+                        title_color = { Background = new SolidColorBrush(Color.FromRgb(255, 0, 0)) },
+                        Topmost = true
 
+                    };
+                    formError.ShowDialog();
+                }
+
+            }));
         }
 
 
@@ -106,9 +116,9 @@ namespace DesignLogin
         private void SetBackground()
         {
             var path = GetCurrentDesktopWallpaper();
-            if(!File.Exists(path))
+            if (!File.Exists(path))
                 return;
-            imgBackground.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
+            ImgBackground.ImageSource = new BitmapImage(new Uri(path, UriKind.Relative));
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -126,7 +136,7 @@ namespace DesignLogin
             }).Start();
 
 
-                // _userService.Authenticate(login);
+            // _userService.Authenticate(login);
 
             //AuthenticateUser();
             //Thread.Sleep(2000);
@@ -145,5 +155,5 @@ namespace DesignLogin
             }
         }
     }
-    
+
 }

@@ -6,15 +6,19 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Dashboard.AdminWindow"
         mc:Ignorable="d"
-        Height="850"
-        Width="1200"
+        MinWidth="1000"
+        MinHeight="720"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         Background="{x:Null}"
         AllowsTransparency="True"
         Loaded="Window_Loaded"
-        MouseDown="Window_MouseDown">
+        MouseLeftButtonDown="Window_MouseDown">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      ResizeBorderThickness="8" />
+    </WindowChrome.WindowChrome>
     <Grid>
         <materialDesign:Card Margin="10"
                              UniformCornerRadius="15">
@@ -34,7 +38,8 @@
                 <Grid Grid.Column="0">
                     <ListView Margin="0 0"
                               ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              >
                         <ListViewItem HorizontalAlignment="Center"
                                       Margin="0 10">
                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
