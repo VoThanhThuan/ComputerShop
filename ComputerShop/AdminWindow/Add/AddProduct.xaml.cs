@@ -60,7 +60,7 @@ namespace Dashboard.AdminWindow.Add
         private string SaveFile(string file)
         {
             var originalFileName = file;
-            var fileName = $@"imageProduct/{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            var fileName = $@"imageProduct\{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             if (!Directory.Exists("imageProduct"))
                 Directory.CreateDirectory("imageProduct");
             File.Copy(_pathImage, fileName);

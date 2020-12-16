@@ -118,8 +118,8 @@ namespace Dashboard.AdminWindow
                     mess.ShowDialog();
                     if (mess.DialogResult != MyDialogResult.Result.Ok) return;
                     var pathImage = $@"{Directory.GetCurrentDirectory()}\{prod.ImagePath}";
-                    if (Directory.Exists(pathImage))
-                        Directory.Delete(pathImage);
+                    if (File.Exists(pathImage))
+                        File.Delete(pathImage);
                     Db.Context.Products.Remove(prod);
                     var imp = Db.Context.Imports.Find(import.ID);
                     imp.Stock--;
