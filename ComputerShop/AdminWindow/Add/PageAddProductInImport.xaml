@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard.AdminWindow.Add"
         mc:Ignorable="d"
-        Title="PageAddProductInImport" MinHeight="450" MinWidth="800"
+        Title="PageAddProductInImport" 
+        MinHeight="450" 
+        MinWidth="800"
         Background="{x:Null}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        SizeToContent="WidthAndHeight">
     <Grid x:Name="RenderPages">
         
     </Grid>

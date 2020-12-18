@@ -11,7 +11,8 @@
         MaxHeight="800"
         MaxWidth="800"
         Background="{x:Null}"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="WidthAndHeight">
     <Grid x:Name="RenderPages">
     </Grid>
 </Window>

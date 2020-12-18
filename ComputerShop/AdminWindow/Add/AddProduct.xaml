@@ -93,33 +93,94 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <GroupBox x:Name="gb_image"
-                                  Header="Card Group Box"
-                                  Style="{DynamicResource MaterialDesignCardGroupBox}"
-                                  Margin="16"
-                                  MouseDown="GroupBox_MouseDown"
-                                  Drop="GroupBox_Drop"
-                                  MaxHeight="300"
-                                  MaxWidth="300"
-                                  AllowDrop="True">
-                            <GroupBox.HeaderTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="ImageArea"
-                                                                 Height="32"
-                                                                 Width="32"
-                                                                 VerticalAlignment="Center" />
-                                        <TextBlock Margin="8,0,0,0"
-                                                   VerticalAlignment="Center"
-                                                   Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                                   Text="{Binding}" />
+                        <StackPanel>
+                            <GroupBox x:Name="gb_image"
+                                      Header="Card Group Box"
+                                      Style="{DynamicResource MaterialDesignCardGroupBox}"
+                                      Margin="16"
+                                      MouseDown="GroupBox_MouseDown"
+                                      Drop="GroupBox_Drop"
+                                      MaxHeight="300"
+                                      MaxWidth="300"
+                                      MinHeight="200"
+                                      MinWidth="200"
+                                      AllowDrop="True">
+                                <GroupBox.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="ImageArea"
+                                                                     Height="32"
+                                                                     Width="32"
+                                                                     VerticalAlignment="Center" />
+                                            <TextBlock Margin="8,0,0,0"
+                                                       VerticalAlignment="Center"
+                                                       Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                                       Text="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GroupBox.HeaderTemplate>
+                                <Image x:Name="img_Product"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </GroupBox>
+
+                            <Grid Margin="15,0,15,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="cbb_Categories" 
+                                          materialDesign:HintAssist.Hint="Loại sản phẩm"
+                                          materialDesign:HintAssist.HintOpacity=".26"
+                                          IsEditable="True"></ComboBox>
+                                <materialDesign:PopupBox Grid.Column="1"
+                                                         Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                                         PlacementMode="BottomAndAlignCentres"
+                                                         ToolTip="Tùy chỉnh danh mục sản phẩm"
+                                                         Height="40"
+                                                         Width="40"
+                                                         Margin="10,0,0,0">
+                                    <materialDesign:PopupBox.ToggleCheckedContent>
+                                        <materialDesign:PackIcon Kind="Pencil"
+                                                                 Width="24"
+                                                                 Height="24" />
+                                    </materialDesign:PopupBox.ToggleCheckedContent>
+                                    <StackPanel>
+                                        <Button x:Name="btn_AddCategory"
+                                                Grid.Column="1"
+                                                ToolTip="Thêm danh mục sản phẩm"
+                                                Click="Btn_AddCategory_OnClick"
+                                                Margin="10,0,0,0"
+                                                Background="#FF00B9FF"
+                                                Foreground="White">
+                                            <materialDesign:PackIcon Kind="PlusCircle" />
+                                        </Button>
+
+                                        <Button x:Name="btn_EditCategory"
+                                                Grid.Column="1"
+                                                ToolTip="Chỉnh sửa danh mục sản phẩm"
+                                                Click="Btn_EditCategory_OnClick"
+                                                Margin="10,0,0,0"
+                                                Background="Violet"
+                                                Foreground="White">
+                                            <materialDesign:PackIcon Kind="Pencil" />
+                                        </Button>
+
+                                        <Button x:Name="btn_RemoveCategory"
+                                                Grid.Column="1"
+                                                ToolTip="Xóa danh mục sản phẩm"
+                                                Click="Btn_RemoveCategory_OnClick"
+                                                Margin="10,0,0,0"
+                                                Background="Red"
+                                                Foreground="White">
+                                            <materialDesign:PackIcon Kind="DeleteForever" />
+                                        </Button>
                                     </StackPanel>
-                                </DataTemplate>
-                            </GroupBox.HeaderTemplate>
-                            <Image x:Name="img_Product"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center" />
-                        </GroupBox>
+                                </materialDesign:PopupBox>
+
+                            </Grid>
+                        </StackPanel>
+
                         <StackPanel Grid.Column="1">
                             <TextBox x:Name="tbx_Name"
                                      materialDesign:HintAssist.Hint="Tên"

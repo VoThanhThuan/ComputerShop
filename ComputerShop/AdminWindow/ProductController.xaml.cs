@@ -82,6 +82,10 @@ namespace Dashboard.AdminWindow
 
                     var guarantee = Db.Context.ProductGuarantees.FirstOrDefault(x => x.ProductId == prod.ID);
 
+                    var category = from pic in Db.Context.ProductInCategories
+                        join c in Db.Context.Categories on pic.CategoryID equals c.ID
+                        select new{pic, c};
+                    var nameCategory = category.FirstOrDefault(x => x.pic.CategoryID == x.c.ID);
                     var ap = new AddProduct(Status.Edit, prod.ID)
                     {
                         tbx_Name = {Text = prod.Name},
@@ -95,13 +99,14 @@ namespace Dashboard.AdminWindow
                         },
                         dp_WarrantyPeriod = {Text = $"{guarantee.ExpirationDate.Date}"},
                         tbx_SeriNumber = {Text = prod.SeriNumber},
-                        card_Import = {Visibility = Visibility.Hidden}
+                        card_Import = {Visibility = Visibility.Hidden},
+                        cbb_Categories = {Text = nameCategory != null ? $"{nameCategory.c.Name}" : ""}
                     };
 
                     //TODO: Event
                     ap.btn_AddProduct.Click += (o, eventArgs) => { editDL.Close(); LoadDataProduct(); };
                     ap.btn_CLose.Click += (o, eventArgs) =>  editDL.Close();
-                    ap.tbl_TitleProduct.MouseLeftButtonDown += (o, eventArgs) =>  editDL.DragMove();
+                    //ap.tbl_TitleProduct.MouseLeftButtonDown += (o, eventArgs) =>  editDL.DragMove();
 
                     editDL.RenderPages.Children.Add(ap);
                     editDL.ShowDialog();
