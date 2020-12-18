@@ -13,7 +13,8 @@
         AllowsTransparency="True"
         MinHeight="520"
         MinWidth="520"
-        MouseDown="Window_MouseDown">
+        MouseDown="Window_MouseDown"
+        SizeToContent="WidthAndHeight">
     <Grid x:Name="RenderPages">
     </Grid>
 </Window>

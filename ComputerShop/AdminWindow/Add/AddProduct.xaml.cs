@@ -30,6 +30,7 @@ namespace Dashboard.AdminWindow.Add
         {
             InitializeComponent();
             dp_WarrantyPeriod.Text = $"{DateTime.Today.AddYears(2)}";
+            LoadCategory();
         }
 
         private Status _status = Status.Add;
@@ -52,6 +53,8 @@ namespace Dashboard.AdminWindow.Add
                     _status = Status.AddOnlyProduct;
                     break;
             }
+
+            LoadCategory();
         }
 
         private string _pathImage = null;
@@ -65,6 +68,13 @@ namespace Dashboard.AdminWindow.Add
                 Directory.CreateDirectory("imageProduct");
             File.Copy(_pathImage, fileName);
             return fileName;
+        }
+
+        private void LoadCategory()
+        {
+            var categories = Db.Context.Categories.Select(x => x);
+            cbb_Categories.ItemsSource = categories.ToList();
+            cbb_Categories.DisplayMemberPath = "Name";
         }
 
         private Result<string> AddListProduct()
@@ -98,6 +108,16 @@ namespace Dashboard.AdminWindow.Add
             };
             _products.Add(product);
             tbx_StockImport.Text = $"{_products.Count}";
+
+            //Add category
+            if (cbb_Categories.SelectionBoxItem != null)
+            {
+                var pic = new ProductInCategory();
+                pic.ProductID = product.ID;
+                pic.CategoryID = ((Category)cbb_Categories.SelectedValue).ID;
+                Db.Context.SaveChanges();
+            }
+
             btn_SaveListProdut.IsEnabled = true;
             return new ResultSuccess<string>();
         }
@@ -117,7 +137,7 @@ namespace Dashboard.AdminWindow.Add
 
         private Result<string> SaveListProduct()
         {
-            var SecuriryCodeImport = Guid.NewGuid();
+            var securityCodeImport = Guid.NewGuid();
             if (_status != Status.AddOnlyProduct)
             {
                 var import = new Import
@@ -127,7 +147,7 @@ namespace Dashboard.AdminWindow.Add
                     Warehouse = tbx_Warehouse.Text,
                     Stock = Convert.ToInt32(tbx_StockImport.Text),
                     Description = tbx_DescriptionImport.Text,
-                    SecurityCode = SecuriryCodeImport
+                    SecurityCode = securityCodeImport
                 };
                 Db.Context.Imports.Add(import);
                 Db.Context.SaveChanges();
@@ -138,7 +158,7 @@ namespace Dashboard.AdminWindow.Add
                 Db.Context.Products.Add(item);
             }
             Db.Context.SaveChanges();
-            var importID = Db.Context.Imports.FirstOrDefault(x => x.SecurityCode == SecuriryCodeImport);
+            var importID = Db.Context.Imports.FirstOrDefault(x => x.SecurityCode == securityCodeImport);
             if (importID == null)
             {
                 MessageBox.Show("Lỗi truy tim mã nhập hàng");
@@ -176,8 +196,72 @@ namespace Dashboard.AdminWindow.Add
 
             Db.Context.SaveChanges();
 
+            var pic = Db.Context.ProductInCategories.FirstOrDefault(x => x.ProductID == prod.ID);
+
+            if (pic == null)
+            {
+                var addpic = new ProductInCategory();
+                addpic.ProductID = prod.ID;
+                addpic.CategoryID = ((Category)cbb_Categories.SelectedValue).ID;
+                Db.Context.ProductInCategories.Add(addpic);
+                Db.Context.SaveChanges();
+            }
+            else
+            {
+                pic.CategoryID = ((Category) cbb_Categories.SelectedValue).ID;
+            }
+            
+
             return new ResultSuccess<string>();
         }
+
+        #region Categories
+
+        private Result<string> AddCategory(string name)
+        {
+            var valid = Db.Context.Categories.FirstOrDefault(x => x.Name == name);
+            if (valid != null) return new ResultError<string>("Tên đã tồn tại");
+            var category = new Category()
+            {
+                Name = name
+            };
+            Db.Context.Categories.Add(category);
+            Db.Context.SaveChanges();
+            LoadCategory();
+            return new ResultSuccess<string>();
+        }
+
+        private Result<string> EditCategory(int id, string name)
+        {
+            var category = Db.Context.Categories.Find(id);
+            if (category == null) return new ResultError<string>("Danh mục không tìm thấy");
+
+            category.Name = name;
+
+            Db.Context.SaveChanges();
+            LoadCategory();
+
+            return new ResultSuccess<string>();
+        }
+
+        private Result<string> RemoveCategory(int id)
+        {
+            var category = Db.Context.Categories.Find(id);
+            if (category == null) return new ResultError<string>("Danh mục không tìm thấy");
+
+            var pic = Db.Context.ProductInCategories.FirstOrDefault(x => x.CategoryID == category.ID);
+            if (pic != null)
+                Db.Context.ProductInCategories.Remove(pic);
+
+            Db.Context.Remove(category);
+            Db.Context.SaveChanges();
+            LoadCategory();
+
+            return new ResultSuccess<string>();
+
+        }
+        #endregion
+
 
         private static readonly Regex _regex = new Regex("[^0-9.,]+"); //regex that matches disallowed text
         private static bool IsTextAllowed(string text)
@@ -263,6 +347,46 @@ namespace Dashboard.AdminWindow.Add
         {
             var myWindow = Window.GetWindow(this);
             myWindow.DragMove();
+        }
+
+        private void Btn_AddCategory_OnClick(object sender, RoutedEventArgs e)
+        {
+
+            var prompt = new PromptDialog(){tbl_Title = {Text = "Tạo \"Loại\" sản phẩm mới "}, };
+
+            prompt.ShowDialog();
+            if(prompt.DialogResult != MyDialogResult.Result.Ok) return;
+            var result = AddCategory(prompt.tbx_Value.Text);
+
+            if (result.IsSuccessed != false) return;
+            var mess = new MessageDialog(){tbl_Title = {Text = "Lỗi thêm danh mục"}, tbl_Message = {Text = result.Message}};
+            
+            mess.ShowDialog();
+        }
+
+        private void Btn_EditCategory_OnClick(object sender, RoutedEventArgs e)
+        {
+            var prompt = new PromptDialog() { tbl_Title = { Text = "Chỉnh sửa \"Loại\" sản phẩm mới " }, tbx_Value = {Text = cbb_Categories.Text}};
+            prompt.ShowDialog();
+            if (prompt.DialogResult != MyDialogResult.Result.Ok) return;
+            var result = EditCategory(((Category)cbb_Categories.SelectedValue).ID, prompt.tbx_Value.Text);
+
+            if (result.IsSuccessed != false) return;
+            var mess = new MessageDialog() { tbl_Title = { Text = "Lỗi Edit" }, tbl_Message = { Text = result.Message} };
+            mess.ShowDialog();
+        }
+
+        private void Btn_RemoveCategory_OnClick(object sender, RoutedEventArgs e)
+        {
+            var category = ((Category) cbb_Categories.SelectedValue);
+            var mess = new MessageDialog() { tbl_Title = { Text = "Xóa danh mục" }, tbl_Message = {Text = $"Bạn thật sự muốn xóa danh mục {category.Name}" } };
+            mess.ShowDialog();
+            if (mess.DialogResult != MyDialogResult.Result.Ok) return;
+
+            var resultRemove = RemoveCategory(category.ID);
+            if (resultRemove.IsSuccessed != false) return;
+            mess = new MessageDialog() { tbl_Title = { Text = "Lỗi Xóa" }, tbl_Message = { Text = resultRemove.Message } };
+            mess.ShowDialog();
         }
     }
 

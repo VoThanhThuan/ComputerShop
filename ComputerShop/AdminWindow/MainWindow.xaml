@@ -17,9 +17,36 @@
         MouseLeftButtonDown="Window_MouseDown">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
-                      ResizeBorderThickness="8" />
+                      ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background"
+                        Value="#00ADD8E6" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#19000000"
+                                            TargetName="Border" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </Grid.Resources>
+
         <materialDesign:Card Margin="10"
                              UniformCornerRadius="15">
             <Grid>
@@ -35,118 +62,90 @@
                                 Value="30"></Setter>
                     </Style>
                 </Grid.Resources>
-                <Grid Grid.Column="0">
-                    <ListView Margin="0 0"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              >
-                        <ListViewItem HorizontalAlignment="Center"
-                                      Margin="0 10">
-                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    HorizontalAlignment="Left"
-                                    BorderBrush="{x:Null}"
-                                    Background="{x:Null}"
-                                    Foreground="Black">
-                                <Path Data="M5540 5628 c-931 -329 -1489 -526 -2245 -790 -473 -166 -862 -305 -865 -309 -3 -4 -56 -434 -119 -956 -63 -521 -117 -950 -122 -953 -4 -3 -498 -174 -1098 -380 -600 -206 -1091 -379 -1091 -385 0 -5 485 -151 1078 -324 592 -173 1482 -433 1977 -578 494 -145 906 -263 915 -263 9 0 371 347 806 771 434 425 844 826 912 892 111 108 138 141 100 123 -7 -3 -442 -291 -967 -639 l-954 -634 -1316 329 c-724 181 -1319 330 -1323 331 -4 1 308 109 695 241 386 131 707 243 713 250 6 6 61 427 123 936 63 509 115 926 116 928 4 4 2468 861 2477 862 6 0 -1 -2041 -7 -2048 -4 -5 -2441 -670 -2481 -678 -41 -7 -45 -24 -6 -23 15 0 686 82 1492 182 l1465 183 3 1512 c2 1207 0 1512 -10 1511 -7 0 -128 -41 -268 -91z"
-                                      Height="34"
-                                      Stretch="Fill"
-                                      Width="40"
-                                      RenderTransformOrigin="0.5,0.5">
-                                    <Path.Fill>
-                                        <LinearGradientBrush EndPoint="0.5,1"
-                                                             StartPoint="0.5,0">
-                                            <GradientStop Color="#FF8000FF" />
-                                            <GradientStop Color="#FFCB98FF"
-                                                          Offset="1" />
-                                        </LinearGradientBrush>
-                                    </Path.Fill>
-                                    <Path.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-1" />
-                                            <SkewTransform />
-                                            <RotateTransform />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Path.RenderTransform>
-                                </Path>
+                <StackPanel HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Center"
+                          Margin="0,0,0,50">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                HorizontalAlignment="Left"
+                                BorderBrush="{x:Null}"
+                                Background="{x:Null}"
+                                Foreground="Black"
+                                Margin="0,10,0,0">
+                            <Path Data="M5540 5628 c-931 -329 -1489 -526 -2245 -790 -473 -166 -862 -305 -865 -309 -3 -4 -56 -434 -119 -956 -63 -521 -117 -950 -122 -953 -4 -3 -498 -174 -1098 -380 -600 -206 -1091 -379 -1091 -385 0 -5 485 -151 1078 -324 592 -173 1482 -433 1977 -578 494 -145 906 -263 915 -263 9 0 371 347 806 771 434 425 844 826 912 892 111 108 138 141 100 123 -7 -3 -442 -291 -967 -639 l-954 -634 -1316 329 c-724 181 -1319 330 -1323 331 -4 1 308 109 695 241 386 131 707 243 713 250 6 6 61 427 123 936 63 509 115 926 116 928 4 4 2468 861 2477 862 6 0 -1 -2041 -7 -2048 -4 -5 -2441 -670 -2481 -678 -41 -7 -45 -24 -6 -23 15 0 686 82 1492 182 l1465 183 3 1512 c2 1207 0 1512 -10 1511 -7 0 -128 -41 -268 -91z"
+                                  Height="34"
+                                  Stretch="Fill"
+                                  Width="40"
+                                  RenderTransformOrigin="0.5,0.5">
+                                <Path.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1"
+                                                         StartPoint="0.5,0">
+                                        <GradientStop Color="#FF8000FF" />
+                                        <GradientStop Color="#FFCB98FF"
+                                                      Offset="1" />
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="-1" />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
 
-                            </Button>
+                        </Button>
 
-                        </ListViewItem>
-                        <ListViewItem HorizontalAlignment="Center"
-                                      Margin="0">
-                            <Button x:Name="btn_User"
-                                    Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    HorizontalAlignment="Left"
-                                    BorderBrush="{x:Null}"
-                                    Background="{x:Null}"
-                                    Foreground="Black"
-                                    Click="btn_User_Click">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="AccountCogOutline" />
-                                </StackPanel>
-                            </Button>
-                        </ListViewItem>
-                        <ListViewItem HorizontalAlignment="Center"
-                                      Margin="0 10">
-                            <Button x:Name="btn_Product"
-                                    Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    HorizontalAlignment="Left"
-                                    BorderBrush="{x:Null}"
-                                    Background="{x:Null}"
-                                    Foreground="Black"
-                                    Click="btn_Product_Click">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="PackageVariantClosed" />
-                                </StackPanel>
-                            </Button>
-                        </ListViewItem>
-                        <ListViewItem HorizontalAlignment="Center"
-                                      Margin="0">
-                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    HorizontalAlignment="Left"
-                                    BorderBrush="{x:Null}"
-                                    Background="{x:Null}"
-                                    Foreground="Black">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="EqualiserVertical" />
-                                </StackPanel>
-                            </Button>
-                        </ListViewItem>
-                        <ListViewItem HorizontalAlignment="Center"
-                                      Margin="0 10"
-                                      Visibility="Hidden">
-                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    HorizontalAlignment="Left"
-                                    BorderBrush="{x:Null}"
-                                    Background="{x:Null}"
-                                    Foreground="Black">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="ChatOutline" />
-                                </StackPanel>
-                            </Button>
-                        </ListViewItem>
-                        <ListViewItem HorizontalAlignment="Center"
-                                      Margin="0 60 0 0">
-                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    HorizontalAlignment="Left"
-                                    BorderBrush="{x:Null}"
-                                    Background="{x:Null}"
-                                    Foreground="Black"
-                                    x:Name="btnExit"
-                                    Click="btnExit_Click">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="Close" />
-                                </StackPanel>
-                            </Button>
-                        </ListViewItem>
-                    </ListView>
-                </Grid>
-                <Grid Grid.Column="1"
-                      Background="#F6F5F8"
-                      Name="RenderPages">
+                    </Grid>
+                    <Button x:Name="btn_User"
+                            ToolTip="Thêm mới"
+                            Click="btn_User_Click"
+                            HorizontalAlignment="Stretch"
+                            Height="60">
+                        <materialDesign:PackIcon Kind="Account" />
+                    </Button>
 
-                </Grid>
+
+                    <Button x:Name="btn_Product"
+                            ToolTip="Thêm mới"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,30,0,0"
+                            Height="60"
+                            Click="btn_Product_Click">
+                        <materialDesign:PackIcon Kind="PackageVariantClosed" />
+                    </Button>
+
+                    <Button HorizontalAlignment="Stretch"
+                            BorderBrush="{x:Null}"
+                            Background="{x:Null}"
+                            Foreground="Black"
+                            Margin="0,30,0,0"
+                            Height="60">
+                        <StackPanel Margin="-5">
+                            <materialDesign:PackIcon Kind="EqualiserVertical" />
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+                <DockPanel Grid.Column="1">
+                    <Grid DockPanel.Dock="Top" Height="32">
+                        <Button x:Name="btnExit"
+                                HorizontalAlignment="Right"
+                                BorderBrush="{x:Null}"
+                                Background="{x:Null}"
+                                Foreground="Black"
+                                Margin="0,0,10,0"
+                                Width="60"
+                                Click="btnExit_Click">
+                            <StackPanel Margin="-5">
+                                <materialDesign:PackIcon Kind="Close" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <Grid Background="#F6F5F8"
+                          Name="RenderPages"
+                          Margin="5,0,5,5"/>
+                </DockPanel>
             </Grid>
         </materialDesign:Card>
     </Grid>
