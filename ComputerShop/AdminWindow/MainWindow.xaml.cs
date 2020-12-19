@@ -77,5 +77,6 @@ namespace Dashboard.AdminWindow
             RenderPages.Children.Clear();
             RenderPages.Children.Add(new ProductController());
         }
+
     }
 }
