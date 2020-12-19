@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Height="600"
-        Width="1028"
+        Width="1145"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         MouseLeftButtonDown="Window_MouseDown"
@@ -91,7 +91,8 @@
               HorizontalAlignment="Left"
               Background="#FF222222">
 
-            <ListViewItem Height="84"
+            <ListViewItem x:Name="StaffInfo"
+                          Height="84"
                           VerticalAlignment="Top"
                           Margin="0,24,0,0">
                 <materialDesign:Chip VerticalAlignment="Center"
@@ -112,7 +113,7 @@
                 <Grid x:Name="GridCursor"
                       Margin="0 164 0 0"
                       Background="#FF0069C0"
-                      Width="10"
+                      Width="4"
                       HorizontalAlignment="Left"
                       Height="60"
                       VerticalAlignment="Top" />
@@ -127,7 +128,7 @@
                       SelectedIndex="0">
 
                 <!--Trang Chủ-->
-                <ListViewItem Height="60">
+                <ListViewItem Height="60" Background="#00000000" UseLayoutRounding="False">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Home"
                                                  Width="30"

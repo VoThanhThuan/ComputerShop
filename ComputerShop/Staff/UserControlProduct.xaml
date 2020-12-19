@@ -22,7 +22,7 @@
             <DockPanel>
                 <materialDesign:ColorZone Mode="PrimaryMid"
                                           Padding="5"
-                                          DockPanel.Dock="Top">
+                                          DockPanel.Dock="Top" Height="50">
                     <DockPanel>
                         <StackPanel Orientation="Horizontal"
                                     materialDesign:RippleAssist.IsCentered="True">
@@ -75,14 +75,15 @@
                                                                  Opacity=".56" />
                                     </Button>
 
-                                    <!--Search box-->
-                                    <TextBox Grid.Column="1"
+                                    <!--Search box Tìm bằng cái này à ?uk-->
+                                    <TextBox x:Name="tbx_Find" Grid.Column="1"
                                              Margin="8 0 0 0"
                                              materialDesign:HintAssist.Hint="Build a search bar"
                                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                              BorderThickness="0"
                                              MinWidth="200"
-                                             VerticalAlignment="Center" />
+                                             VerticalAlignment="Center" 
+                                             TextChanged="Tbx_Find_OnTextChanged"/>
 
                                     <!--Button voice-->
                                     <Button Style="{DynamicResource MaterialDesignToolButton}"
@@ -95,14 +96,15 @@
                                 </Grid>
                             </materialDesign:ColorZone>
 
-                            <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                            <!--<Button x:Name="btn_Find" Style="{DynamicResource MaterialDesignToolForegroundButton}"
                                     Margin="8 0 0 0"
                                     Panel.ZIndex="0">
                                 <materialDesign:PackIcon Kind="Send" />
-                            </Button>
+                            </Button>-->
                         </StackPanel>
                     </DockPanel>
                 </materialDesign:ColorZone>
+
                 <ScrollViewer x:Name="MyViewer"
                               Margin="0 10 0 0"
                               HorizontalScrollBarVisibility="Auto"
@@ -119,30 +121,61 @@
 
 
         </Grid>
+
         <Grid Grid.Column="1"
-              Grid.ColumnSpan="2" Background="White">
-            <ListView x:Name="SelectedProduct" 
-                      Margin="0,0,0,50" >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="auto" Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Width="auto" Header="Price" DisplayMemberBinding="{Binding Price}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="70" >
-                <Button Style="{DynamicResource MaterialDesignRaisedButton}"
+              Grid.ColumnSpan="2">
+            <ScrollViewer Margin="3 0 0 90" 
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="SelectedProduct"/>
+            </ScrollViewer>
+           
+            <StackPanel VerticalAlignment="Bottom">
+
+                <StackPanel Orientation="Horizontal">
+                    <Label HorizontalAlignment="Left" Content="Tổng Tiền:" Foreground="White"/>
+                    <Label x:Name="LblTotalCost" Foreground="White" Content="0"/>
+                    <Label Content="VNĐ" Foreground="White"/>
+                    <Button x:Name="BtnTotalCost"
+                            Width="45" 
+                            Height="27"
+                            ToolTip="Tổng Tiền"
+                            Foreground="White"
+                            >
+                        <materialDesign:PackIcon Kind="CashUsd" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="52" >
+                    <Button x:Name="BillPayment"
+                        Style="{DynamicResource MaterialDesignRaisedButton}"
                         Width="120"
                         Margin="12 0 0 0"
                         Content="Thanh Toán" />
 
-                <Button x:Name="BtnDelete"
+                    <Button x:Name="BtnCalc"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            Width="50"
+                            Margin="15 0 0 0"
+                            Click="BtnCalc_OnClick" 
+                            ToolTip ="Máy Tính">
+                        <materialDesign:PackIcon Kind="Calculator"/>
+                    </Button >
+
+                    <Button x:Name="Refresh"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
-                        Width="120"
-                        Margin="5 0 0 0"
-                        Content="Xoá" />
+                        Width="50"
+                        Margin="15 0 0 0"
+                        ToolTip ="Làm Mới"
+                        Click="Refresh_OnClick">
+                        <materialDesign:PackIcon Kind="Refresh" />
+                    </Button>
+
+                </StackPanel>
             </StackPanel>
 
         </Grid>
+
+
     </Grid>
 </UserControl>
