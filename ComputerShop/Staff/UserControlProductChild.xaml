@@ -23,7 +23,7 @@
                                 Height="127" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Image
+                        <Image x:Name="ImageProduct"
                             Source="/Staff/AORUS_Z390_Xtreme_Waterforce_5G_Bundle_Intel_Core_i9_9900K.jpg"
                             Margin="12,0,13,0"
                             Stretch="UniformToFill" Height="120" VerticalAlignment="Center" />
@@ -32,21 +32,27 @@
                             Grid.Row="1"
                             Margin="8,0,8,0"                        
                             >
+
+                            <!--Tên-->
                             <TextBlock x:Name="TblNameProduct"
-                                FontWeight="Bold" Height="18">
-                                <Run Text="Nope"/>
+                                       FontWeight="Bold" Height="18">
                             </TextBlock>
-                            <TextBlock x:Name="TblUnitPrice" Width="128" Height="22"
-                                       FontSize="15"
-                                       FontFamily="Stormfaze"               
-                                       Opacity="1" 
-                                       HorizontalAlignment="Left"                                     
-                            />
+                            <TextBlock x:Name="TblId" Visibility="Collapsed" />
+
+                            <!--Giá-->
+                            <StackPanel Orientation="Horizontal" 
+                                        VerticalAlignment="Center">
+                                <Label Content="Giá:"/>
+                                <TextBlock x:Name="TblUnitPrice" 
+                                       Height="20"
+                                       FontSize="15"             
+                                       Opacity="1"/>
+                                <Label Content="VNĐ"/>
+                            </StackPanel>
 
                             <StackPanel Orientation="Horizontal" 
                                         HorizontalAlignment="Right" 
                                         VerticalAlignment="Center">
-
                                 <Button
                                 x:Name="BtnAddCart"
                                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"

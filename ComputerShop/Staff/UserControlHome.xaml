@@ -15,10 +15,10 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
-            <Border                 
+            <Border   
                     CornerRadius="12"
-                     Height="144"
-                      Width="256"
+                    Height="144"
+                    Width="256"
                     Margin="0 3 0 0 ">
                 <Border.Background>
                     <ImageBrush ImageSource="/Staff/GIGABYTE_GeForceRTX™2080 SUPER_AORUS8G.jpg"/>

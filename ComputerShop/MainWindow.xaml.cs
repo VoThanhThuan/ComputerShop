@@ -65,7 +65,7 @@ namespace Dashboard
         private void MoveCursorMenu(int index)
         {
             TrainsitionigContentSlide.OnApplyTemplate();
-            GridCursor.Margin = new Thickness(0, (164 + (60 * index)), 0, 0);
+            GridCursor.Margin = new Thickness(0, 164 + (60 * index), 0, 0);
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
