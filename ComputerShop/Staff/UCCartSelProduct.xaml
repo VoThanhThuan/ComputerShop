@@ -20,7 +20,7 @@
                 </ToggleButton>
                 <Image x:Name="ImageCartCh" 
                        Margin="0 0 3 0"
-                       MaxWidth="100" 
+                       MaxWidth="70" 
                        Source="AORUS_Z390_Xtreme_Waterforce_5G_Bundle_Intel_Core_i9_9900K.jpg"/>
 
                 <StackPanel>

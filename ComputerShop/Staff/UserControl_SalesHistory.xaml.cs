@@ -3,11 +3,11 @@
 namespace Dashboard.Staff
 {
     /// <summary>
-    /// Interaction logic for UserControlProductChild.xaml
+    /// Interaction logic for UserControl_SalesHistory.xaml
     /// </summary>
-    public partial class UserControlProductChild : UserControl
+    public partial class UserControl_SalesHistory : UserControl
     {
-        public UserControlProductChild()
+        public UserControl_SalesHistory()
         {
             InitializeComponent();
         }

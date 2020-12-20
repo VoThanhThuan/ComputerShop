@@ -55,18 +55,8 @@
                     Width="300" 
                     IsEnabled="False" 
                     Opacity="1"
-                    Content="CỬA HÀNG PHỤ KIỆN MÁY TÍNH"/>
-
-                <Button
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    materialDesign:ButtonProgressAssist.Value="-1"
-                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                    IsEnabled="False" 
-                    Content="GIGABYTE  AORUS"
-                    Margin="0 25 0 0 " 
-                    Height="30" Width="290" Opacity="1"
-                    />
+                    Content="CỬA HÀNG PHỤ KIỆN MÁY TÍNH"
+                Margin="0 20 0 20"/>
                 <Border 
                 CornerRadius="12"
                 Height="170"
