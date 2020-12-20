@@ -16,7 +16,7 @@ namespace Dashboard.Data.Extensions
                 new Category()
                 {
                     ID = 1,
-                    Name = "RAM",
+                    Name = "ALL",
                     IsShowOnHome = true,
                     ParentId = null,
                     SortOrder = 1,
