@@ -34,9 +34,9 @@ namespace Dashboard.AdminWindow.Add
         }
 
         private Status _status = Status.Add;
-        private int _ID = 0;
+        private Guid? _ID = null;
 
-        public AddProduct(Status status, int id)
+        public AddProduct(Status status, Guid id)
         {
             InitializeComponent();
             dp_WarrantyPeriod.Text = $"{DateTime.Today.AddYears(2)}";
@@ -68,7 +68,7 @@ namespace Dashboard.AdminWindow.Add
 
         private string _pathImage = null;
         private List<Product> _products = new List<Product>();
-
+        private List<ProductInCategory> _categories = new List<ProductInCategory>();
         private string SaveFile(string file)
         {
             var originalFileName = file;
@@ -89,8 +89,10 @@ namespace Dashboard.AdminWindow.Add
         private Result<string> AddListProduct()
         {
             var codeGuarantee = cb_seri.IsChecked == true ? tbx_SeriNumber.Text : $"{Guid.NewGuid()}";
+            var gid = Guid.NewGuid();
             var product = new Product()
             {
+                ID = gid,
                 Name = tbx_Name.Text,
                 Price = Convert.ToDecimal(tbx_Price.Text),
                 OriginalPrice = Convert.ToDecimal(tbx_Price.Text),
@@ -110,15 +112,15 @@ namespace Dashboard.AdminWindow.Add
             _products.Add(product);
             tbx_StockImport.Text = $"{_products.Count}";
 
-            //Add category
+            //Add product in category
             if (cbb_Categories.SelectionBoxItem != null)
             {
                 if (cbb_Categories.SelectedIndex > -1)
                 {
                     var pic = new ProductInCategory();
-                    pic.ProductID = product.ID;
+                    pic.ProductID = gid;
                     pic.CategoryID = ((Category)cbb_Categories.SelectedValue).ID;
-                    Db.Context.SaveChanges();
+                    _categories.Add(pic);
                 }
             }
 
@@ -129,6 +131,7 @@ namespace Dashboard.AdminWindow.Add
         private void ResetAddProdut()
         {
             _pathImage = null;
+            
             tbx_Name.Clear();
             tbx_Price.Clear();
             tbx_OriginalPrice.Clear();
@@ -139,15 +142,18 @@ namespace Dashboard.AdminWindow.Add
             tbx_Name.Focus();
         }
 
+
         public Guid securityCodeImportOld = Guid.NewGuid();
         private Result<string> SaveListProduct()
         {
             //FIXME:
             var securityCodeImport = _status == Status.AddProductImportOld ? securityCodeImportOld : Guid.NewGuid();
+            var gid = Guid.NewGuid();
             if (_status != Status.AddProductImportOld)
             {
                 var import = new Import
                 {
+                    ID = gid,
                     DayImport = Convert.ToDateTime(tbx_DateImport.Text),
                     Supplier = tbx_Supplier.Text,
                     Warehouse = tbx_Warehouse.Text,
@@ -165,12 +171,23 @@ namespace Dashboard.AdminWindow.Add
                 if (import != null)
                     import.Stock += _products.Count();
             }
-
+            //Product
             foreach (var item in _products)
             {
                 Db.Context.Products.Add(item);
             }
             Db.Context.SaveChanges();
+
+            //Category
+            foreach (var item in _categories)
+            {
+                Db.Context.ProductInCategories.Add(item);
+            }
+            Db.Context.SaveChanges();
+
+
+
+            //Add phiếu nhập hàng
             var importID = Db.Context.Imports.FirstOrDefault(x => x.SecurityCode == securityCodeImport);
             if (importID == null)
             {

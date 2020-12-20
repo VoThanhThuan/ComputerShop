@@ -198,8 +198,8 @@ namespace Dashboard.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -259,10 +259,9 @@ namespace Dashboard.Migrations
 
             modelBuilder.Entity("Dashboard.Data.Entities.Import", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AppUserID")
                         .HasColumnType("nvarchar(450)");
@@ -341,8 +340,8 @@ namespace Dashboard.Migrations
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -359,10 +358,9 @@ namespace Dashboard.Migrations
 
             modelBuilder.Entity("Dashboard.Data.Entities.Product", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -395,8 +393,8 @@ namespace Dashboard.Migrations
                     b.HasData(
                         new
                         {
-                            ID = 1,
-                            DateCreated = new DateTime(2020, 12, 20, 16, 11, 21, 788, DateTimeKind.Local).AddTicks(6438),
+                            ID = new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d"),
+                            DateCreated = new DateTime(2020, 12, 20, 18, 11, 19, 578, DateTimeKind.Local).AddTicks(1135),
                             Name = "RAM-SAMSUNG-256GB",
                             OriginalPrice = 100000m,
                             Price = 200000m,
@@ -421,8 +419,8 @@ namespace Dashboard.Migrations
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SeriNumber")
                         .HasColumnType("nvarchar(max)");
@@ -445,8 +443,8 @@ namespace Dashboard.Migrations
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ID");
 
@@ -461,7 +459,7 @@ namespace Dashboard.Migrations
                         {
                             ID = 1,
                             CategoryID = 1,
-                            ProductID = 1
+                            ProductID = new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d")
                         });
                 });
 
@@ -472,11 +470,11 @@ namespace Dashboard.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("ImportID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ImportID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ID");
 
@@ -495,8 +493,8 @@ namespace Dashboard.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TransactionID")
                         .HasColumnType("int");

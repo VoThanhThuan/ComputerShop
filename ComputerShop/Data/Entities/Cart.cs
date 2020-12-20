@@ -7,11 +7,12 @@ namespace Dashboard.Data.Entities
     public class Cart
     {
         public int ID { set; get; }
-        public int ProductId { set; get; }
         public int Quantity { set; get; }
         public decimal Price { set; get; }
 
         public string UserID { get; set; }
+
+        public Guid ProductId { set; get; }
 
         public Product Product { get; set; }
 

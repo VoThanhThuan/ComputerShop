@@ -13,7 +13,6 @@ namespace Dashboard.Data.Configurations
         {
             builder.ToTable("Import");
             builder.HasKey(x => x.ID);
-            builder.Property(x => x.ID).UseIdentityColumn();
 
         }
     }

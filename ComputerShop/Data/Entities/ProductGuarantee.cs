@@ -11,7 +11,7 @@ namespace Dashboard.Data.Entities
         public DateTime ExpirationDate { get; set; }
         public string SeriNumber { get; set; }
         public string Description { get; set; }
-        public int ProductId { set; get; }
+        public Guid ProductId { set; get; }
         public Product Product { get; set; }
 
     }

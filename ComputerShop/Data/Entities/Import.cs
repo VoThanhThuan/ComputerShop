@@ -6,7 +6,7 @@ namespace Dashboard.Data.Entities
 {
     public class Import
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public DateTime DayImport { get; set; }
         public string Supplier { get; set; }
         public string Warehouse { get; set; }

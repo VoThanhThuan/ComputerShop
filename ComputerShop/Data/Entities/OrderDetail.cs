@@ -8,11 +8,11 @@ namespace Dashboard.Data.Entities
     {
 
         public int OrderID { set; get; }
-        public int ProductID { set; get; }
         public int Quantity { set; get; }
         public decimal Price { set; get; }
 
         public Order Order { get; set; }
+        public Guid ProductID { set; get; }
 
         public Product Product { get; set; }
 

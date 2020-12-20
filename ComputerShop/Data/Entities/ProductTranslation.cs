@@ -9,7 +9,7 @@ namespace Dashboard.Data.Entities
         public int ID { set; get; }
         public int TransactionID { set; get; }
         public Transaction Transaction { get; set; }
-        public int ProductId { set; get; }
+        public Guid ProductId { set; get; }
         public Product Product { get; set; }
 
     }

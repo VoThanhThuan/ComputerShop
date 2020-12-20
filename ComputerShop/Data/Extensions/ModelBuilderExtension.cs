@@ -23,10 +23,11 @@ namespace Dashboard.Data.Extensions
                     Status = Status.Active,
                 });
 
+            var gid = Guid.NewGuid();
             modelBuilder.Entity<Product>().HasData(
                 new Product()
                 {
-                    ID = 1,
+                    ID = gid,
                     Name = "RAM-SAMSUNG-256GB",
                     DateCreated = DateTime.Now,
                     OriginalPrice = 100000,
@@ -35,7 +36,7 @@ namespace Dashboard.Data.Extensions
                     SeriNumber = "000-000-000-000"
                 });
             modelBuilder.Entity<ProductInCategory>().HasData(
-                new ProductInCategory() { ID = 1, ProductID = 1, CategoryID = 1 });
+                new ProductInCategory() { ID = 1, ProductID = gid, CategoryID = 1 });
 
             modelBuilder.Entity<AppRole>().HasData(
                 new AppRole

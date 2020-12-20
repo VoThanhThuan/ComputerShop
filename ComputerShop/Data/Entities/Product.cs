@@ -7,7 +7,7 @@ namespace Dashboard.Data.Entities
 {
     public class Product : IEnumerable
     {
-        public int ID { set; get; }
+        public Guid ID { set; get; }
         public string Name { get; set; }
         public decimal Price { set; get; }
         public decimal OriginalPrice { set; get; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dashboard.Migrations
 {
-    public partial class database1 : Migration
+    public partial class database_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,8 +87,7 @@ namespace Dashboard.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OriginalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -142,8 +141,7 @@ namespace Dashboard.Migrations
                 name: "Import",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DayImport = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Supplier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Warehouse = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -194,10 +192,10 @@ namespace Dashboard.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -227,7 +225,7 @@ namespace Dashboard.Migrations
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SeriNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -246,7 +244,7 @@ namespace Dashboard.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    ProductID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -273,7 +271,7 @@ namespace Dashboard.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionID = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -298,8 +296,8 @@ namespace Dashboard.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    ImportID = table.Column<int>(type: "int", nullable: false)
+                    ProductID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ImportID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -323,7 +321,7 @@ namespace Dashboard.Migrations
                 columns: table => new
                 {
                     OrderID = table.Column<int>(type: "int", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    ProductID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -382,12 +380,12 @@ namespace Dashboard.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "DateCreated", "ImagePath", "Name", "OriginalPrice", "Price", "SeriNumber", "Stock" },
-                values: new object[] { 1, new DateTime(2020, 12, 20, 16, 11, 21, 788, DateTimeKind.Local).AddTicks(6438), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
+                values: new object[] { new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d"), new DateTime(2020, 12, 20, 18, 11, 19, 578, DateTimeKind.Local).AddTicks(1135), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
 
             migrationBuilder.InsertData(
                 table: "ProductInCategories",
                 columns: new[] { "ID", "CategoryID", "ProductID" },
-                values: new object[] { 1, 1, 1 });
+                values: new object[] { 1, 1, new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_ProductId",
