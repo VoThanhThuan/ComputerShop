@@ -267,7 +267,7 @@
                         Height="46"
                         Width="46"
                         Click="Btn_ChangeView_OnClick"
-                        Foreground="#FF421E42">
+                        Foreground="#FF873D87">
                     <materialDesign:PackIcon x:Name="pi_List"
                                              Kind="ViewListOutline"
                                              Height="32"

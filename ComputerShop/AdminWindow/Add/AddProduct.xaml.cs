@@ -40,21 +40,30 @@ namespace Dashboard.AdminWindow.Add
         {
             InitializeComponent();
             dp_WarrantyPeriod.Text = $"{DateTime.Today.AddYears(2)}";
+            LoadCategory();
             switch (status)
             {
                 case Status.Edit:
                     _status = Status.Edit;
                     _ID = id;
+                    var pic = Db.Context.ProductInCategories.FirstOrDefault(x => x.ProductID == id);
+                    if (pic != null)
+                    {
+                        var category = Db.Context.Categories.Find(pic.CategoryID);
+                        if (category != null)
+                        {
+                            cbb_Categories.SelectedValue = category;
+                        }
+                    }
                     btn_AddProduct.Content = "Edit";
                     btn_SaveListProdut.Visibility = Visibility.Collapsed;
                     break;
-                case Status.AddOnlyProduct:
+                case Status.AddProductImportOld:
                     _ID = id;
-                    _status = Status.AddOnlyProduct;
+                    _status = Status.AddProductImportOld;
                     break;
             }
 
-            LoadCategory();
         }
 
         private string _pathImage = null;
@@ -89,14 +98,6 @@ namespace Dashboard.AdminWindow.Add
                 DateCreated = DateTime.Now,
                 SeriNumber = codeGuarantee,
                 ImagePath = _pathImage != null ? this.SaveFile(_pathImage) : "",
-                ProductTranslations = new List<ProductTranslation>()
-                {
-                    new ProductTranslation()
-                    {
-                        Name = tbx_Name.Text,
-                        Details = tbx_Details.Text,
-                    }
-                },
                 ProductGuarantee = new ProductGuarantee()
                 {
                     DateOfPurchase = DateTime.Now,
@@ -112,10 +113,13 @@ namespace Dashboard.AdminWindow.Add
             //Add category
             if (cbb_Categories.SelectionBoxItem != null)
             {
-                var pic = new ProductInCategory();
-                pic.ProductID = product.ID;
-                pic.CategoryID = ((Category)cbb_Categories.SelectedValue).ID;
-                Db.Context.SaveChanges();
+                if (cbb_Categories.SelectedIndex > -1)
+                {
+                    var pic = new ProductInCategory();
+                    pic.ProductID = product.ID;
+                    pic.CategoryID = ((Category)cbb_Categories.SelectedValue).ID;
+                    Db.Context.SaveChanges();
+                }
             }
 
             btn_SaveListProdut.IsEnabled = true;
@@ -135,10 +139,12 @@ namespace Dashboard.AdminWindow.Add
             tbx_Name.Focus();
         }
 
+        public Guid securityCodeImportOld = Guid.NewGuid();
         private Result<string> SaveListProduct()
         {
-            var securityCodeImport = Guid.NewGuid();
-            if (_status != Status.AddOnlyProduct)
+            //FIXME:
+            var securityCodeImport = _status == Status.AddProductImportOld ? securityCodeImportOld : Guid.NewGuid();
+            if (_status != Status.AddProductImportOld)
             {
                 var import = new Import
                 {
@@ -148,9 +154,16 @@ namespace Dashboard.AdminWindow.Add
                     Stock = Convert.ToInt32(tbx_StockImport.Text),
                     Description = tbx_DescriptionImport.Text,
                     SecurityCode = securityCodeImport
+
                 };
                 Db.Context.Imports.Add(import);
                 Db.Context.SaveChanges();
+            }
+            else
+            {
+                var import = Db.Context.Imports.Find(_ID);
+                if (import != null)
+                    import.Stock += _products.Count();
             }
 
             foreach (var item in _products)
@@ -210,8 +223,8 @@ namespace Dashboard.AdminWindow.Add
             {
                 pic.CategoryID = ((Category) cbb_Categories.SelectedValue).ID;
             }
-            
 
+            Db.Context.SaveChanges();
             return new ResultSuccess<string>();
         }
 
@@ -288,7 +301,7 @@ namespace Dashboard.AdminWindow.Add
 
         private void btn_AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            if (_status == Status.Add || _status == Status.AddOnlyProduct)
+            if (_status == Status.Add || _status == Status.AddProductImportOld)
             {
                 AddListProduct();
                 ResetAddProdut();
@@ -393,7 +406,7 @@ namespace Dashboard.AdminWindow.Add
     public enum Status
     {
         Add = 0,
-        AddOnlyProduct = 1,
+        AddProductImportOld = 1,
         Edit = 2
     }
 }

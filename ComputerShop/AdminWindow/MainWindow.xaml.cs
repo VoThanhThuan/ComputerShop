@@ -59,24 +59,33 @@ namespace Dashboard.AdminWindow
             }
         }
 
-
-        private void btn_User_Click(object sender, RoutedEventArgs e)
-        {
-            RenderPages.Children.Clear();
-            RenderPages.Children.Add(new UserController());
-        }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton != MouseButtonState.Released)
                 this.DragMove();
         }
+        private void btn_User_Click(object sender, RoutedEventArgs e)
+        {
+            tbl_title.Text = "Trang tùy chỉnh người dùng";
+
+            RenderPages.Children.Clear();
+            RenderPages.Children.Add(new UserController());
+        }
 
         private void btn_Product_Click(object sender, RoutedEventArgs e)
         {
+            tbl_title.Text = "Trang tùy chỉnh sản phẩm";
+
             RenderPages.Children.Clear();
             RenderPages.Children.Add(new ProductController());
         }
 
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            tbl_title.Text = "Trang thống kê";
+
+            RenderPages.Children.Clear();
+            RenderPages.Children.Add(new HomePage());
+        }
     }
 }

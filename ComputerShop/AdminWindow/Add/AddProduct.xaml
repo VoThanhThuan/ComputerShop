@@ -129,7 +129,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition Width="60"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <ComboBox x:Name="cbb_Categories" 
+                                <ComboBox x:Name="cbb_Categories"
                                           materialDesign:HintAssist.Hint="Loại sản phẩm"
                                           materialDesign:HintAssist.HintOpacity=".26"
                                           IsEditable="True"></ComboBox>

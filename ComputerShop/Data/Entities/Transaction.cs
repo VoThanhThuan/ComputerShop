@@ -9,14 +9,9 @@ namespace Dashboard.Data.Entities
     {
         public int ID { set; get; }
         public DateTime TransactionDate { set; get; }
-        public string ExternalTransactionId { set; get; }
         public decimal Amount { set; get; }
         public decimal Fee { set; get; }
-        public string Result { set; get; }
-        public string Message { set; get; }
-        public TransactionStatus Status { set; get; }
-        public string Provider { set; get; }
-        public string UserID { get; set; }
-        public AppUser AppUser { get; set; }
+        public string NameStaff { get; set; }
+        public List<ProductTranslation> ProductTranslations { get; set; }
     }
 }

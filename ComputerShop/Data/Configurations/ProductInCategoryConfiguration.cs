@@ -12,7 +12,8 @@ namespace Dashboard.Data.Configurations
         public void Configure(EntityTypeBuilder<ProductInCategory> builder)
         {
 
-            builder.HasKey(t => new { t.CategoryID, t.ProductID });
+            builder.HasKey(x => x.ID);
+            builder.Property(x => x.ID).UseIdentityColumn();
 
             builder.ToTable("ProductInCategories");
 

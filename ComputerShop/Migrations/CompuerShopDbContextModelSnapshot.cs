@@ -396,7 +396,7 @@ namespace Dashboard.Migrations
                         new
                         {
                             ID = 1,
-                            DateCreated = new DateTime(2020, 12, 16, 21, 41, 45, 507, DateTimeKind.Local).AddTicks(8882),
+                            DateCreated = new DateTime(2020, 12, 20, 16, 11, 21, 788, DateTimeKind.Local).AddTicks(6438),
                             Name = "RAM-SAMSUNG-256GB",
                             OriginalPrice = 100000m,
                             Price = 200000m,
@@ -437,13 +437,20 @@ namespace Dashboard.Migrations
 
             modelBuilder.Entity("Dashboard.Data.Entities.ProductInCategory", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoryID", "ProductID");
+                    b.HasKey("ID");
+
+                    b.HasIndex("CategoryID");
 
                     b.HasIndex("ProductID");
 
@@ -452,6 +459,7 @@ namespace Dashboard.Migrations
                     b.HasData(
                         new
                         {
+                            ID = 1,
                             CategoryID = 1,
                             ProductID = 1
                         });
@@ -487,32 +495,19 @@ namespace Dashboard.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Details")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransactionID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductTranslations");
+                    b.HasIndex("TransactionID");
 
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Details = "Tai nghe bờ lu tút",
-                            Name = "Tai Nghe",
-                            ProductId = 1
-                        });
+                    b.ToTable("ProductTranslations");
                 });
 
             modelBuilder.Entity("Dashboard.Data.Entities.Promotion", b =>
@@ -562,33 +557,16 @@ namespace Dashboard.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ExternalTransactionId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("Fee")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Message")
+                    b.Property<string>("NameStaff")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Provider")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Result")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Transactions");
                 });
@@ -702,16 +680,15 @@ namespace Dashboard.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Dashboard.Data.Entities.Transaction", "Transaction")
+                        .WithMany("ProductTranslations")
+                        .HasForeignKey("TransactionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Product");
-                });
 
-            modelBuilder.Entity("Dashboard.Data.Entities.Transaction", b =>
-                {
-                    b.HasOne("Dashboard.Data.Entities.AppUser", "AppUser")
-                        .WithMany("Transactions")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("AppUser");
+                    b.Navigation("Transaction");
                 });
 
             modelBuilder.Entity("Dashboard.Data.Entities.AppUser", b =>
@@ -721,8 +698,6 @@ namespace Dashboard.Migrations
                     b.Navigation("ImportGoods");
 
                     b.Navigation("Orders");
-
-                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("Dashboard.Data.Entities.Category", b =>
@@ -752,6 +727,11 @@ namespace Dashboard.Migrations
 
                     b.Navigation("ProductInImports");
 
+                    b.Navigation("ProductTranslations");
+                });
+
+            modelBuilder.Entity("Dashboard.Data.Entities.Transaction", b =>
+                {
                     b.Navigation("ProductTranslations");
                 });
 #pragma warning restore 612, 618
