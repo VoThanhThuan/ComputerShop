@@ -42,6 +42,7 @@ namespace Dashboard.AdminWindow
             RenderDataProduct.Children.Clear();
             Db.Context.Imports.Load();
             var imports = Db.Context.Imports.Select(x => x).ToList();
+            imports.Reverse();
             foreach (var import in imports)
             {
                 //1. Select join
@@ -61,14 +62,15 @@ namespace Dashboard.AdminWindow
                 //TODO: event cho Expander (phiues nhập hàng)
                 expander.btn_Add.Click += (sender, args) =>
                 {
-                    var ap = new AddProduct(Status.AddOnlyProduct, import.ID)
+                    var ap = new AddProduct(Status.AddProductImportOld, import.ID)
                     {
                         tbx_Supplier = {Text = import.Supplier},
                         tbx_DateImport = {Text = $"{import.DayImport.Date}"},
                         tbx_StockImport = {Text = $"{import.Stock}"},
-                        tbx_Warehouse = {Text = import.Warehouse}
+                        tbx_Warehouse = {Text = import.Warehouse},
+                        securityCodeImportOld = import.SecurityCode
                     };
-
+                    
                     var window = new PageAddProductInImport(ap) {Title = "Thêm"};
 
                     window.ShowDialog();
@@ -82,25 +84,20 @@ namespace Dashboard.AdminWindow
 
                     var guarantee = Db.Context.ProductGuarantees.FirstOrDefault(x => x.ProductId == prod.ID);
 
-                    var category = from pic in Db.Context.ProductInCategories
-                        join c in Db.Context.Categories on pic.CategoryID equals c.ID
-                        select new{pic, c};
-                    var nameCategory = category.FirstOrDefault(x => x.pic.CategoryID == x.c.ID);
+                    //var category = from pic in Db.Context.ProductInCategories
+                    //    join c in Db.Context.Categories on pic.CategoryID equals c.ID
+                    //    select new{pic, c};
+                    //var nameCategory = category.FirstOrDefault(x => x.pic.CategoryID == x.c.ID);
                     var ap = new AddProduct(Status.Edit, prod.ID)
                     {
                         tbx_Name = {Text = prod.Name},
                         tbx_Price = {Text = $"{prod.Price}"},
                         tbx_OriginalPrice = {Text = $"{prod.OriginalPrice}"},
                         tbx_Stock = {Text = $"{prod.Stock}"},
-                        tbx_Details =
-                        {
-                            Text =
-                                $"{(Db.Context.ProductTranslations.FirstOrDefault(x => x.ProductId == prod.ID))?.Details}"
-                        },
                         dp_WarrantyPeriod = {Text = $"{guarantee.ExpirationDate.Date}"},
                         tbx_SeriNumber = {Text = prod.SeriNumber},
-                        card_Import = {Visibility = Visibility.Hidden},
-                        cbb_Categories = {Text = nameCategory != null ? $"{nameCategory.c.Name}" : ""}
+                        card_Import = {Visibility = Visibility.Hidden}
+                        //cbb_Categories = {Text = nameCategory != null ? $"{nameCategory.c.Name}" : ""}
                     };
 
                     //TODO: Event
@@ -124,7 +121,20 @@ namespace Dashboard.AdminWindow
                     if (mess.DialogResult != MyDialogResult.Result.Ok) return;
                     var pathImage = $@"{Directory.GetCurrentDirectory()}\{prod.ImagePath}";
                     if (File.Exists(pathImage))
-                        File.Delete(pathImage);
+                    {
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        try
+                        {
+                            File.Delete(pathImage);
+
+                        }
+                        catch (Exception e)
+                        {
+                            var messErrorRemove = new MessageDialog(){tbl_Title = {Text = "Lỗi xóa hình"}, tbl_Message = {Text = $"Gặp lỗi xóa hình ảnh, bạn hãy tử xóa thủ công theo được dẫn: {Environment.NewLine} {pathImage}"} };
+                            messErrorRemove.ShowDialog();
+                        }
+                    }
                     Db.Context.Products.Remove(prod);
                     var imp = Db.Context.Imports.Find(import.ID);
                     imp.Stock--;
@@ -189,6 +199,7 @@ namespace Dashboard.AdminWindow
         //    Db.Context.SaveChanges();
         //    return new ResultSuccess<string>();
         //}
+
         private DataProduct _dataProduct;
         private Result<string> EditOpenProduct()
         {
@@ -243,13 +254,15 @@ namespace Dashboard.AdminWindow
 
         private void Btn_EditOpen_OnClick(object sender, RoutedEventArgs e)
         {
+            if(_dataProduct.dtg_Product.SelectedIndex < 0) return;
             EditOpenProduct();
+            btn_Do.Content = "Edit";
             dlh_Loading.IsOpen = true;
         }
 
         private void btn_AddOpen_Click(object sender, RoutedEventArgs e)
         {
-            //dlh_Loading.IsOpen = true;
+            dlh_Loading.IsOpen = true;
             var pap = new PageAddProduct();
             pap.ShowDialog();
             LoadDataProduct();
@@ -259,6 +272,9 @@ namespace Dashboard.AdminWindow
         {
             SaveEditOpen();
             dlh_Loading.IsOpen = false;
+            RenderDataProduct.Children.Clear();
+            _dataProduct = new DataProduct();
+            RenderDataProduct.Children.Add(_dataProduct);
         }
 
         private void GroupBox_MouseDown(object sender, MouseButtonEventArgs e)

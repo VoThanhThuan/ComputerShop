@@ -16,11 +16,11 @@ namespace Dashboard.Data.Configurations
             builder.HasKey(x => x.ID);
             builder.Property(x => x.ID).UseIdentityColumn();
 
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(200);
+            builder.HasOne(x => x.Product).WithMany(pt => pt.ProductTranslations)
+                .HasForeignKey(t => t.ProductId);
 
-            builder.Property(x => x.Details).HasMaxLength(500);
-
-            builder.HasOne(x => x.Product).WithMany(x => x.ProductTranslations).HasForeignKey(x => x.ProductId);
+            builder.HasOne(x => x.Transaction).WithMany(pt => pt.ProductTranslations)
+                .HasForeignKey(pc => pc.TransactionID);
 
         }
     }

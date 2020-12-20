@@ -123,6 +123,22 @@ namespace Dashboard.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Transactions",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Fee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    NameStaff = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transactions", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Import",
                 columns: table => new
                 {
@@ -167,33 +183,6 @@ namespace Dashboard.Migrations
                     table.ForeignKey(
                         name: "FK_Orders_AppUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AppUsers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Transactions",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExternalTransactionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Fee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Result = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Provider = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Transactions", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Transactions_AppUsers_UserID",
-                        column: x => x.UserID,
                         principalTable: "AppUsers",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
@@ -255,12 +244,14 @@ namespace Dashboard.Migrations
                 name: "ProductInCategories",
                 columns: table => new
                 {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProductID = table.Column<int>(type: "int", nullable: false),
                     CategoryID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductInCategories", x => new { x.CategoryID, x.ProductID });
+                    table.PrimaryKey("PK_ProductInCategories", x => x.ID);
                     table.ForeignKey(
                         name: "FK_ProductInCategories_Categories_CategoryID",
                         column: x => x.CategoryID,
@@ -281,9 +272,8 @@ namespace Dashboard.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Details = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    TransactionID = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -292,6 +282,12 @@ namespace Dashboard.Migrations
                         name: "FK_ProductTranslations_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductTranslations_Transactions_TransactionID",
+                        column: x => x.TransactionID,
+                        principalTable: "Transactions",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -386,17 +382,12 @@ namespace Dashboard.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "DateCreated", "ImagePath", "Name", "OriginalPrice", "Price", "SeriNumber", "Stock" },
-                values: new object[] { 1, new DateTime(2020, 12, 16, 21, 41, 45, 507, DateTimeKind.Local).AddTicks(8882), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
+                values: new object[] { 1, new DateTime(2020, 12, 20, 16, 11, 21, 788, DateTimeKind.Local).AddTicks(6438), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
 
             migrationBuilder.InsertData(
                 table: "ProductInCategories",
-                columns: new[] { "CategoryID", "ProductID" },
-                values: new object[] { 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "ProductTranslations",
-                columns: new[] { "ID", "Details", "Name", "ProductId" },
-                values: new object[] { 1, "Tai nghe bờ lu tút", "Tai Nghe", 1 });
+                columns: new[] { "ID", "CategoryID", "ProductID" },
+                values: new object[] { 1, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_ProductId",
@@ -430,6 +421,11 @@ namespace Dashboard.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductInCategories_CategoryID",
+                table: "ProductInCategories",
+                column: "CategoryID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductInCategories_ProductID",
                 table: "ProductInCategories",
                 column: "ProductID");
@@ -451,9 +447,9 @@ namespace Dashboard.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_UserID",
-                table: "Transactions",
-                column: "UserID");
+                name: "IX_ProductTranslations_TransactionID",
+                table: "ProductTranslations",
+                column: "TransactionID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -489,9 +485,6 @@ namespace Dashboard.Migrations
                 name: "Promotions");
 
             migrationBuilder.DropTable(
-                name: "Transactions");
-
-            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
@@ -502,6 +495,9 @@ namespace Dashboard.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "AppUsers");

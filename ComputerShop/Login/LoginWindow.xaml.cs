@@ -36,6 +36,8 @@ namespace DesignLogin
         public LoginWindow()
         {
             InitializeComponent();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             Controller._context.AppUsers.Load();
             SetBackground();
         }

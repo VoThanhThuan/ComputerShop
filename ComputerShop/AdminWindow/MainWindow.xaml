@@ -17,10 +17,12 @@
         MouseLeftButtonDown="Window_MouseDown">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
-                      ResizeBorderThickness="5" />
+                      CornerRadius="4"
+                      ResizeBorderThickness="8"/>
     </WindowChrome.WindowChrome>
     <Grid>
         <Grid.Resources>
+
             <Style TargetType="{x:Type Button}">
                 <Setter Property="Background"
                         Value="#00ADD8E6" />
@@ -36,18 +38,41 @@
                                 <Trigger Property="IsMouseOver"
                                          Value="True">
                                     <Setter Property="Background"
-                                            Value="#19000000"
-                                            TargetName="Border" />
+                                            TargetName="Border">
+                                        <Setter.Value>
+                                            <LinearGradientBrush EndPoint="0.5,1"
+                                                                 StartPoint="0.5,0">
+                                                <LinearGradientBrush.RelativeTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform CenterY="0.5"
+                                                                        CenterX="0.5" />
+                                                        <SkewTransform CenterY="0.5"
+                                                                       CenterX="0.5" />
+                                                        <RotateTransform Angle="90"
+                                                                         CenterY="0.5"
+                                                                         CenterX="0.5" />
+                                                        <TranslateTransform />
+                                                    </TransformGroup>
+                                                </LinearGradientBrush.RelativeTransform>
+                                                <GradientStop Color="#FFF300FF" />
+                                                <GradientStop Color="#FF8B00FF"
+                                                              Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground"
+                                            Value="White"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
+
                     </Setter.Value>
                 </Setter>
-            </Style>
 
+            </Style>
         </Grid.Resources>
 
-        <materialDesign:Card Margin="10"
+        <materialDesign:Card Margin="0"
                              UniformCornerRadius="15">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -79,8 +104,8 @@
                                 <Path.Fill>
                                     <LinearGradientBrush EndPoint="0.5,1"
                                                          StartPoint="0.5,0">
-                                        <GradientStop Color="#FF8000FF" />
-                                        <GradientStop Color="#FFCB98FF"
+                                        <GradientStop Color="#FF8B00FF" />
+                                        <GradientStop Color="#FFF300FF"
                                                       Offset="1" />
                                     </LinearGradientBrush>
                                 </Path.Fill>
@@ -118,9 +143,9 @@
                     <Button HorizontalAlignment="Stretch"
                             BorderBrush="{x:Null}"
                             Background="{x:Null}"
-                            Foreground="Black"
                             Margin="0,30,0,0"
-                            Height="60">
+                            Height="60"
+                            Click="ButtonBase_OnClick">
                         <StackPanel Margin="-5">
                             <materialDesign:PackIcon Kind="EqualiserVertical" />
                         </StackPanel>
@@ -128,13 +153,39 @@
 
                 </StackPanel>
                 <DockPanel Grid.Column="1">
-                    <Grid DockPanel.Dock="Top" Height="32">
+                    <Grid DockPanel.Dock="Top"
+                          Height="32">
+                        <TextBlock x:Name="tbl_title"
+                                   Text="Dashboard"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="20">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1"
+                                                     StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5"
+                                                            CenterX="0.5" />
+                                            <SkewTransform CenterY="0.5"
+                                                           CenterX="0.5" />
+                                            <RotateTransform Angle="90"
+                                                             CenterY="0.5"
+                                                             CenterX="0.5" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFF300FF" />
+                                    <GradientStop Color="#FF8B00FF"
+                                                  Offset="1" />
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
                         <Button x:Name="btnExit"
                                 HorizontalAlignment="Right"
                                 BorderBrush="{x:Null}"
                                 Background="{x:Null}"
-                                Foreground="Black"
-                                Margin="0,0,10,0"
+                                Margin="0,0,0,0"
                                 Width="60"
                                 Click="btnExit_Click">
                             <StackPanel Margin="-5">
@@ -144,7 +195,7 @@
                     </Grid>
                     <Grid Background="#F6F5F8"
                           Name="RenderPages"
-                          Margin="5,0,5,5"/>
+                          Margin="5,0,5,5" />
                 </DockPanel>
             </Grid>
         </materialDesign:Card>

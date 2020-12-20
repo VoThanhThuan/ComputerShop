@@ -16,8 +16,6 @@ namespace Dashboard.Data.Configurations
             builder.HasKey(x => x.ID);
 
             builder.Property(x => x.ID).UseIdentityColumn();
-            builder.HasOne(x => x.AppUser).WithMany(x => x.Transactions).HasForeignKey(x => x.UserID);
-
         }
     }
 }

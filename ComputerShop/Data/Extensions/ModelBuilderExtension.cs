@@ -34,16 +34,8 @@ namespace Dashboard.Data.Extensions
                     Stock = 20,
                     SeriNumber = "000-000-000-000"
                 });
-            modelBuilder.Entity<ProductTranslation>().HasData(
-                new ProductTranslation()
-                {
-                    ID = 1,
-                    ProductId = 1,
-                    Name = "Tai Nghe",
-                    Details = "Tai nghe bờ lu tút"
-                });
             modelBuilder.Entity<ProductInCategory>().HasData(
-                new ProductInCategory() { ProductID = 1, CategoryID = 1 });
+                new ProductInCategory() { ID = 1, ProductID = 1, CategoryID = 1 });
 
             modelBuilder.Entity<AppRole>().HasData(
                 new AppRole
