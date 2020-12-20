@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Height="600"
-        Width="1145"
+        Width="1170"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         MouseLeftButtonDown="Window_MouseDown"
@@ -16,7 +16,7 @@
         <WindowChrome CaptionHeight="0"
                       ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
-    <Grid Background="Black">
+    <Grid Background="#161414">
         <StackPanel VerticalAlignment="Top">
             <Grid Margin="5">
 
@@ -81,9 +81,7 @@
         </StackPanel>
 
         <Grid x:Name="GridPrincipal"
-              Margin="212,40,0,0"
-              VerticalAlignment="Stretch">
-        </Grid>
+              Margin="212,40,10,0"/>
 
 
         <!-- Menu Bar-->
@@ -172,22 +170,22 @@
                     </StackPanel>
                 </ListViewItem>
 
-                <!--Giao Hàng
+               
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon 
-                            Kind="TruckDelivery" 
+                            Kind="Security" 
                             Width="30" 
                             Height="30" 
                             VerticalAlignment="Center" 
                             Margin="5"/>
                         <TextBlock 
-                            Text="Giao Hàng" 
+                            Text="Bảo Hành" 
                             FontSize="17" 
                             VerticalAlignment="Center" 
                             Margin="20 0"/>
                     </StackPanel>
-                </ListViewItem>-->
+                </ListViewItem>
 
                 <!-- Đăng Xuất-->
                 <Button

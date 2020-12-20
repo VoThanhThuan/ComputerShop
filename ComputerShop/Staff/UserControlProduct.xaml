@@ -26,35 +26,13 @@
                     <DockPanel>
                         <StackPanel Orientation="Horizontal"
                                     materialDesign:RippleAssist.IsCentered="True">
-                            <ComboBox SelectedIndex="0"
+                            <ComboBox x:Name="cbbCategories" 
+                                      SelectedIndex="-1"
                                       Margin="8 0 0 0"
                                       BorderThickness="0"
                                       materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
-                                      BorderBrush="{DynamicResource MaterialDesignPaper}">
-                                <ComboBoxItem>
-                                    ALL
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    CPU
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Mainboard
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    VGA(Card đồ họa)
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Bộ nguồn điện
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    RAM
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    HDD/ SSD
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    Cooler(tản nhiệt)
-                                </ComboBoxItem>
+                                      BorderBrush="{DynamicResource MaterialDesignPaper}"
+                                      SelectionChanged="Selector_OnSelectionChanged">
                             </ComboBox>
                             <materialDesign:ColorZone Mode="Standard"
                                                       Padding="8 4 8 4"
@@ -129,7 +107,7 @@
                           VerticalScrollBarVisibility="Hidden">
                 <StackPanel x:Name="SelectedProduct"/>
             </ScrollViewer>
-           
+
             <StackPanel VerticalAlignment="Bottom">
 
                 <StackPanel Orientation="Horizontal">
@@ -162,12 +140,12 @@
                         <materialDesign:PackIcon Kind="Calculator"/>
                     </Button >
 
-                    <Button x:Name="Refresh"
+                    <Button x:Name="BtnRefresh"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Width="50"
                         Margin="15 0 0 0"
                         ToolTip ="Làm Mới"
-                        Click="Refresh_OnClick">
+                        Click="BtnRefresh_OnClick">
                         <materialDesign:PackIcon Kind="Refresh" />
                     </Button>
 
@@ -175,7 +153,6 @@
             </StackPanel>
 
         </Grid>
-
 
     </Grid>
 </UserControl>

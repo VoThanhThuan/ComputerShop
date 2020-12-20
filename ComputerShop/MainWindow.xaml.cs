@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Common;
-using Dashboard.Common;
+﻿using Dashboard.Common;
 using Dashboard.Common.ViewModel;
 using Dashboard.Staff;
 using DesignLogin;
-using MaterialDesignThemes.Wpf;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Dashboard
 {
@@ -41,22 +28,23 @@ namespace Dashboard
         {
             var index = ListViewMenu.SelectedIndex;
             MoveCursorMenu(index);
-         
+
+            GridPrincipal.Children.Clear();
             switch (index)
             {
                 case 0:
-                    GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new UserControlHome());
                     break;
 
                 case 1:
-                    GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new UserControlProduct());
                     break;
 
                 case 2:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new UserControl_InvoicePrinting());
+                    GridPrincipal.Children.Add(new UserControl_SalesHistory());
+                    break;
+                case 3:
+                    GridPrincipal.Children.Add(new UserControl_SalesHistory());
                     break;
 
             }
@@ -106,7 +94,6 @@ namespace Dashboard
                     break;
             }
         }
-
 
         private void Mess_Logout()
         {
