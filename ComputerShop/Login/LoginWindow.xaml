@@ -55,13 +55,11 @@
                        Width="44.5"
                        Background="#FF4346D3" />
 
-                <Grid 
-                      HorizontalAlignment="Left"
+                <Grid HorizontalAlignment="Left"
                       Height="39"
                       Margin="49.833,157.5,0,0"
                       VerticalAlignment="Top"
-                      Width="233.167"
-                      >
+                      Width="233.167">
                     <materialDesign:PackIcon Kind="Account"
                                              Width="20"
                                              Height="20"
@@ -73,8 +71,9 @@
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Margin="25,0,0,0"
                              CaretBrush="#FF2B5BEB"
-                             BorderBrush="#FF696FD0" 
-                             Focusable="True" Padding="-1"/>
+                             BorderBrush="#FF696FD0"
+                             Focusable="True"
+                             Padding="-1" />
 
                 </Grid>
 
@@ -103,28 +102,46 @@
                               ToolTip="MaterialDesignActionLightToggleButton"
                               Margin="72,376,238,13"
                               Background="#FF2437B0">
-                    <materialDesign:ToggleButtonAssist.OnContent>
-                        <materialDesign:PackIcon Kind="EmoticonHappy" />
-                    </materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="Facebook" />
+                    <Hyperlink NavigateUri="https://www.facebook.com/son.dh19pm/"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               TextDecorations="none"
+                               Foreground="White">
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="EmoticonHappy" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Facebook" />
+                    </Hyperlink>
+
                 </ToggleButton>
+                
                 <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
                               ToolTip="MaterialDesignActionLightToggleButton"
                               Margin="149,376,161,13"
-                              Background="#FFB73A3A">
-                    <materialDesign:ToggleButtonAssist.OnContent>
-                        <materialDesign:PackIcon Kind="EmoticonHappy" />
-                    </materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="Google" />
+                              Background="#FF192889">
+                    <Hyperlink NavigateUri="https://www.facebook.com/anome69"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               TextDecorations="none"
+                               Foreground="White">
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="EmoticonHappy" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Facebook" />
+                    </Hyperlink>
+
                 </ToggleButton>
                 <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
                               ToolTip="MaterialDesignActionLightToggleButton"
                               Margin="224,376,86,13"
                               Background="#FF3A5CB7">
-                    <materialDesign:ToggleButtonAssist.OnContent>
-                        <materialDesign:PackIcon Kind="EmoticonHappy" />
-                    </materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="Linkedin" />
+                    <Hyperlink NavigateUri="https://www.facebook.com/profile.php?id=100028337690354"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               TextDecorations="none"
+                               Foreground="White">
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="EmoticonHappy" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Facebook" />
+                    </Hyperlink>
                 </ToggleButton>
 
             </Grid>
@@ -137,8 +154,18 @@
             <RepeatButton ToolTip="GitHub :v"
                           Margin="485.5,10,135.5,378"
                           Background="Transparent"
-                          BorderBrush="Transparent"
-                          Content="PORNHUB" />
+                          BorderBrush="Transparent">
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://github.com/VoThanhThuan/ComputerShop"
+                               TextDecorations="none"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               Foreground="White">
+                        <Hyperlink.Inlines>
+                            <Run Text="GITHUB" />
+                        </Hyperlink.Inlines>
+                    </Hyperlink>
+                </TextBlock>
+            </RepeatButton>
             <RepeatButton ToolTip="Giới thiệu về thành viên nhớm"
                           Margin="594,10,27,378"
                           Background="Transparent"
@@ -166,7 +193,8 @@
                       Foreground="#FFBCBCBC"
                       FontWeight="Bold"
                       FontSize="9"
-                      RenderTransformOrigin="0.428,0.618" />
+                      RenderTransformOrigin="0.428,0.618"
+                      d:IsHidden="True" />
 
             <Button Style="{StaticResource MaterialDesignFlatButton}"
                     ToolTip="Bạn đã quên mật khẩu ?"
@@ -176,7 +204,8 @@
                     FontSize="7"
                     FontWeight="Bold"
                     HorizontalAlignment="Left"
-                    Width="109" />
+                    Width="109"
+                    d:IsHidden="True" />
             <materialDesign:DialogHost CloseOnClickAway="True"
                                        x:Name="dht_Loading">
                 <materialDesign:DialogHost.DialogContent>
@@ -226,14 +255,14 @@
                 </Path.RenderTransform>
             </Path>
 
-            <Label x:Name="label1_Copy"
+            <!--<Label x:Name="label1_Copy"
                    Content="Hoặc đăng nhập bằng:"
                    HorizontalAlignment="Left"
                    Height="23"
                    Margin="50,349,0,0"
                    VerticalAlignment="Top"
                    Width="153"
-                   FontWeight="Bold" />
+                   FontWeight="Bold" />-->
 
         </Grid>
     </materialDesign:Card>
