@@ -249,7 +249,7 @@ namespace Dashboard.AdminWindow
 
         private void Btn_RemoveOpen_OnClick(object sender, RoutedEventArgs e)
         {
-            dlh_Loading.IsOpen = true;
+            //dlh_Loading.IsOpen = true;
         }
 
         private void Btn_EditOpen_OnClick(object sender, RoutedEventArgs e)
@@ -262,7 +262,7 @@ namespace Dashboard.AdminWindow
 
         private void btn_AddOpen_Click(object sender, RoutedEventArgs e)
         {
-            dlh_Loading.IsOpen = true;
+            //dlh_Loading.IsOpen = true;
             var pap = new PageAddProduct();
             pap.ShowDialog();
             LoadDataProduct();
