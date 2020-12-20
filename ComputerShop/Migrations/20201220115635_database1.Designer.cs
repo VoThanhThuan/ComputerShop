@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dashboard.Migrations
 {
     [DbContext(typeof(CompuerShopDbContext))]
-    [Migration("20201220111120_database_1")]
-    partial class database_1
+    [Migration("20201220115635_database1")]
+    partial class database1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -253,7 +253,7 @@ namespace Dashboard.Migrations
                         {
                             ID = 1,
                             IsShowOnHome = true,
-                            Name = "RAM",
+                            Name = "ALL",
                             SortOrder = 1,
                             Status = 1
                         });
@@ -395,8 +395,8 @@ namespace Dashboard.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d"),
-                            DateCreated = new DateTime(2020, 12, 20, 18, 11, 19, 578, DateTimeKind.Local).AddTicks(1135),
+                            ID = new Guid("d4964779-d5f4-4915-9814-a1436097dcb8"),
+                            DateCreated = new DateTime(2020, 12, 20, 18, 56, 34, 960, DateTimeKind.Local).AddTicks(3884),
                             Name = "RAM-SAMSUNG-256GB",
                             OriginalPrice = 100000m,
                             Price = 200000m,
@@ -461,7 +461,7 @@ namespace Dashboard.Migrations
                         {
                             ID = 1,
                             CategoryID = 1,
-                            ProductID = new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d")
+                            ProductID = new Guid("d4964779-d5f4-4915-9814-a1436097dcb8")
                         });
                 });
 
@@ -498,8 +498,8 @@ namespace Dashboard.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("TransactionID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TransactionID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ID");
 
@@ -549,10 +549,9 @@ namespace Dashboard.Migrations
 
             modelBuilder.Entity("Dashboard.Data.Entities.Transaction", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");

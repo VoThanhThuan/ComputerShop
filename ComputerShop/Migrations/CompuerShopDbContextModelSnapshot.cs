@@ -393,8 +393,8 @@ namespace Dashboard.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("e434deb8-e54e-4ab2-9d47-cb5c7b29cbab"),
-                            DateCreated = new DateTime(2020, 12, 20, 18, 35, 27, 585, DateTimeKind.Local).AddTicks(9564),
+                            ID = new Guid("d4964779-d5f4-4915-9814-a1436097dcb8"),
+                            DateCreated = new DateTime(2020, 12, 20, 18, 56, 34, 960, DateTimeKind.Local).AddTicks(3884),
                             Name = "RAM-SAMSUNG-256GB",
                             OriginalPrice = 100000m,
                             Price = 200000m,
@@ -459,7 +459,7 @@ namespace Dashboard.Migrations
                         {
                             ID = 1,
                             CategoryID = 1,
-                            ProductID = new Guid("e434deb8-e54e-4ab2-9d47-cb5c7b29cbab")
+                            ProductID = new Guid("d4964779-d5f4-4915-9814-a1436097dcb8")
                         });
                 });
 
@@ -496,8 +496,8 @@ namespace Dashboard.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("TransactionID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TransactionID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ID");
 
@@ -547,10 +547,9 @@ namespace Dashboard.Migrations
 
             modelBuilder.Entity("Dashboard.Data.Entities.Transaction", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");

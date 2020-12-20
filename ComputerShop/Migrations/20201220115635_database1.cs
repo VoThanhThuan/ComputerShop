@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dashboard.Migrations
 {
-    public partial class database_1 : Migration
+    public partial class database1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -125,8 +125,7 @@ namespace Dashboard.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Fee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -270,7 +269,7 @@ namespace Dashboard.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TransactionID = table.Column<int>(type: "int", nullable: false),
+                    TransactionID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -375,17 +374,17 @@ namespace Dashboard.Migrations
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "ID", "IsShowOnHome", "Name", "ParentId", "SortOrder", "Status" },
-                values: new object[] { 1, true, "RAM", null, 1, 1 });
+                values: new object[] { 1, true, "ALL", null, 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "DateCreated", "ImagePath", "Name", "OriginalPrice", "Price", "SeriNumber", "Stock" },
-                values: new object[] { new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d"), new DateTime(2020, 12, 20, 18, 11, 19, 578, DateTimeKind.Local).AddTicks(1135), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
+                values: new object[] { new Guid("d4964779-d5f4-4915-9814-a1436097dcb8"), new DateTime(2020, 12, 20, 18, 56, 34, 960, DateTimeKind.Local).AddTicks(3884), null, "RAM-SAMSUNG-256GB", 100000m, 200000m, "000-000-000-000", 20 });
 
             migrationBuilder.InsertData(
                 table: "ProductInCategories",
                 columns: new[] { "ID", "CategoryID", "ProductID" },
-                values: new object[] { 1, 1, new Guid("c48b7b0e-f1e6-41db-b544-a6d90242505d") });
+                values: new object[] { 1, 1, new Guid("d4964779-d5f4-4915-9814-a1436097dcb8") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_ProductId",

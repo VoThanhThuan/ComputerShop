@@ -7,7 +7,7 @@ namespace Dashboard.Data.Entities
 {
     public class Transaction
     {
-        public int ID { set; get; }
+        public Guid ID { set; get; }
         public DateTime TransactionDate { set; get; }
         public decimal Amount { set; get; }
         public decimal Fee { set; get; }
