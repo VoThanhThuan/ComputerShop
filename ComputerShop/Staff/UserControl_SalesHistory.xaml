@@ -6,110 +6,104 @@
              xmlns:local="clr-namespace:Dashboard.Staff"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+            >
 
+    <Grid>
         <materialDesign:Card>
-            <StackPanel >
-                <Expander x:Name="EpdHeader"
+                    <StackPanel>
+                        <Expander x:Name="EpdHeader"
                           HorizontalAlignment="Stretch"
-                          Header="Sale History">
-                    <StackPanel Orientation="Vertical"
+                          Header="Sale History" 
+                          MaxHeight="500">
+                            <StackPanel Orientation="Vertical"
                                 TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
                                 Margin="24,0,24,0">
 
-                        <materialDesign:Card UniformCornerRadius="10"
+                                <materialDesign:Card UniformCornerRadius="10"
                                              VerticalAlignment="Center"
                                              Margin="5,0,5,0"
                                              Padding="10,0,10,0">
-                            <StackPanel>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
 
-                                    <TextBox x:Name="TbxSupplier"
-                                             materialDesign:HintAssist.Hint="Tên nhà cung cấp"
+                                            <TextBox x:Name="TbxID"
+                                             materialDesign:HintAssist.Hint="Mã bill"
                                              materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              IsReadOnly="True"
                                              Grid.Column="0" />
-                                    <TextBox x:Name="TbxDateImport"
+                                            <TextBox x:Name="TbxDateTransaction"
                                              materialDesign:HintAssist.Hint="Ngày Tạo"
                                              materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              IsReadOnly="True"
                                              Grid.Column="1" />
-                                    <TextBox x:Name="TbxStockImport"
+                                            <TextBox x:Name="TbxAmount"
                                              materialDesign:HintAssist.Hint="Số lượng sản phẩm"
                                              materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              IsReadOnly="True"
                                              Grid.Column="2" />
-                                    <TextBox x:Name="TbxWarehouse"
-                                             materialDesign:HintAssist.Hint="Kho nhập"
+                                            <TextBox x:Name="TbxFee"
+                                             materialDesign:HintAssist.Hint="Tổng tiền"
                                              materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              IsReadOnly="True"
                                              Grid.Column="3" />
-                                </Grid>
+                                        </Grid>
 
-                                <StackPanel>
-                                    <TextBox x:Name="TbxDescriptionImport"
+                                        <StackPanel>
+                                            <!--<TextBox x:Name="TbxDescriptionImport"
                                              VerticalAlignment="Top"
                                              Height="50"
                                              AcceptsReturn="True"
                                              TextWrapping="Wrap"
                                              VerticalScrollBarVisibility="Auto"
                                              materialDesign:HintAssist.Hint="Ghi chú"
-                                             IsReadOnly="True" />
-                                </StackPanel>
-                            </StackPanel>
-                        </materialDesign:Card>
+                                             IsReadOnly="True" />-->
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:Card>
 
-                        <Grid MaxHeight="450">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <DataGrid x:Name="DtgProduct"
+                                <Grid>
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin ="0 0 0 10">
+                                        <DataGrid x:Name="DtgProduct"
                                           AutoGenerateColumns="False"
                                           HeadersVisibility="All"
                                           CanUserAddRows="False"
                                           Margin="10,5,10,0"
                                           d:IsHidden="True"
                                           IsReadOnly="True">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Hình ảnh"
-                                                            Width="100"
-                                                            Binding="{Binding ImagePath}" />
-                                        <DataGridTextColumn Header="Id"
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Id"
                                                             Binding="{Binding ID}" />
-                                        <DataGridTextColumn Header="Tên"
+                                                <DataGridTextColumn Header="Tên"
                                                             Binding="{Binding Name}" />
-                                        <DataGridTextColumn Header="Giá"
+                                                <DataGridTextColumn Header="Giá"
                                                             Binding="{Binding Price}" />
-                                        <DataGridTextColumn Header="Giá gốc"
-                                                            Binding="{Binding OriginalPrice}" />
-                                        <DataGridTextColumn Header="Số lượng"
-                                                            Binding="{Binding Stock}" />
-                                        <DataGridTextColumn Header="Mã bảo hành"
-                                                            Binding="{Binding SeriNumber}" />
+                                                <DataGridTextColumn Header="Số lượng"
+                                                            Binding="{Binding Amount}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </ScrollViewer>
+                                </Grid>
 
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </ScrollViewer>
-                        </Grid>
+                            </StackPanel>
+                        </Expander>
 
-                    </StackPanel>
-                </Expander>
-                <Border Background="{DynamicResource MaterialDesignDivider}"
+                        <Border Background="{DynamicResource MaterialDesignDivider}"
                         Height="1"
                         HorizontalAlignment="Stretch"
                         SnapsToDevicePixels="True" />
-            </StackPanel>
+                    </StackPanel>
 
-        </materialDesign:Card>
 
+                </materialDesign:Card>
     </Grid>
 </UserControl>

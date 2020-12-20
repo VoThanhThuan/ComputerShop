@@ -34,7 +34,7 @@ namespace Dashboard.Staff
             cbbCategories.Text = "All";
         }
 
-        private void FindProduct()//TODO:Find
+        private void FindProduct()//TODO:Find TEXT
         {
             Product.Children.Clear();
             var products = _listCard.Where(x =>
@@ -46,17 +46,17 @@ namespace Dashboard.Staff
 
         private void FindCategories()
         {
-            if(cbbCategories.SelectedIndex < 0)return;
-            var id = ((Category) cbbCategories.SelectedValue).ID;
-            var pic = 
-                Db.Context.ProductInCategories.Where(x => 
+            if (cbbCategories.SelectedIndex < 0) return;
+            var id = ((Category)cbbCategories.SelectedValue).ID;
+            var pic =
+                Db.Context.ProductInCategories.Where(x =>
                     x.CategoryID == id).Select(x => x);
-           
+
             Product.Children.Clear();
             foreach (var item in pic)
             {
-                var products = 
-                    _listCard.Where(x => 
+                var products =
+                    _listCard.Where(x =>
                         x.TblId.Text == $"{item.ProductID}");
                 foreach (var product in products)
                     Product.Children.Add(product);
@@ -70,7 +70,7 @@ namespace Dashboard.Staff
         {
             FindProduct();
         }
-        
+
         //TODO:LoadPanel
         private void LoadPanel()
         {
@@ -105,7 +105,7 @@ namespace Dashboard.Staff
                         listCart.FirstOrDefault(x => (string)x.LabelCartId.Content == cardProduct.TblId.Text);
                     if (textAmount < 1) return;
                     cardProduct.TblAmount.Text = $"{--textAmount}";
-                  
+
                     if (itemCart == null)
                     {
                         var cartPro = new UCCartSelProduct()
@@ -116,6 +116,7 @@ namespace Dashboard.Staff
                             LabelCartId = { Content = $"{product.ID}" }
                         };
 
+                        BtnTotalCost.IsEnabled = true;
                         //TODO:CHECK IMG
                         if (File.Exists($@"{Directory.GetCurrentDirectory()}\{product.ImagePath}"))
                             cartPro.ImageCartCh.Source =
@@ -136,6 +137,11 @@ namespace Dashboard.Staff
                             {
                                 SelectedProduct.Children.Remove(cartPro);
                                 listCart.Remove(cartPro);
+                                
+                                //TODO: 1 số ràng buộc
+                                LblTotalCost.Content = "0";
+                                BillPayment.IsEnabled = false;
+                                BtnTotalCost.IsEnabled = false;
                             }
 
                             var i = int.Parse(cart.TblAmount.Text);
@@ -159,26 +165,66 @@ namespace Dashboard.Staff
             //TODO: TotalCost Fake
             BtnTotalCost.Click += (sender, args) =>
             {
-                var sum = (from item in listCart 
-                    let amount = int.Parse(item.TblAmount.Text) 
-                    let price = double.Parse(item.TblPrice.Text) 
-                    select amount * price).Sum();
 
+                var sum = (from item in listCart
+                           let amount = int.Parse(item.TblAmount.Text)
+                           let price = double.Parse(item.TblPrice.Text)
+                           select amount * price).Sum();
+
+                BillPayment.IsEnabled = true;
                 LblTotalCost.Content = $"{sum:N0}";
+
             };
 
-            //BillPayment.Click += (sender, args) =>
-            //{
-            //    var bill = new Transaction()
-            //    {
-            //        TransactionDate = DateTime.Now,
-            //        Amount = listCart.Count,
-            //        Fee = decimal.Parse($"{LblTotalCost.Content}")
-            //    };
-            //};
+            BillPayment.Click += (sender, args) =>
+            {
+                var amount = listCart.Sum(item => int.Parse(item.TblAmount.Text));
+
+                var billId = Guid.NewGuid();
+                var bill = new Transaction()
+                {
+                    ID = billId,
+                    TransactionDate = DateTime.Now,
+                    Amount = amount,
+                    Fee = decimal.Parse($"{LblTotalCost.Content}"),
+                    //TODO:Tên nhân viên sẽ thêm ở đây
+                };
+                Db.Context.Transactions.Add(bill);
+                foreach (var pit in listCart.Select(item => new ProductTranslation()
+                {
+                    TransactionID = billId,
+                    ProductId = Guid.Parse($"{item.LabelCartId.Content}"),
+                    Amount = int.Parse(item.TblAmount.Text)
+                }))
+                {
+                    Db.Context.ProductTranslations.Add(pit);
+                }
+
+                Db.Context.SaveChanges();
+                //trừ trừ sản phẩm :)))
+                foreach (var item in listCart)
+                {
+                    var product = Db.Context.Products.Find(Guid.Parse($"{item.LabelCartId.Content}"));
+                    if (product == null) continue;
+                    product.Stock -= amount;
+                    Db.Context.SaveChanges();
+                }
+                //TODO:Xong rồi sẽ load lại dữ liệu tại chổ này
+                ResetData();
+            };
 
         }//TODO: LoadPenal();
 
+
+        private void ResetData()
+        {
+            _listCard = new List<UserControlProductChild>();
+            LoadPanel();
+            //TODO: 1 số ràng buộc
+            BtnTotalCost.IsEnabled = false;
+            BillPayment.IsEnabled = false;
+            LblTotalCost.Content = "0";
+        }
 
         //TODO: Calculator
         public IntPtr Handle { get; set; }
@@ -193,10 +239,8 @@ namespace Dashboard.Staff
 
         private void BtnRefresh_OnClick(object sender, RoutedEventArgs e)
         {
-            _listCard = new List<UserControlProductChild>();
-            LoadPanel();
-            LblTotalCost.Content = "0";
 
+            ResetData();
         }
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

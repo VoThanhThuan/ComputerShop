@@ -41,10 +41,10 @@ namespace Dashboard
                     break;
 
                 case 2:
-                    GridPrincipal.Children.Add(new UserControl_SalesHistory());
+                    GridPrincipal.Children.Add(new PageUCSaleHistory());
                     break;
                 case 3:
-                    GridPrincipal.Children.Add(new UserControl_SalesHistory());
+                    GridPrincipal.Children.Add(new PageUCSaleHistory());
                     break;
 
             }
