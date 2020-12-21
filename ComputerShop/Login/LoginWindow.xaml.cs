@@ -64,7 +64,7 @@ namespace DesignLogin
                 var result = user.Authenticate(login);
                 if (result.IsSuccessed)
                 {
-                    switch (result.Message)
+                    switch (result.ResultObj.RoleID)
                     {
                         case "admin":
                             var admin = new Dashboard.AdminWindow.MainWindow();
@@ -75,7 +75,10 @@ namespace DesignLogin
                             admin.Show();
                             break;
                         case "staff":
-                            var staff = new MainWindow();
+                            var staff = new MainWindow(){NameStaff = {Content = $"{result.ResultObj.NameStaff}"}};
+                            if (File.Exists($@"{Directory.GetCurrentDirectory()}\{result.ResultObj.ImagePath}"))
+                                staff.imgAvatar.Source = new BitmapImage(new Uri($@"{Directory.GetCurrentDirectory()}\{result.ResultObj.ImagePath}"));
+
                             staff.Show();
                             break;
                     }

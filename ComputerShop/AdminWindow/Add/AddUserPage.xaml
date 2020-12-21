@@ -62,13 +62,13 @@
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      VerticalAlignment="Center" />
             <TextBox x:Name="tbx_LastName"
-                     materialDesign:HintAssist.Hint="Last Name"
+                     materialDesign:HintAssist.Hint="Họ"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      VerticalAlignment="Center" />
             <Grid>
 
                 <DatePicker x:Name="dp_DoB"
-                            materialDesign:HintAssist.Hint="Pick Date"
+                            materialDesign:HintAssist.Hint="Ngày sinh"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 <Button x:Name="btn_OpenCalendar"
                         Height="40"
@@ -82,7 +82,7 @@
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      VerticalAlignment="Center" />
             <TextBox x:Name="tbx_PhoneNumber"
-                     materialDesign:HintAssist.Hint="PhoneNumber"
+                     materialDesign:HintAssist.Hint="Số điện thoại"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      VerticalAlignment="Center"
                      PreviewTextInput="NumberValidationTextBox" />

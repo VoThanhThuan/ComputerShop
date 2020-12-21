@@ -14,15 +14,17 @@ namespace Dashboard.Login
     public class UserService
     {
 
-        public Result<string> Authenticate(LoginRequest request)
+        public Result<InfoLogin> Authenticate(LoginRequest request)
         {
+            var info = new InfoLogin();
             var userName = Controller._context.AppUsers.FirstOrDefault(x => x.Username == request.Username);
-            if (userName == null) return new ResultError<string>("Tài khoản không tồn tại!");
+            if (userName == null) return new ResultError<InfoLogin>("Tài khoản không tồn tại!");
             var password = PasswordHash(request.Password);
-            if (password != userName.PasswordHash) return new ResultError<string>("Password không đúng");
+            if (password != userName.PasswordHash) return new ResultError<InfoLogin>("Password không đúng");
             var role = Db.Context.AppUserRoles.FirstOrDefault(x => x.UserID == userName.ID);
-            if(role == null) return new ResultError<string>("không tồn tại quyền cho tài khoản này!");
-            return new ResultSuccess<string>(role.RoleID);
+            if(role == null) return new ResultError<InfoLogin>("không tồn tại quyền cho tài khoản này!");
+            info = new InfoLogin(){RoleID = role.RoleID, NameStaff = $"{userName.LastName} {userName.FirstName}", ImagePath = userName.Avatar};
+            return new ResultSuccess<InfoLogin>(info, "OK");
         }
 
         public static string PasswordHash(string password)
@@ -34,5 +36,12 @@ namespace Dashboard.Login
             return Convert.ToBase64String(hashBytes);
         }
 
+    }
+
+    public class InfoLogin
+    {
+        public string RoleID { get; set; }
+        public string NameStaff { get; set; }
+        public string ImagePath { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace Dashboard
                     GridPrincipal.Children.Add(new PageUCSaleHistory());
                     break;
                 case 3:
-                    GridPrincipal.Children.Add(new PageUCSaleHistory());
+                    GridPrincipal.Children.Add(new UserControlGuarantee());
                     break;
 
             }

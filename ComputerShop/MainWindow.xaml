@@ -93,11 +93,11 @@
                           Height="84"
                           VerticalAlignment="Top"
                           Margin="0,24,0,0">
-                <materialDesign:Chip VerticalAlignment="Center"
+                <materialDesign:Chip x:Name="NameStaff" VerticalAlignment="Center"
                                      Content="Nguyen Ngoc Son"
                                      Foreground="White">
                     <materialDesign:Chip.Icon>
-                        <Image Source="/0dc9da469ec12fb17c17fb856a884390.jpg" />
+                        <Image x:Name="imgAvatar" Source="/0dc9da469ec12fb17c17fb856a884390.jpg" />
                     </materialDesign:Chip.Icon>
                 </materialDesign:Chip>
             </ListViewItem>
@@ -110,7 +110,7 @@
 
                 <Grid x:Name="GridCursor"
                       Margin="0 164 0 0"
-                      Background="#FF0069C0"
+                      Background="#FF673AB7"
                       Width="4"
                       HorizontalAlignment="Left"
                       Height="60"

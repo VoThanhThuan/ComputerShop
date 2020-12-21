@@ -48,6 +48,11 @@ namespace Dashboard.Staff
         {
             if (cbbCategories.SelectedIndex < 0) return;
             var id = ((Category)cbbCategories.SelectedValue).ID;
+            if (id == 1)
+            {
+                FindProduct();
+                return;
+            }
             var pic =
                 Db.Context.ProductInCategories.Where(x =>
                     x.CategoryID == id).Select(x => x);
@@ -202,11 +207,10 @@ namespace Dashboard.Staff
 
                 Db.Context.SaveChanges();
                 //trừ trừ sản phẩm :)))
-                foreach (var item in listCart)
+                foreach (var product in listCart.Select(item => Db.Context.Products.Find(Guid.Parse($"{item.LabelCartId.Content}"))).Where(product => product != null))
                 {
-                    var product = Db.Context.Products.Find(Guid.Parse($"{item.LabelCartId.Content}"));
-                    if (product == null) continue;
                     product.Stock -= amount;
+                    if (product.Stock < 0) product.Stock = 0;
                     Db.Context.SaveChanges();
                 }
                 //TODO:Xong rồi sẽ load lại dữ liệu tại chổ này

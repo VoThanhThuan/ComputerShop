@@ -99,7 +99,7 @@
 
 
                 <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
-                              ToolTip="MaterialDesignActionLightToggleButton"
+                              ToolTip="Facebook Nguyễn Sơn"
                               Margin="72,376,238,13"
                               Background="#FF2437B0">
                     <Hyperlink NavigateUri="https://www.facebook.com/son.dh19pm/"
@@ -115,7 +115,7 @@
                 </ToggleButton>
                 
                 <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
-                              ToolTip="MaterialDesignActionLightToggleButton"
+                              ToolTip="Facebook Võ Thuận"
                               Margin="149,376,161,13"
                               Background="#FF192889">
                     <Hyperlink NavigateUri="https://www.facebook.com/anome69"
@@ -130,10 +130,10 @@
 
                 </ToggleButton>
                 <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
-                              ToolTip="MaterialDesignActionLightToggleButton"
+                              ToolTip="Facebook Nguyễn Thanh Toàn"
                               Margin="224,376,86,13"
                               Background="#FF3A5CB7">
-                    <Hyperlink NavigateUri="https://www.facebook.com/profile.php?id=100028337690354"
+                    <Hyperlink NavigateUri="https://www.facebook.com/profile.php?id=100011405461763"
                                RequestNavigate="Hyperlink_OnRequestNavigate"
                                TextDecorations="none"
                                Foreground="White">
