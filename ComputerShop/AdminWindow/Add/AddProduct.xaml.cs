@@ -88,15 +88,27 @@ namespace Dashboard.AdminWindow.Add
 
         private Result<string> AddListProduct()
         {
+
+            if (string.IsNullOrEmpty(tbx_Name.Text))
+            {
+                var mess = new MessageDialog
+                {
+                    tbl_Title = {Text = "Lưu ý"}, tbl_Message = {Text = "Bạn đang để trống tên sản phẩm"}
+                };
+                mess.ShowDialog();
+                if (mess.DialogResult != MyDialogResult.Result.Ok)
+                    return new ResultError<string>("");
+            }
+
             var codeGuarantee = cb_seri.IsChecked == true ? tbx_SeriNumber.Text : $"{Guid.NewGuid()}";
             var gid = Guid.NewGuid();
             var product = new Product()
             {
                 ID = gid,
                 Name = tbx_Name.Text,
-                Price = Convert.ToDecimal(tbx_Price.Text),
-                OriginalPrice = Convert.ToDecimal(tbx_Price.Text),
-                Stock = Convert.ToInt32(tbx_Stock.Text),
+                Price = string.IsNullOrEmpty(tbx_Price.Text) == true ? 0 : Convert.ToDecimal(tbx_Price.Text),
+                OriginalPrice = string.IsNullOrEmpty(tbx_OriginalPrice.Text) == true ? 0 : Convert.ToDecimal(tbx_OriginalPrice.Text),
+                Stock = string.IsNullOrEmpty(tbx_Stock.Text) == true ? 0 : Convert.ToInt32(tbx_Stock.Text),
                 DateCreated = DateTime.Now,
                 SeriNumber = codeGuarantee,
                 ImagePath = _pathImage != null ? this.SaveFile(_pathImage) : "",
@@ -122,6 +134,11 @@ namespace Dashboard.AdminWindow.Add
                     pic.CategoryID = ((Category)cbb_Categories.SelectedValue).ID;
                     _categories.Add(pic);
                 }
+                else
+                {
+                    var mess = new MessageDialog {tbl_Title = {Text = "Lưu ý"}, tbl_Message = {Text = "Bạn đang để trống nhà cùng cấp"}};
+                    mess.ShowDialog(); 
+                }
             }
 
             btn_SaveListProdut.IsEnabled = true;
@@ -131,7 +148,7 @@ namespace Dashboard.AdminWindow.Add
         private void ResetAddProdut()
         {
             _pathImage = null;
-            
+
             tbx_Name.Clear();
             tbx_Price.Clear();
             tbx_OriginalPrice.Clear();
@@ -238,7 +255,7 @@ namespace Dashboard.AdminWindow.Add
             }
             else
             {
-                pic.CategoryID = ((Category) cbb_Categories.SelectedValue).ID;
+                pic.CategoryID = ((Category)cbb_Categories.SelectedValue).ID;
             }
 
             Db.Context.SaveChanges();
@@ -348,7 +365,7 @@ namespace Dashboard.AdminWindow.Add
             if (string.IsNullOrEmpty(txt.Text)) return;
             if (!IsTextAllowed(txt.Text))
             {
-                var mess = new MessageDialog(){tbl_Title = {Text = "Không phải số"}, tbl_Message = {Text = "Dữ liệu bạn copy có chứ ký tự."}};
+                var mess = new MessageDialog() { tbl_Title = { Text = "Không phải số" }, tbl_Message = { Text = "Dữ liệu bạn copy có chứ ký tự." } };
                 mess.ShowDialog();
                 txt.Clear();
                 return;
@@ -382,34 +399,34 @@ namespace Dashboard.AdminWindow.Add
         private void Btn_AddCategory_OnClick(object sender, RoutedEventArgs e)
         {
 
-            var prompt = new PromptDialog(){tbl_Title = {Text = "Tạo \"Loại\" sản phẩm mới "}, };
+            var prompt = new PromptDialog() { tbl_Title = { Text = "Tạo \"Loại\" sản phẩm mới " }, };
 
             prompt.ShowDialog();
-            if(prompt.DialogResult != MyDialogResult.Result.Ok) return;
+            if (prompt.DialogResult != MyDialogResult.Result.Ok) return;
             var result = AddCategory(prompt.tbx_Value.Text);
 
             if (result.IsSuccessed != false) return;
-            var mess = new MessageDialog(){tbl_Title = {Text = "Lỗi thêm danh mục"}, tbl_Message = {Text = result.Message}};
-            
+            var mess = new MessageDialog() { tbl_Title = { Text = "Lỗi thêm danh mục" }, tbl_Message = { Text = result.Message } };
+
             mess.ShowDialog();
         }
 
         private void Btn_EditCategory_OnClick(object sender, RoutedEventArgs e)
         {
-            var prompt = new PromptDialog() { tbl_Title = { Text = "Chỉnh sửa \"Loại\" sản phẩm mới " }, tbx_Value = {Text = cbb_Categories.Text}};
+            var prompt = new PromptDialog() { tbl_Title = { Text = "Chỉnh sửa \"Loại\" sản phẩm mới " }, tbx_Value = { Text = cbb_Categories.Text } };
             prompt.ShowDialog();
             if (prompt.DialogResult != MyDialogResult.Result.Ok) return;
             var result = EditCategory(((Category)cbb_Categories.SelectedValue).ID, prompt.tbx_Value.Text);
 
             if (result.IsSuccessed != false) return;
-            var mess = new MessageDialog() { tbl_Title = { Text = "Lỗi Edit" }, tbl_Message = { Text = result.Message} };
+            var mess = new MessageDialog() { tbl_Title = { Text = "Lỗi Edit" }, tbl_Message = { Text = result.Message } };
             mess.ShowDialog();
         }
 
         private void Btn_RemoveCategory_OnClick(object sender, RoutedEventArgs e)
         {
-            var category = ((Category) cbb_Categories.SelectedValue);
-            var mess = new MessageDialog() { tbl_Title = { Text = "Xóa danh mục" }, tbl_Message = {Text = $"Bạn thật sự muốn xóa danh mục {category.Name}" } };
+            var category = ((Category)cbb_Categories.SelectedValue);
+            var mess = new MessageDialog() { tbl_Title = { Text = "Xóa danh mục" }, tbl_Message = { Text = $"Bạn thật sự muốn xóa danh mục {category.Name}" } };
             mess.ShowDialog();
             if (mess.DialogResult != MyDialogResult.Result.Ok) return;
 

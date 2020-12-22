@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Dashboard.Common;
+using Dashboard.Common.ViewModel;
 
 namespace Dashboard.AdminWindow.Add
 {
@@ -28,6 +30,14 @@ namespace Dashboard.AdminWindow.Add
             };
             aii.btn_Accept.Click += (sender, args) =>
             {
+                if (string.IsNullOrEmpty(aii.tbx_Supplier.Text))
+                {
+                    var mess = new MessageDialog()
+                        {tbl_Title = {Text = "Lưu ý"}, tbl_Message = {Text = "Bạn đang để trống nhà cùng cấp"}};
+                    mess.ShowDialog();
+                    if (mess.DialogResult != MyDialogResult.Result.Ok)
+                        return;
+                }
                 RenderPages.Children.Clear();
                 var ap = new AddProduct
                 {
