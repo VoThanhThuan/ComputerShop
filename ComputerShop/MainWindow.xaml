@@ -4,9 +4,210 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="600"
+        Width="1170"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseDown"
+        ResizeMode="CanResize">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    <Grid Background="#161414">
+        <StackPanel VerticalAlignment="Top">
+            <Grid Margin="5">
 
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="10 0">
+                    <Button Width="30"
+                            Height="30"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Padding="0"
+                            Foreground="Gray">
+                        <materialDesign:PackIcon Kind="BellOutline" />
+                    </Button>
+
+                    <Button Width="30"
+                            Height="30"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Padding="0"
+                            Foreground="Gray"
+                            Margin="0 0 10 0">
+                        <materialDesign:PackIcon Kind="Settings" />
+                    </Button>
+
+                    <!--BtnHide-->
+                    <Button x:Name="Btn_Hide"
+                            Width="30"
+                            Height="30"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Padding="0"
+                            Foreground="Gray"
+                            Click="BtnHide">
+                        <materialDesign:PackIcon Kind="Minus" />
+                    </Button>
+
+                    <!--Btn Zoom-->
+                    <Button Width="30"
+                            Height="30"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Padding="0"
+                            Foreground="Gray"
+                            Click="BtnZoom">
+                        <materialDesign:PackIcon Kind="CropSquare" />
+                    </Button>
+
+                    <!--Button Exit-->
+                    <Button x:Name="Btn_Exit"
+                            Width="30"
+                            Height="30"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Padding="0"
+                            Foreground="Gray"
+                            Click="BtnExit">
+                        <materialDesign:PackIcon Kind="Power" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <Grid x:Name="GridPrincipal"
+              Margin="212,40,10,0"/>
+
+
+        <!-- Menu Bar-->
+        <Grid Width="207"
+              HorizontalAlignment="Left"
+              Background="#FF222222">
+
+            <ListViewItem x:Name="StaffInfo"
+                          Height="84"
+                          VerticalAlignment="Top"
+                          Margin="0,24,0,0">
+                <materialDesign:Chip x:Name="NameStaff" VerticalAlignment="Center"
+                                     Content="Nguyen Ngoc Son"
+                                     Foreground="White">
+                    <materialDesign:Chip.Icon>
+                        <Image x:Name="imgAvatar" Source="/0dc9da469ec12fb17c17fb856a884390.jpg" />
+                    </materialDesign:Chip.Icon>
+                </materialDesign:Chip>
+            </ListViewItem>
+
+            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
+                                                 OpeningEffect="{materialDesign:TransitionEffect 
+                SlideInFromLeft, 
+                Duration=0:0:0.2}"
+                                                 Margin="0,0,10,0">
+
+                <Grid x:Name="GridCursor"
+                      Margin="0 164 0 0"
+                      Background="#FF673AB7"
+                      Width="4"
+                      HorizontalAlignment="Left"
+                      Height="60"
+                      VerticalAlignment="Top" />
+            </materialDesign:TransitioningContent>
+
+            <ListView x:Name="ListViewMenu"
+                      Margin="0,164,0,100"
+                      Foreground="LightGray"
+                      FontFamily="Champagne &amp; Limousines"
+                      FontSize="18"
+                      SelectionChanged="ListViewMenu_SelectionChanged"
+                      SelectedIndex="0">
+
+                <!--Trang Chủ-->
+                <ListViewItem Height="60" Background="#00000000" UseLayoutRounding="False">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Home"
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center"
+                                                 Margin="5" />
+                        <TextBlock Text="Trang Chủ"
+                                   FontSize="17"
+                                   VerticalAlignment="Center"
+                                   Margin="20 0" />
+                    </StackPanel>
+                </ListViewItem>
+
+                <!--Hàng Hoá-->
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cart"
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center"
+                                                 Margin="5" />
+                        <TextBlock Text="Hàng Hoá"
+                                   FontSize="17"
+                                   VerticalAlignment="Center"
+                                   Margin="20 0" />
+                    </StackPanel>
+                </ListViewItem>
+
+                <!--In Hoá Đơn-->
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Receipt"
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center"
+                                                 Margin="5" />
+                        <TextBlock Text="Lịch Sử Bán"
+                                   FontSize="17"
+                                   VerticalAlignment="Center"
+                                   Margin="20 0" />
+                    </StackPanel>
+                </ListViewItem>
+
+               
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon 
+                            Kind="Security" 
+                            Width="30" 
+                            Height="30" 
+                            VerticalAlignment="Center" 
+                            Margin="5"/>
+                        <TextBlock 
+                            Text="Bảo Hành" 
+                            FontSize="17" 
+                            VerticalAlignment="Center" 
+                            Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+
+                <!-- Đăng Xuất-->
+                <Button
+                        Height="60" 
+                        Background="{x:Null}" 
+                        BorderBrush="{x:Null}" 
+                        Foreground="#DDFFFFFF" 
+                        Width="190" Click="BtnLog_Out">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ExitToApp"
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center"
+                                                 Margin="-25 0 0 0" />
+                        <TextBlock Text="Đăng Xuất"
+                                   FontSize="17"
+                                   VerticalAlignment="Center"
+                                   Margin="20 0" />
+                    </StackPanel>
+                </Button>
+            </ListView>
+        </Grid>
     </Grid>
+
 </Window>

@@ -4,224 +4,266 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesignLogin"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controlzex="urn:controlzex"
         x:Class="DesignLogin.LoginWindow"
         mc:Ignorable="d"
         Title="LoginWindow"
-        Height="420"
+        Height="440"
         Width="730"
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        MouseLeave="Window_MouseLeave"
-        MouseEnter="Window_MouseEnter">
-    <Window.Effect>
-        <BlurEffect x:Name="blurEffect" Radius="3" />
-    </Window.Effect>
-    <Window.Background>
-        <ImageBrush x:Name="imgBackground"
-                    ImageSource="/Login/WallpaperVTT.png" />
-    </Window.Background>
-    <Grid>
-        <Label x:Name="label"
-               Content=""
-               HorizontalAlignment="Left"
-               Height="421"
-               Margin="342,0,0,0"
-               VerticalAlignment="Center"
-               Width="388">
-            <!--<Label.Background>
-                <ImageBrush x:Name="imgBackground"
-                            ImageSource="/Login/loginwpf.png" />
-            </Label.Background>-->
-        </Label>
-        <Grid Margin="0, 0, 388, -1"
-              Background="#CCFFFFFF">
-            <Label x:Name="label1"
-                   Content="Login"
+        Background="{x:Null}"
+        KeyDown="Window_KeyDown">
+    <materialDesign:Card UniformCornerRadius="10">
+        <materialDesign:Card.Background>
+            <ImageBrush x:Name="ImgBackground"
+                        ImageSource="/Login/image/WallpaperLaptopLogo.png" />
+        </materialDesign:Card.Background>
+        <Grid>
+            <Label x:Name="label"
                    HorizontalAlignment="Left"
-                   Height="43.5"
-                   Margin="44.5,46.5,0,0"
-                   VerticalAlignment="Top"
-                   Width="153.5"
-                   FontSize="22"
-                   FontWeight="Bold" />
-            <Label x:Name="label2"
-                   Content="Chào mừng bạn trở lại, đăng nhập bằng tài khoản của bạn "
-                   HorizontalAlignment="Left"
-                   Height="25"
-                   Margin="44.5,83,0,0"
-                   VerticalAlignment="Top"
-                   Width="273.5" />
-            <Label x:Name="label3"
-                   Content=""
-                   HorizontalAlignment="Left"
-                   Height="4"
-                   Margin="49.833,111,0,0"
-                   VerticalAlignment="Top"
-                   Width="44.5"
-                   Background="#FF4346D3" />
-            <Grid Grid.Row="2"
-                  HorizontalAlignment="Left"
-                  Height="39"
-                  Margin="49.833,157.5,0,0"
-                  VerticalAlignment="Top"
-                  Width="233.167">
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Left"
-                            Height="39"
-                            Margin="-1.333,0,0,0"
-                            VerticalAlignment="Top"
-                            Width="234.5" />
-                <materialDesign:PackIcon Kind="Account"
-                                         Width="20"
-                                         Height="20"
-                                         Foreground="{Binding ElementName=txt_Usuario,Path=BorderBrush}"
-                                         VerticalAlignment="Bottom"
-                                         Margin="0 0"></materialDesign:PackIcon>
-                <TextBox x:Name="txt_Usuario"
-                         materialDesign:HintAssist.Hint="User Name"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Margin="25,0,0,0"
-                         CaretBrush="#FF2B5BEB"
-                         BorderBrush="#FF696FD0" />
+                   Height="421"
+                   Margin="342,0,0,0"
+                   VerticalAlignment="Center"
+                   Width="388" />
+            <Grid Margin="0, 0, 388, -1"
+                  Background="#CCFFFFFF">
+                <Label x:Name="label1"
+                       Content="Login"
+                       HorizontalAlignment="Left"
+                       Height="43.5"
+                       Margin="44.5,46.5,0,0"
+                       VerticalAlignment="Top"
+                       Width="153.5"
+                       FontSize="22"
+                       FontWeight="Bold" />
+                <Label x:Name="label2"
+                       Content="Chào mừng bạn trở lại, đăng nhập bằng tài khoản của bạn "
+                       HorizontalAlignment="Left"
+                       Height="25"
+                       Margin="44.5,83,0,0"
+                       VerticalAlignment="Top"
+                       Width="273.5" />
+                <Label x:Name="label3"
+                       Content=""
+                       HorizontalAlignment="Left"
+                       Height="4"
+                       Margin="49.833,111,0,0"
+                       VerticalAlignment="Top"
+                       Width="44.5"
+                       Background="#FF4346D3" />
 
+                <Grid HorizontalAlignment="Left"
+                      Height="39"
+                      Margin="49.833,157.5,0,0"
+                      VerticalAlignment="Top"
+                      Width="233.167">
+                    <materialDesign:PackIcon Kind="Account"
+                                             Width="20"
+                                             Height="20"
+                                             Foreground="{Binding BorderBrush, ElementName=txt_Usuario}"
+                                             VerticalAlignment="Bottom"
+                                             Margin="0 0" />
+                    <TextBox x:Name="tbx_UserName"
+                             materialDesign:HintAssist.Hint="User Name"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Margin="25,0,0,0"
+                             CaretBrush="#FF2B5BEB"
+                             BorderBrush="#FF696FD0"
+                             Focusable="True"
+                             Padding="-1" />
+
+                </Grid>
+
+                <Grid  HorizontalAlignment="Left"
+                       Height="39"
+                       Margin="49.833,211.527,0,0"
+                       VerticalAlignment="Top"
+                       Width="233.167">
+                    <materialDesign:PackIcon Grid.Column="0"
+                                             Kind="Key"
+                                             Width="20"
+                                             Height="20"
+                                             Foreground="{Binding BorderBrush, ElementName=txt_Password}"
+                                             VerticalAlignment="Bottom"
+                                             Margin="0 0" />
+                    <PasswordBox   x:Name="tbx_Password"
+                                   materialDesign:HintAssist.Hint="Password"
+                                   Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                   Margin="25,0,0,0"
+                                   CaretBrush="#FF2B5BEB"
+                                   BorderBrush="#FF696FD0" />
+                </Grid>
+
+
+                <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
+                              ToolTip="Facebook Nguyễn Sơn"
+                              Margin="72,376,238,13"
+                              Background="#FF2437B0">
+                    <Hyperlink NavigateUri="https://www.facebook.com/son.dh19pm/"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               TextDecorations="none"
+                               Foreground="White">
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="EmoticonHappy" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Facebook" />
+                    </Hyperlink>
+
+                </ToggleButton>
+                
+                <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
+                              ToolTip="Facebook Võ Thuận"
+                              Margin="149,376,161,13"
+                              Background="#FF192889">
+                    <Hyperlink NavigateUri="https://www.facebook.com/anome69"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               TextDecorations="none"
+                               Foreground="White">
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="EmoticonHappy" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Facebook" />
+                    </Hyperlink>
+
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
+                              ToolTip="Facebook Nguyễn Thanh Toàn"
+                              Margin="224,376,86,13"
+                              Background="#FF3A5CB7">
+                    <Hyperlink NavigateUri="https://www.facebook.com/profile.php?id=100011405461763"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               TextDecorations="none"
+                               Foreground="White">
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="EmoticonHappy" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Facebook" />
+                    </Hyperlink>
+                </ToggleButton>
 
             </Grid>
 
-            <Grid  HorizontalAlignment="Left"
-                   Height="39"
-                   Margin="49.833,211.527,0,0"
+            <RepeatButton ToolTip="chưa biết để gì"
+                          Margin="371.5,10,249.5,378"
+                          Background="Transparent"
+                          BorderBrush="Transparent"
+                          Content="MÃ NGUỒN " />
+            <RepeatButton ToolTip="GitHub :v"
+                          Margin="485.5,10,135.5,378"
+                          Background="Transparent"
+                          BorderBrush="Transparent">
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://github.com/VoThanhThuan/ComputerShop"
+                               TextDecorations="none"
+                               RequestNavigate="Hyperlink_OnRequestNavigate"
+                               Foreground="White">
+                        <Hyperlink.Inlines>
+                            <Run Text="GITHUB" />
+                        </Hyperlink.Inlines>
+                    </Hyperlink>
+                </TextBlock>
+            </RepeatButton>
+            <RepeatButton ToolTip="Giới thiệu về thành viên nhớm"
+                          Margin="594,10,27,378"
+                          Background="Transparent"
+                          BorderBrush="Transparent"
+                          Content="GIỚI THIỆU" />
+
+
+            <ToggleButton x:Name="btn_Close"
+                          Style="{StaticResource MaterialDesignIconButton}"
+                          ToolTip="Thoát chương trình"
+                          Margin="690,0,0,400"
+                          Height="Auto"
+                          Width="Auto"
+                          Checked="btn_Close_Checked">
+                <materialDesign:PackIcon Kind="Close"
+                                         Height="15"
+                                         Width="15"
+                                         Foreground="White" />
+            </ToggleButton>
+            <CheckBox x:Name="cbx_RememberLogin"
+                      Style="{StaticResource MaterialDesignCheckBox}"
+                      Margin="73.833,263.045,544,131.205"
+                      Content="Ghi nhớ đăng nhập"
+                      BorderBrush="#FFBCBCBC"
+                      Foreground="#FFBCBCBC"
+                      FontWeight="Bold"
+                      FontSize="9"
+                      RenderTransformOrigin="0.428,0.618"
+                      d:IsHidden="True" />
+
+            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Bạn đã quên mật khẩu ?"
+                    Margin="186,265.75,0,130.25"
+                    Height="24"
+                    Content="Quên mật khẩu"
+                    FontSize="7"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Left"
+                    Width="109"
+                    d:IsHidden="True" />
+            <materialDesign:DialogHost CloseOnClickAway="True"
+                                       x:Name="dht_Loading">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16">
+                        <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                                     HorizontalAlignment="Center"
+                                     Margin="16"
+                                     IsIndeterminate="True"
+                                     Value="0" />
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+
+                <RepeatButton x:Name="btn_Login"
+                              Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                              ToolTip="Đăng nhập"
+                              Margin="114,303,502,85"
+                              Background="#FF2B5BEB"
+                              BorderBrush="Transparent"
+                              Content="Login"
+                              Click="BtnLogin_Click">
+
+                </RepeatButton>
+
+            </materialDesign:DialogHost>
+
+            <Path Data="M5540 5628 c-931 -329 -1489 -526 -2245 -790 -473 -166 -862 -305 -865 -309 -3 -4 -56 -434 -119 -956 -63 -521 -117 -950 -122 -953 -4 -3 -498 -174 -1098 -380 -600 -206 -1091 -379 -1091 -385 0 -5 485 -151 1078 -324 592 -173 1482 -433 1977 -578 494 -145 906 -263 915 -263 9 0 371 347 806 771 434 425 844 826 912 892 111 108 138 141 100 123 -7 -3 -442 -291 -967 -639 l-954 -634 -1316 329 c-724 181 -1319 330 -1323 331 -4 1 308 109 695 241 386 131 707 243 713 250 6 6 61 427 123 936 63 509 115 926 116 928 4 4 2468 861 2477 862 6 0 -1 -2041 -7 -2048 -4 -5 -2441 -670 -2481 -678 -41 -7 -45 -24 -6 -23 15 0 686 82 1492 182 l1465 183 3 1512 c2 1207 0 1512 -10 1511 -7 0 -128 -41 -268 -91z"
+                  Height="34"
+                  Stretch="Fill"
+                  Width="40"
+                  RenderTransformOrigin="0.5,0.5"
+                  Margin="680,396,10,10">
+                <Path.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                                         StartPoint="0.5,0">
+                        <GradientStop Color="#FF7F00FF" />
+                        <GradientStop Color="#FFCB98FF"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Path.Fill>
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+
+            <!--<Label x:Name="label1_Copy"
+                   Content="Hoặc đăng nhập bằng:"
+                   HorizontalAlignment="Left"
+                   Height="23"
+                   Margin="50,349,0,0"
                    VerticalAlignment="Top"
-                   Width="233.167">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200*" />
-                    <ColumnDefinition Width="33*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Left"
-                            Height="39"
-                            Margin="-1.333,0,0,0"
-                            VerticalAlignment="Top"
-                            Width="234.5"
-                            Grid.ColumnSpan="2" />
-                <materialDesign:PackIcon Kind="Key"
-                                         Width="20"
-                                         Height="20"
-                                         Foreground="{Binding ElementName=txt_Password,Path=BorderBrush}"
-                                         VerticalAlignment="Bottom"
-                                         Margin="0 0"></materialDesign:PackIcon>
-                <PasswordBox   x:Name="txt_Password"
-                               materialDesign:HintAssist.Hint="Password"
-                               Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                               Grid.ColumnSpan="2"
-                               Margin="25,0,0,0"
-                               CaretBrush="#FF2B5BEB"
-                               BorderBrush="#FF696FD0" />
-            </Grid>
-
-
-            <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
-                          ToolTip="MaterialDesignActionLightToggleButton"
-                          Margin="72,376,238,13"
-                          Background="#FF2437B0">
-                <ToggleButton.Content>
-                    <materialDesign:PackIcon Kind="Facebook" />
-                </ToggleButton.Content>
-                <materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="EmoticonHappy" />
-                </materialDesign:ToggleButtonAssist.OnContent>
-            </ToggleButton>
-            <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
-                          ToolTip="MaterialDesignActionLightToggleButton"
-                          Margin="149,376,161,13"
-                          Background="#FFB73A3A">
-                <materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="EmoticonHappy" />
-                </materialDesign:ToggleButtonAssist.OnContent>
-                <materialDesign:PackIcon Kind="Google" />
-            </ToggleButton>
-            <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}"
-                          ToolTip="MaterialDesignActionLightToggleButton"
-                          Margin="224,376,86,13"
-                          Background="#FF3A5CB7">
-                <materialDesign:ToggleButtonAssist.OnContent>
-                    <materialDesign:PackIcon Kind="EmoticonHappy" />
-                </materialDesign:ToggleButtonAssist.OnContent>
-                <materialDesign:PackIcon Kind="Linkedin" />
-            </ToggleButton>
+                   Width="153"
+                   FontWeight="Bold" />-->
 
         </Grid>
-
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
-                      Margin="371.5,10,249.5,378"
-                      Background="Transparent"
-                      BorderBrush="Transparent"
-                      Content="MÃ NGUỒN " />
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
-                      Margin="485.5,10,135.5,378"
-                      Background="Transparent"
-                      BorderBrush="Transparent"
-                      Content="PORNHUB" />
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
-                      Margin="594,10,27,378"
-                      Background="Transparent"
-                      BorderBrush="Transparent"
-                      Content="LIÊN HỆ" />
-
-
-        <ToggleButton x:Name="btn_Salir"
-                      Style="{StaticResource MaterialDesignFlatToggleButton}"
-                      ToolTip="MaterialDesignFlatToggleButton"
-                      Margin="712.083,0,0,400.5"
-                      Height="Auto"
-                      Width="Auto"
-                      Click="Btn_Salir_Click">
-            <materialDesign:PackIcon Kind="Close"
-                                     Height="15"
-                                     Width="10.333"
-                                     Foreground="White" />
-        </ToggleButton>
-        <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
-                  Margin="73.833,263.045,544,131.205"
-                  Content="Ghi nhớ đăng nhập"
-                  BorderBrush="#FFBCBCBC"
-                  Foreground="#FFBCBCBC"
-                  FontWeight="Bold"
-                  FontSize="9"
-                  RenderTransformOrigin="0.428,0.618" />
-
-        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                ToolTip="Bạn đã quên mật khẩu ?"
-                Margin="186,265.75,0,130.25"
-                Height="24"
-                Content="Quên mật khẩu"
-                FontSize="7"
-                FontWeight="Bold"
-                HorizontalAlignment="Left"
-                Width="109" />
-        <RepeatButton x:Name="btnLogin"
-                      ToolTip="Resource name: MaterialDesignRaisedButton"
-                      Margin="49.833,305.693,610.167,82.306"
-                      Background="#FF2B5BEB"
-                      BorderBrush="Transparent"
-                      Content="Login"
-                      Click="BtnLogin_Click" />
-        <RepeatButton ToolTip="Resource name: MaterialDesignRaisedButton"
-                      Margin="168,306,444,82"
-                      Background="#FF605ED6"
-                      BorderBrush="Transparent"
-                      Content="Tạo tài khoản" />
-        <Label x:Name="label1_Copy"
-               Content="Hoặc đăng nhập bằng:"
-               HorizontalAlignment="Left"
-               Height="23"
-               Margin="50,349,0,0"
-               VerticalAlignment="Top"
-               Width="153"
-               FontWeight="Bold" />
-
-
-
-    </Grid>
+    </materialDesign:Card>
 </Window>

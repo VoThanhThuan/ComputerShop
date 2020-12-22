@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Dashboard.Staff.UCCartSelProduct"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Staff"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+            HorizontalAlignment="Stretch">
+    <Border BorderBrush="White" BorderThickness="0.5 0.5 0.5 0.5" Margin="0 5 0 0">
+        <StackPanel Orientation="Horizontal">
+                <Label Name="LabelCartId" Foreground="White" Visibility="Collapsed"/>
+
+                <ToggleButton x:Name="chk_delete"
+                              Style="{StaticResource MaterialDesignActionLightToggleButton}"
+                              IsChecked="False"
+                              ToolTip="Xoá" 
+                              Margin="0 0 3 0">
+                    <materialDesign:PackIcon Kind="Delete" />
+                </ToggleButton>
+                <Image x:Name="ImageCartCh" 
+                       Margin="0 0 3 0"
+                       MaxWidth="70" 
+                       Source="AORUS_Z390_Xtreme_Waterforce_5G_Bundle_Intel_Core_i9_9900K.jpg"/>
+
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tên SP : " Foreground="White"/>
+                        <TextBlock x:Name="TblName" Foreground="White"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Giá : " Foreground="White"/>
+                        <TextBlock x:Name="TblPrice" Foreground="White"/>
+                        <TextBlock Text=" VNĐ" Foreground="White"/>
+                    </StackPanel>
+
+                    <StackPanel  Orientation="Horizontal">
+                        <TextBlock Text="Số Lượng : " Foreground="White"/>
+                        <TextBlock x:Name="TblAmount" Foreground="White"/>
+                    </StackPanel>
+                </StackPanel>
+
+        </StackPanel>
+    </Border>
+
+</UserControl>

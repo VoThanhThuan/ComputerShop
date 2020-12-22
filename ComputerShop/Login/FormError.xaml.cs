@@ -24,7 +24,8 @@ namespace DesignLogin
             InitializeComponent();
         }
 
-        private void Btn_Salir_Click(object sender, RoutedEventArgs e)
+
+        private void btn_Close_Checked(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

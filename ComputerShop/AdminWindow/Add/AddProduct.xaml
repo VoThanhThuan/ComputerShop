@@ -1,0 +1,261 @@
+﻿<UserControl x:Class="Dashboard.AdminWindow.Add.AddProduct"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Dashboard.AdminWindow.Add"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignWidth="800">
+    <StackPanel>
+        <materialDesign:Card x:Name="card_Import" UniformCornerRadius="10"
+                             VerticalAlignment="Center"
+                             Margin="5"
+                             Padding="10,0,10,0">
+            <StackPanel>
+                <TextBlock x:Name="tbl_TitleImport"
+                           ToolTip="MaterialDesignFlatButton"
+                           FontSize="24"
+                           Height="38"
+                           Background="{x:Null}"
+                           Foreground="#FF673AB7"
+                           VerticalAlignment="Stretch"
+                           TextAlignment="Center"
+                           MouseLeftButtonDown="Tbl_TitleImport_OnMouseLeftButtonDown">
+                    THÔNG TIN CHO PHIẾU NHẬP HÀNG
+                </TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="tbx_Supplier"
+                             materialDesign:HintAssist.Hint="Tên nhà cung cấp"
+                             materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="0" 
+                             IsReadOnly="True"/>
+                    <TextBox x:Name="tbx_DateImport"
+                             materialDesign:HintAssist.Hint="Ngày Tạo"
+                             materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="1"
+                             IsReadOnly="True" />
+                    <TextBox x:Name="tbx_StockImport"
+                             materialDesign:HintAssist.Hint="Số lượng sản phẩm"
+                             materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="2" 
+                             Text="0"
+                             IsReadOnly="True"/>
+                    <TextBox x:Name="tbx_Warehouse"
+                             materialDesign:HintAssist.Hint="Kho nhập"
+                             materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Grid.Column="3"
+                             IsReadOnly="True" />
+                </Grid>
+
+                <StackPanel>
+                    <TextBox x:Name="tbx_DescriptionImport"
+                             VerticalAlignment="Top"
+                             Height="100"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             materialDesign:HintAssist.Hint="Ghi chú"
+                             IsReadOnly="True" />
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card UniformCornerRadius="10"
+                             VerticalAlignment="Center"
+                             Margin="5"
+                             Padding="10,0,10,0">
+            <StackPanel>
+                <StackPanel  x:Name="card_Product">
+                    <TextBlock x:Name="tbl_TitleProduct"
+                               ToolTip="MaterialDesignFlatButton"
+                               FontSize="24"
+                               HorizontalAlignment="Stretch"
+                               Height="38"
+                               Foreground="#FF673AB7"
+                               TextAlignment="Center"
+                               MouseLeftButtonDown="Tbl_TitleImport_OnMouseLeftButtonDown">
+                    THÔNG TIN CHO SẢN PHẨM
+                    </TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <GroupBox x:Name="gb_image"
+                                      Header="Card Group Box"
+                                      Style="{DynamicResource MaterialDesignCardGroupBox}"
+                                      Margin="16"
+                                      MouseDown="GroupBox_MouseDown"
+                                      Drop="GroupBox_Drop"
+                                      MaxHeight="300"
+                                      MaxWidth="300"
+                                      MinHeight="200"
+                                      MinWidth="200"
+                                      AllowDrop="True">
+                                <GroupBox.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="ImageArea"
+                                                                     Height="32"
+                                                                     Width="32"
+                                                                     VerticalAlignment="Center" />
+                                            <TextBlock Margin="8,0,0,0"
+                                                       VerticalAlignment="Center"
+                                                       Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                                       Text="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GroupBox.HeaderTemplate>
+                                <Image x:Name="img_Product"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </GroupBox>
+
+                            <Grid Margin="15,0,15,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="cbb_Categories"
+                                          materialDesign:HintAssist.Hint="Loại sản phẩm"
+                                          materialDesign:HintAssist.HintOpacity=".26"
+                                          IsEditable="True"></ComboBox>
+                                <materialDesign:PopupBox Grid.Column="1"
+                                                         Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                                         PlacementMode="BottomAndAlignCentres"
+                                                         ToolTip="Tùy chỉnh danh mục sản phẩm"
+                                                         Height="40"
+                                                         Width="40"
+                                                         Margin="10,0,0,0">
+                                    <materialDesign:PopupBox.ToggleCheckedContent>
+                                        <materialDesign:PackIcon Kind="Pencil"
+                                                                 Width="24"
+                                                                 Height="24" />
+                                    </materialDesign:PopupBox.ToggleCheckedContent>
+                                    <StackPanel>
+                                        <Button x:Name="btn_AddCategory"
+                                                Grid.Column="1"
+                                                ToolTip="Thêm danh mục sản phẩm"
+                                                Click="Btn_AddCategory_OnClick"
+                                                Margin="10,0,0,0"
+                                                Background="#FF00B9FF"
+                                                Foreground="White">
+                                            <materialDesign:PackIcon Kind="PlusCircle" />
+                                        </Button>
+
+                                        <Button x:Name="btn_EditCategory"
+                                                Grid.Column="1"
+                                                ToolTip="Chỉnh sửa danh mục sản phẩm"
+                                                Click="Btn_EditCategory_OnClick"
+                                                Margin="10,0,0,0"
+                                                Background="Violet"
+                                                Foreground="White">
+                                            <materialDesign:PackIcon Kind="Pencil" />
+                                        </Button>
+
+                                        <Button x:Name="btn_RemoveCategory"
+                                                Grid.Column="1"
+                                                ToolTip="Xóa danh mục sản phẩm"
+                                                Click="Btn_RemoveCategory_OnClick"
+                                                Margin="10,0,0,0"
+                                                Background="Red"
+                                                Foreground="White">
+                                            <materialDesign:PackIcon Kind="DeleteForever" />
+                                        </Button>
+                                    </StackPanel>
+                                </materialDesign:PopupBox>
+
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBox x:Name="tbx_Name"
+                                     materialDesign:HintAssist.Hint="Tên"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center" />
+                            <TextBox x:Name="tbx_Price"
+                                     materialDesign:HintAssist.Hint="Giá"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center"
+                                     PreviewTextInput="tbx_Price_PreviewTextInput"
+                                     TextChanged="tbx_Price_TextChanged" />
+                            <TextBox x:Name="tbx_OriginalPrice"
+                                     materialDesign:HintAssist.Hint="Giá gốc"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center"
+                                     TextChanged="tbx_Price_TextChanged" />
+                            <TextBox x:Name="tbx_Stock"
+                                     materialDesign:HintAssist.Hint="Số lượng"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center"
+                                     PreviewTextInput="tbx_Price_PreviewTextInput"
+                                     TextChanged="Tbx_Stock_OnTextChanged" />
+                            <TextBox x:Name="tbx_Details"
+                                     materialDesign:HintAssist.Hint="chi tiết"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center"
+                                     TextWrapping="Wrap" />
+                            <Grid>
+                                <DatePicker x:Name="dp_WarrantyPeriod"
+                                            materialDesign:HintAssist.Hint="Hạn bảo hành"
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <Button x:Name="btn_OpenCalendar"
+                                        Height="40"
+                                        Click="btn_OpenCalendar_Click"
+                                        Background="{x:Null}"
+                                        BorderBrush="{x:Null}" />
+                            </Grid>
+                            <StackPanel  Margin="0,5,0,5">
+                                <CheckBox x:Name="cb_seri"
+                                          IsChecked="True"
+                                          Margin="0,0,0,10">
+                                    Dùng số seri làm mã bảo hành
+                                </CheckBox>
+                                <TextBox x:Name="tbx_SeriNumber"
+                                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                         AcceptsReturn="True"
+                                         materialDesign:HintAssist.Hint="Nhập seri number"
+                                         IsEnabled="{Binding Path=IsChecked, ElementName=cb_seri}" />
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Grid>
+
+                </StackPanel>
+
+                <Grid Height="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btn_AddProduct"
+                            Grid.Column="0"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Click="btn_AddProduct_Click"
+                            Content="Thêm"/>
+                        <Button x:Name="btn_SaveListProdut"
+                            Grid.Column="1"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Click="btn_SaveListProdut_Click"
+                            IsEnabled="False">Save</Button>
+                    <Button x:Name="btn_CLose" Grid.Column="2"
+                            Style="{StaticResource MaterialDesignOutlinedButton}">Đóng</Button>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+    </StackPanel>
+</UserControl>
