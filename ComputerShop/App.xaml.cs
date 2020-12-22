@@ -27,11 +27,11 @@ namespace Dashboard
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-            Configuration = builder.Build();
+            //Configuration = builder.Build();
 
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
