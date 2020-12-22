@@ -8,7 +8,7 @@
 ## CÁCH CÀI ĐẶT
 * kết nối cơ sở dữ liệu.
 ---
-  * Thay đôi chuỗi kết nối tại file [appseting.json] và [App.xaml.cs] theo định dạng
+  * Thay đổi chuỗi kết nối tại file [appseting.json] và [App.xaml.cs] theo định dạng:
    - Đối với đăng nhập không cần tài khoảng và mật khẩu:
    
      "Server=[tên cơ sở dữ liệu];Database=[tên dabase];Trusted_Connection=true;"
